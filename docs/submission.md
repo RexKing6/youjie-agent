@@ -51,7 +51,8 @@
 - 固定邮件批准生成 5 张 draft-only 工单；驳回生成 0 张。
 - README、架构、数据溯源、演示脚本、答辩材料和机器可读 artifacts：完成。
 - 11 页可编辑答辩 PPT 与 64 秒真实 Web 操作 Demo：完成；另保留 2 分 22 秒答辩概览版。
-- 在线 Demo：本地验收完成；公开仓库和 Streamlit 部署等待最终发布确认。
+- 在线 Demo：<https://youjie-goai-2026.streamlit.app/>；公开仓库：<https://github.com/RexKing6/youjie-agent>。
+- 云端使用 Python 3.12，公开版无需 API key，只开放可复现 Replay；Live 模式需部署者在 Secrets 中另行配置。
 
 ## 适用边界
 

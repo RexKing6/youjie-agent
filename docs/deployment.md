@@ -2,6 +2,10 @@
 
 The competition demo is designed for Streamlit Community Cloud and defaults to deterministic replay mode. It does not require an API key, database, external service, or writable persistent storage.
 
+- Live demo: <https://youjie-goai-2026.streamlit.app/>
+- Public repository: <https://github.com/RexKing6/youjie-agent>
+- Deployment runtime: Python `3.12`, Streamlit Community Cloud.
+
 ## Repository contract
 
 - Repository root: this project directory.
@@ -27,6 +31,8 @@ Official references:
 - <https://docs.streamlit.io/deploy/streamlit-community-cloud/deploy-your-app/app-dependencies>
 
 ## Post-deploy acceptance
+
+The public deployment was created on 2026-08-09. Its first build completed and the public-data evidence page loaded without a model secret.
 
 - The home page loads without a secret or login prompt.
 - The Mendeley public-data badge and synthetic-overlay boundary are visible.

@@ -2,6 +2,10 @@
 
 **能力有界，方案可证，决策在人。**
 
+- 在线 Demo：<https://youjie-goai-2026.streamlit.app/>
+- GitHub 源码：<https://github.com/RexKing6/youjie-agent>
+- 主演示视频：[`docs/youjie_demo.mp4`](docs/youjie_demo.mp4)
+
 有界面向制造计划员，把供应商邮件、群聊或演练告警变成可追溯事故，使用 LangGraph 规划和执行受限工具链，再由 OR-Tools CP-SAT 与独立验证器生成三种恢复方案。图会在人工审批处真实暂停；只有场景哈希、计划哈希和验证证据仍一致，才生成 `draft_only` 工单。
 
 这不是 ERP/MES，也不控制设备。LLM 负责理解不可信文本；LangGraph 负责状态、路由、中断与恢复；确定性代码负责 BOM、库存、产能、求解、验证和权限门禁。
@@ -82,6 +86,7 @@ python -m venv .venv
 ```
 
 Replay 是公开、固定的结构化响应夹具，不冒充现场模型调用。Live OpenAI-compatible 模式只从运行时环境变量读取 endpoint、model 和 key。
+公开部署未配置模型密钥，因此界面只开放 Replay；需要 Live 时由部署者在 Streamlit Secrets 中配置，页面不采集密钥。
 
 ## 验证基线
 

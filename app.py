@@ -25,6 +25,14 @@ PROFILE_LABELS = {
     "balanced": "平衡方案",
     "stability_first": "少变更",
 }
+LIVE_LLM_AVAILABLE = all(
+    os.environ.get(name)
+    for name in (
+        "DELIVERY_GUARD_LLM_BASE_URL",
+        "DELIVERY_GUARD_LLM_MODEL",
+        "DELIVERY_GUARD_API_KEY",
+    )
+)
 
 
 def build_graph(mode: str) -> DeliveryGuardGraph:
@@ -113,9 +121,11 @@ with st.sidebar:
     st.subheader("运行设置")
     mode = st.radio(
         "语言模型",
-        ["replay", "live"],
+        ["replay", "live"] if LIVE_LLM_AVAILABLE else ["replay"],
         format_func=lambda value: "离线 Replay" if value == "replay" else "Live OpenAI-compatible",
     )
+    if not LIVE_LLM_AVAILABLE:
+        st.caption("公开版未配置模型密钥，因此仅开放可复现 Replay；密钥不会由页面采集。")
     run_kind = st.radio("事件来源", ["固定供应商邮件", "随机事故演练"])
     seed = st.number_input("演练 seed", min_value=0, max_value=99_999_999, value=20260810, step=1)
     st.caption("seed 相同则事件完全一致；连续五个 seed 可覆盖五类事故。")
