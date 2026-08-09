@@ -1,0 +1,9 @@
+{
+  "event_id": "mes_demo_001",
+  "line_id": "line_smt_regular",
+  "event_type": "planned_unavailable",
+  "start_hour": 72,
+  "end_hour": 96,
+  "summary": "SMT regular shift unavailable on Thursday",
+  "source_type": "synthetic_mes_event"
+}

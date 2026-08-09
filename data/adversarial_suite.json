@@ -1,0 +1,95 @@
+{
+  "suite_id": "delivery_guard_adversarial_v1",
+  "as_of": "2026-08-08",
+  "cases": [
+    {
+      "case_id": "adv_01_supplier_delay_recovery",
+      "type": "incident_run",
+      "incident": "incidents/supplier_delay.json",
+      "expected_verified_plans": {"min": 1},
+      "approve_and_generate": true
+    },
+    {
+      "case_id": "adv_02_line_outage_recovery",
+      "type": "incident_run",
+      "incident": "incidents/line_outage.json",
+      "expected_verified_plans": {"min": 1}
+    },
+    {
+      "case_id": "adv_03_impossible_critical_order",
+      "type": "incident_run",
+      "incident": "incidents/impossible_critical_order.json",
+      "expected_verified_plans": 0
+    },
+    {
+      "case_id": "adv_04_full_line_outage",
+      "type": "incident_run",
+      "incident": "incidents/full_line_outage.json",
+      "expected_verified_plans": 0
+    },
+    {
+      "case_id": "adv_05_bom_cycle",
+      "type": "scenario_validation",
+      "mutation": "bom_cycle",
+      "expect_error_contains": "cyclic BOM"
+    },
+    {
+      "case_id": "adv_06_negative_inventory",
+      "type": "scenario_validation",
+      "mutation": "negative_inventory",
+      "expect_error_contains": "greater than or equal to 0"
+    },
+    {
+      "case_id": "adv_07_duplicate_order",
+      "type": "scenario_validation",
+      "mutation": "duplicate_order_id",
+      "expect_error_contains": "duplicate order_id"
+    },
+    {
+      "case_id": "adv_08_dangling_bom",
+      "type": "scenario_validation",
+      "mutation": "dangling_bom_reference",
+      "expect_error_contains": "dangling BOM reference"
+    },
+    {
+      "case_id": "adv_09_prompt_injection",
+      "type": "workflow_attack",
+      "incident": "incidents/prompt_injection.json",
+      "attack": "prompt_injection"
+    },
+    {
+      "case_id": "adv_10_unapproved_work_orders",
+      "type": "workflow_attack",
+      "incident": "incidents/supplier_delay.json",
+      "attack": "unapproved_work_orders"
+    },
+    {
+      "case_id": "adv_11_tampered_plan",
+      "type": "workflow_attack",
+      "incident": "incidents/supplier_delay.json",
+      "attack": "tampered_plan"
+    },
+    {
+      "case_id": "adv_12_stale_approval",
+      "type": "workflow_attack",
+      "incident": "incidents/supplier_delay.json",
+      "attack": "stale_approval"
+    },
+    {
+      "case_id": "adv_13_revoked_evidence",
+      "type": "workflow_attack",
+      "incident": "incidents/supplier_delay.json",
+      "attack": "evidence_revoked"
+    },
+    {
+      "case_id": "adv_14_independent_verifier",
+      "type": "verifier_attack",
+      "incident": "incidents/supplier_delay.json"
+    },
+    {
+      "case_id": "adv_15_deterministic_replay",
+      "type": "deterministic_replay",
+      "incident": "incidents/supplier_delay.json"
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "as_of": "2026-08-09",
+  "license": "Apache-2.0 synthetic competition fixture",
+  "seed": 20260809,
+  "real_company_data": false,
+  "alibaba_internal_data": false,
+  "simulation_logic": "Three commercial orders are split into deterministic 10-unit production lots so the existing exact scheduler can model partial delivery without pretending a divisible order is one task.",
+  "public_schema_anchor": "https://data.mendeley.com/datasets/pr3sdy5vp3/1",
+  "applicability": "Competition demonstration of exception response; not a calibrated production plan or ROI claim."
+}

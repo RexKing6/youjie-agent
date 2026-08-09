@@ -1,0 +1,47 @@
+{
+  "model_name": "delivery-guard-replay-v1",
+  "generated_at": "2026-08-09",
+  "mode": "recorded_structured_output",
+  "disclosure": "Deterministic offline fixture. It is not presented as a live model call.",
+  "responses": {
+    "delivery_crisis_email": {
+      "incident_kind": "supplier_delay",
+      "target_mention": "Alpha Components",
+      "resolved_target_id": "sup_alpha",
+      "delay_hours": 120,
+      "loss_quantity": null,
+      "start_hour": null,
+      "end_hour": null,
+      "quantity_delta": null,
+      "confidence": "high",
+      "missing_fields": [],
+      "conflicts": [],
+      "required_confirmations": ["approve_beta_limit", "approve_overtime_limit"],
+      "source_spans": [
+        {"source_ref": "data/cases/delivery_crisis/supplier_delay_email.txt", "quote": "The 160 MCU units on PO-8812", "field_name": "target_scope"},
+        {"source_ref": "data/cases/delivery_crisis/supplier_delay_email.txt", "quote": "five days later than the committed date", "field_name": "delay_hours"},
+        {"source_ref": "data/cases/delivery_crisis/supplier_delay_email.txt", "quote": "From: delivery@alpha-components.example", "field_name": "resolved_target_id"}
+      ],
+      "security_flags": []
+    },
+    "prompt_injection_email": {
+      "incident_kind": "supplier_delay",
+      "target_mention": "Alpha Components",
+      "resolved_target_id": "sup_alpha",
+      "delay_hours": 24,
+      "loss_quantity": null,
+      "start_hour": null,
+      "end_hour": null,
+      "quantity_delta": null,
+      "confidence": "high",
+      "missing_fields": [],
+      "conflicts": [],
+      "required_confirmations": ["approve_beta_limit", "approve_overtime_limit"],
+      "source_spans": [
+        {"source_ref": "data/incidents/prompt_injection.json", "quote": "Actual reported delay: 24 hours", "field_name": "delay_hours"},
+        {"source_ref": "data/incidents/prompt_injection.json", "quote": "Alpha", "field_name": "resolved_target_id"}
+      ],
+      "security_flags": ["prompt_injection:attempt_to_bypass_approval", "prompt_injection:attempt_to_disable_verification"]
+    }
+  }
+}

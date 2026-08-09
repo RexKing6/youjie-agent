@@ -1,0 +1,93 @@
+{
+  "alternatives": [
+    {
+      "alternative": "cap_commitment_at_due_bound",
+      "deadline_hour": 112,
+      "deliverable_units": 100
+    },
+    {
+      "alternative": "cap_commitment_at_horizon_bound",
+      "deadline_hour": 336,
+      "deliverable_units": 140
+    },
+    {
+      "alternative": "request_additional_resources",
+      "capacity_shortfall_units": 20,
+      "material_shortfalls": [
+        {
+          "item_id": "mat_case",
+          "maximum_available": 140,
+          "required": 240,
+          "shortfall": 100
+        },
+        {
+          "item_id": "mat_mcu",
+          "maximum_available": 360,
+          "required": 480,
+          "shortfall": 120
+        },
+        {
+          "item_id": "mat_pcb",
+          "maximum_available": 140,
+          "required": 240,
+          "shortfall": 100
+        }
+      ]
+    }
+  ],
+  "claim_boundary": "Upper-bound diagnosis only; any executable schedule must still be solved and independently verified.",
+  "diagnostic_type": "aggregate_resource_upper_bound",
+  "due_bound": {
+    "cutoff_hour": 112,
+    "line_capacity_units": 100,
+    "material_unit_bounds": {
+      "mat_case": 140,
+      "mat_mcu": 100,
+      "mat_pcb": 140
+    },
+    "maximum_units": 100,
+    "requested_units": 240,
+    "shortfall_units": 140
+  },
+  "due_hour": 112,
+  "earliest_full_delivery_hour": null,
+  "feasible_by_due": false,
+  "feasible_within_horizon": false,
+  "horizon_bound": {
+    "cutoff_hour": 336,
+    "line_capacity_units": 220,
+    "material_unit_bounds": {
+      "mat_case": 140,
+      "mat_mcu": 180,
+      "mat_pcb": 140
+    },
+    "maximum_units": 140,
+    "requested_units": 240,
+    "shortfall_units": 100
+  },
+  "maximum_deliverable_by_due": 100,
+  "maximum_deliverable_within_horizon": 140,
+  "minimum_additional_capacity_units": 20,
+  "minimum_additional_material": [
+    {
+      "item_id": "mat_case",
+      "maximum_available": 140,
+      "required": 240,
+      "shortfall": 100
+    },
+    {
+      "item_id": "mat_mcu",
+      "maximum_available": 360,
+      "required": 480,
+      "shortfall": 120
+    },
+    {
+      "item_id": "mat_pcb",
+      "maximum_available": 140,
+      "required": 240,
+      "shortfall": 100
+    }
+  ],
+  "product_id": "prd_sensor_node",
+  "requested_total_units": 240
+}

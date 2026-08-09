@@ -1,0 +1,9 @@
+{
+  "incident_id": "inc_impossible_critical",
+  "kind": "demand_surge",
+  "target_id": "ord_critical_gateway",
+  "description": "Critical customer increases the order by 100 units inside the same due window.",
+  "quantity_delta": 100,
+  "source_type": "synthetic_fixture",
+  "source_ref": "data/incidents/impossible_critical_order.json"
+}

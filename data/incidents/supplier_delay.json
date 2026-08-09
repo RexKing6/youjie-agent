@@ -1,0 +1,9 @@
+{
+  "incident_id": "inc_supplier_delay",
+  "kind": "supplier_delay",
+  "target_id": "sup_alpha",
+  "description": "Alpha Components reports a five-day delay affecting chips and boards.",
+  "delay_hours": 120,
+  "source_type": "synthetic_fixture",
+  "source_ref": "data/incidents/supplier_delay.json"
+}

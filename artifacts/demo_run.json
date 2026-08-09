@@ -1,0 +1,1835 @@
+{
+  "approval": {
+    "actor_id": "cli_demo_operator",
+    "approval_id": "approval_006",
+    "comment": "Explicit approval for deterministic offline demo artifact",
+    "decision": "approve",
+    "plan_hash": "5a3f8e1ba047b1c01cbc7a3875817b0bf4bf4b6042d3891b1e67998ce593b390",
+    "plan_id": "plan_balanced",
+    "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+    "valid": true
+  },
+  "audit": [
+    {
+      "actor_type": "system",
+      "from_state": null,
+      "sequence": 1,
+      "state_hash": "1e836de55bd3c58820549266d9ab3ad720dfa9b5275b30c6da74044c8455c2c7",
+      "summary": "Scenario and incident received",
+      "to_state": "received"
+    },
+    {
+      "actor_type": "deterministic_tool",
+      "from_state": "received",
+      "sequence": 2,
+      "state_hash": "87446962774d45150b406f4714a97e21ca72927e9e11235202f6fb63f4502002",
+      "summary": "Inputs validated",
+      "to_state": "validated"
+    },
+    {
+      "actor_type": "deterministic_tool",
+      "from_state": "validated",
+      "sequence": 3,
+      "state_hash": "28a785290cb91e3dea80302bfbfcb984e70a09a85bc32c49dc04e3f0f1fa70fa",
+      "summary": "Impact graph computed",
+      "to_state": "analyzed"
+    },
+    {
+      "actor_type": "solver",
+      "from_state": "analyzed",
+      "sequence": 4,
+      "state_hash": "92e1fa639adc9fbe42dd3af2aa6a168579b4c424e6a5bbf6329d07df1538a773",
+      "summary": "Three policy profiles solved",
+      "to_state": "solved"
+    },
+    {
+      "actor_type": "system",
+      "from_state": "solved",
+      "sequence": 5,
+      "state_hash": "01c951177726802a6c87c8bd38f1017ac3f87e0e6449c2038f82ac082c2c991e",
+      "summary": "Verified candidates are awaiting explicit approval",
+      "to_state": "awaiting_approval"
+    },
+    {
+      "actor_type": "user",
+      "from_state": "awaiting_approval",
+      "sequence": 6,
+      "state_hash": "4e112963170c4dd603eeb30fbdfc65b55b15cd83f2e9d1358c31ab2c1d6dd275",
+      "summary": "Plan plan_balanced approved",
+      "to_state": "approved"
+    },
+    {
+      "actor_type": "deterministic_tool",
+      "from_state": "approved",
+      "sequence": 7,
+      "state_hash": "3d8a116d0f49426b68ac1a4097cb97551af4f74a16fa8d6e348f54feea52025a",
+      "summary": "Generated 17 draft-only work orders",
+      "to_state": "orders_generated"
+    }
+  ],
+  "impact": {
+    "affected_orders": [
+      "ord_critical_gateway",
+      "ord_edge_01",
+      "ord_edge_02",
+      "ord_gateway_02",
+      "ord_gateway_03",
+      "ord_sensor_01",
+      "ord_sensor_02",
+      "ord_sensor_03"
+    ],
+    "affected_resources": [
+      "sup_alpha"
+    ],
+    "evidence_paths": [
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_critical_gateway",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_chip",
+          "ord_critical_gateway"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_critical_gateway",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_board",
+          "ord_critical_gateway"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_sensor_01",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_chip",
+          "ord_sensor_01"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_sensor_01",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_board",
+          "ord_sensor_01"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_sensor_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_chip",
+          "ord_sensor_02"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_sensor_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_board",
+          "ord_sensor_02"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_gateway_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_chip",
+          "ord_gateway_02"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_gateway_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_board",
+          "ord_gateway_02"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_edge_01",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_edge_box",
+          "mat_chip",
+          "ord_edge_01"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_edge_01",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_edge_box",
+          "mat_board",
+          "ord_edge_01"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_sensor_03",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_chip",
+          "ord_sensor_03"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_sensor_03",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_sensor_hub",
+          "mat_board",
+          "ord_sensor_03"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_gateway_03",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_chip",
+          "ord_gateway_03"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_gateway_03",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_gateway",
+          "mat_board",
+          "ord_gateway_03"
+        ]
+      },
+      {
+        "material_id": "mat_chip",
+        "order_id": "ord_edge_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_edge_box",
+          "mat_chip",
+          "ord_edge_02"
+        ]
+      },
+      {
+        "material_id": "mat_board",
+        "order_id": "ord_edge_02",
+        "path": [
+          "inc_supplier_delay",
+          "sup_alpha",
+          "prd_edge_box",
+          "mat_board",
+          "ord_edge_02"
+        ]
+      }
+    ],
+    "incident_id": "inc_supplier_delay",
+    "material_demand": {
+      "mat_board": 48,
+      "mat_cable": 48,
+      "mat_case": 43,
+      "mat_chip": 110,
+      "mat_fan": 10,
+      "mat_label": 43,
+      "mat_power": 5,
+      "mat_radio": 28
+    },
+    "notes": [
+      "Incident free text was retained for audit but ignored by deterministic calculations.",
+      "Computed impact from 8 orders and 18 BOM lines."
+    ],
+    "projected_shortages": {},
+    "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0"
+  },
+  "incident": {
+    "delay_hours": 120,
+    "description": "Alpha Components reports a five-day delay affecting chips and boards.",
+    "end_hour": null,
+    "incident_id": "inc_supplier_delay",
+    "kind": "supplier_delay",
+    "loss_quantity": null,
+    "quantity_delta": null,
+    "source_ref": "data/incidents/supplier_delay.json",
+    "source_type": "synthetic_fixture",
+    "start_hour": null,
+    "target_id": "sup_alpha"
+  },
+  "plans": [
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 672,
+          "lateness": 16,
+          "line_capacity": 672,
+          "precedence": 8,
+          "required_order": 8,
+          "supplier_capacity": 18,
+          "task_assignment": 16
+        },
+        "evidence_id": "evidence_service_first",
+        "objective_breakdown": {
+          "first_due_late_units": 0,
+          "first_due_on_time_units": 8,
+          "late_units": 29,
+          "lateness_weighted_units_hours": 2958,
+          "on_time_units": 14,
+          "overtime_cost": 0,
+          "purchase_actions": 9,
+          "purchase_cost": 15466,
+          "recovery_cost": 15466,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "98a2a91214aecafde2624e70260c526359f2a0ae3328367aca77b00d31c8a323",
+        "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+        "solve_time_ms": 663,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 0,
+        "first_due_on_time_units": 8,
+        "late_units": 29,
+        "lateness_weighted_units_hours": 2958,
+        "on_time_units": 14,
+        "overtime_cost": 0,
+        "purchase_actions": 9,
+        "purchase_cost": 15466,
+        "recovery_cost": 15466,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 176,
+          "late_hours": 80,
+          "order_id": "ord_critical_gateway",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 214,
+          "late_hours": 22,
+          "order_id": "ord_edge_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 262,
+          "late_hours": 0,
+          "order_id": "ord_edge_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 204,
+          "late_hours": 36,
+          "order_id": "ord_gateway_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 240,
+          "late_hours": 0,
+          "order_id": "ord_gateway_03",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 40,
+          "late_hours": 0,
+          "order_id": "ord_sensor_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 188,
+          "late_hours": 44,
+          "order_id": "ord_sensor_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 228,
+          "late_hours": 12,
+          "order_id": "ord_sensor_03",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_service_first",
+      "profile": "service_first",
+      "purchases": [
+        {
+          "arrival_hour": 156,
+          "committed": false,
+          "cost": 2280,
+          "incremental_cost": 2280,
+          "item_id": "mat_board",
+          "quantity": 38,
+          "source_id": "src_alpha_board",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 144,
+          "committed": false,
+          "cost": 8000,
+          "incremental_cost": 8000,
+          "item_id": "mat_chip",
+          "quantity": 80,
+          "source_id": "src_alpha_chip",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 72,
+          "committed": false,
+          "cost": 725,
+          "incremental_cost": 725,
+          "item_id": "mat_chip",
+          "quantity": 5,
+          "source_id": "src_beta_chip",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 2340,
+          "incremental_cost": 2340,
+          "item_id": "mat_radio",
+          "quantity": 26,
+          "source_id": "src_beta_radio",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 420,
+          "incremental_cost": 420,
+          "item_id": "mat_cable",
+          "quantity": 28,
+          "source_id": "src_gamma_cable",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 1155,
+          "incremental_cost": 1155,
+          "item_id": "mat_case",
+          "quantity": 33,
+          "source_id": "src_gamma_case",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 240,
+          "incremental_cost": 240,
+          "item_id": "mat_fan",
+          "quantity": 8,
+          "source_id": "src_gamma_fan",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 12,
+          "committed": false,
+          "cost": 26,
+          "incremental_cost": 26,
+          "item_id": "mat_label",
+          "quantity": 13,
+          "source_id": "src_gamma_label",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 280,
+          "incremental_cost": 280,
+          "item_id": "mat_power",
+          "quantity": 4,
+          "source_id": "src_gamma_power",
+          "supplier_id": "sup_gamma"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "scheduled_operations": [
+        {
+          "end_hour": 20,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 12,
+          "task_id": "ord_sensor_01__op_sensor_smt"
+        },
+        {
+          "end_hour": 40,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 28,
+          "task_id": "ord_sensor_01__op_sensor_assembly"
+        },
+        {
+          "end_hour": 166,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 156,
+          "task_id": "ord_critical_gateway__op_gateway_smt"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_critical_gateway__op_gateway_assembly"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_sensor_02__op_sensor_smt"
+        },
+        {
+          "end_hour": 188,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_sensor_02__op_sensor_assembly"
+        },
+        {
+          "end_hour": 186,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_gateway_02__op_gateway_smt"
+        },
+        {
+          "end_hour": 204,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 188,
+          "task_id": "ord_gateway_02__op_gateway_assembly"
+        },
+        {
+          "end_hour": 200,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 188,
+          "task_id": "ord_edge_01__op_edge_smt"
+        },
+        {
+          "end_hour": 214,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 204,
+          "task_id": "ord_edge_01__op_edge_assembly"
+        },
+        {
+          "end_hour": 212,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 204,
+          "task_id": "ord_sensor_03__op_sensor_smt"
+        },
+        {
+          "end_hour": 228,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 216,
+          "task_id": "ord_sensor_03__op_sensor_assembly"
+        },
+        {
+          "end_hour": 230,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 220,
+          "task_id": "ord_gateway_03__op_gateway_smt"
+        },
+        {
+          "end_hour": 240,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 232,
+          "task_id": "ord_gateway_03__op_gateway_assembly"
+        },
+        {
+          "end_hour": 252,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 240,
+          "task_id": "ord_edge_02__op_edge_smt"
+        },
+        {
+          "end_hour": 262,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 252,
+          "task_id": "ord_edge_02__op_edge_assembly"
+        }
+      ],
+      "total_score": 29595916
+    },
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 672,
+          "lateness": 16,
+          "line_capacity": 672,
+          "precedence": 8,
+          "required_order": 1,
+          "supplier_capacity": 18,
+          "task_assignment": 16
+        },
+        "evidence_id": "evidence_balanced",
+        "objective_breakdown": {
+          "first_due_late_units": 0,
+          "first_due_on_time_units": 8,
+          "late_units": 29,
+          "lateness_weighted_units_hours": 2958,
+          "on_time_units": 14,
+          "overtime_cost": 0,
+          "purchase_actions": 9,
+          "purchase_cost": 15466,
+          "recovery_cost": 15466,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "5a3f8e1ba047b1c01cbc7a3875817b0bf4bf4b6042d3891b1e67998ce593b390",
+        "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+        "solve_time_ms": 732,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 0,
+        "first_due_on_time_units": 8,
+        "late_units": 29,
+        "lateness_weighted_units_hours": 2958,
+        "on_time_units": 14,
+        "overtime_cost": 0,
+        "purchase_actions": 9,
+        "purchase_cost": 15466,
+        "recovery_cost": 15466,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 176,
+          "late_hours": 80,
+          "order_id": "ord_critical_gateway",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 214,
+          "late_hours": 22,
+          "order_id": "ord_edge_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 286,
+          "late_hours": 0,
+          "order_id": "ord_edge_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 204,
+          "late_hours": 36,
+          "order_id": "ord_gateway_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 236,
+          "late_hours": 0,
+          "order_id": "ord_gateway_03",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 20,
+          "late_hours": 0,
+          "order_id": "ord_sensor_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 188,
+          "late_hours": 44,
+          "order_id": "ord_sensor_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 228,
+          "late_hours": 12,
+          "order_id": "ord_sensor_03",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_balanced",
+      "profile": "balanced",
+      "purchases": [
+        {
+          "arrival_hour": 156,
+          "committed": false,
+          "cost": 2280,
+          "incremental_cost": 2280,
+          "item_id": "mat_board",
+          "quantity": 38,
+          "source_id": "src_alpha_board",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 144,
+          "committed": false,
+          "cost": 8000,
+          "incremental_cost": 8000,
+          "item_id": "mat_chip",
+          "quantity": 80,
+          "source_id": "src_alpha_chip",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 72,
+          "committed": false,
+          "cost": 725,
+          "incremental_cost": 725,
+          "item_id": "mat_chip",
+          "quantity": 5,
+          "source_id": "src_beta_chip",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 2340,
+          "incremental_cost": 2340,
+          "item_id": "mat_radio",
+          "quantity": 26,
+          "source_id": "src_beta_radio",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 420,
+          "incremental_cost": 420,
+          "item_id": "mat_cable",
+          "quantity": 28,
+          "source_id": "src_gamma_cable",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 1155,
+          "incremental_cost": 1155,
+          "item_id": "mat_case",
+          "quantity": 33,
+          "source_id": "src_gamma_case",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 240,
+          "incremental_cost": 240,
+          "item_id": "mat_fan",
+          "quantity": 8,
+          "source_id": "src_gamma_fan",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 12,
+          "committed": false,
+          "cost": 26,
+          "incremental_cost": 26,
+          "item_id": "mat_label",
+          "quantity": 13,
+          "source_id": "src_gamma_label",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 280,
+          "incremental_cost": 280,
+          "item_id": "mat_power",
+          "quantity": 4,
+          "source_id": "src_gamma_power",
+          "supplier_id": "sup_gamma"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "scheduled_operations": [
+        {
+          "end_hour": 8,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 0,
+          "task_id": "ord_sensor_01__op_sensor_smt"
+        },
+        {
+          "end_hour": 20,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 8,
+          "task_id": "ord_sensor_01__op_sensor_assembly"
+        },
+        {
+          "end_hour": 166,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 156,
+          "task_id": "ord_critical_gateway__op_gateway_smt"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_critical_gateway__op_gateway_assembly"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_sensor_02__op_sensor_smt"
+        },
+        {
+          "end_hour": 188,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_sensor_02__op_sensor_assembly"
+        },
+        {
+          "end_hour": 186,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_gateway_02__op_gateway_smt"
+        },
+        {
+          "end_hour": 204,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 188,
+          "task_id": "ord_gateway_02__op_gateway_assembly"
+        },
+        {
+          "end_hour": 200,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 188,
+          "task_id": "ord_edge_01__op_edge_smt"
+        },
+        {
+          "end_hour": 214,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 204,
+          "task_id": "ord_edge_01__op_edge_assembly"
+        },
+        {
+          "end_hour": 216,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 208,
+          "task_id": "ord_sensor_03__op_sensor_smt"
+        },
+        {
+          "end_hour": 228,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 216,
+          "task_id": "ord_sensor_03__op_sensor_assembly"
+        },
+        {
+          "end_hour": 226,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 216,
+          "task_id": "ord_gateway_03__op_gateway_smt"
+        },
+        {
+          "end_hour": 236,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 228,
+          "task_id": "ord_gateway_03__op_gateway_assembly"
+        },
+        {
+          "end_hour": 244,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 232,
+          "task_id": "ord_edge_02__op_edge_smt"
+        },
+        {
+          "end_hour": 286,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 276,
+          "task_id": "ord_edge_02__op_edge_assembly"
+        }
+      ],
+      "total_score": 14946460
+    },
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 672,
+          "lateness": 16,
+          "line_capacity": 672,
+          "precedence": 8,
+          "required_order": 1,
+          "supplier_capacity": 18,
+          "task_assignment": 16
+        },
+        "evidence_id": "evidence_stability_first",
+        "objective_breakdown": {
+          "first_due_late_units": 0,
+          "first_due_on_time_units": 8,
+          "late_units": 29,
+          "lateness_weighted_units_hours": 2958,
+          "on_time_units": 14,
+          "overtime_cost": 0,
+          "purchase_actions": 9,
+          "purchase_cost": 15466,
+          "recovery_cost": 15466,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "280009f6b694724389e590ceca4346cb2b79d5a88b52c6591099f5254fbf74d5",
+        "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+        "solve_time_ms": 695,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 0,
+        "first_due_on_time_units": 8,
+        "late_units": 29,
+        "lateness_weighted_units_hours": 2958,
+        "on_time_units": 14,
+        "overtime_cost": 0,
+        "purchase_actions": 9,
+        "purchase_cost": 15466,
+        "recovery_cost": 15466,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 176,
+          "late_hours": 80,
+          "order_id": "ord_critical_gateway",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 214,
+          "late_hours": 22,
+          "order_id": "ord_edge_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 282,
+          "late_hours": 0,
+          "order_id": "ord_edge_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 204,
+          "late_hours": 36,
+          "order_id": "ord_gateway_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 240,
+          "late_hours": 0,
+          "order_id": "ord_gateway_03",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 20,
+          "late_hours": 0,
+          "order_id": "ord_sensor_01",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 188,
+          "late_hours": 44,
+          "order_id": "ord_sensor_02",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 228,
+          "late_hours": 12,
+          "order_id": "ord_sensor_03",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_stability_first",
+      "profile": "stability_first",
+      "purchases": [
+        {
+          "arrival_hour": 156,
+          "committed": false,
+          "cost": 2280,
+          "incremental_cost": 2280,
+          "item_id": "mat_board",
+          "quantity": 38,
+          "source_id": "src_alpha_board",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 144,
+          "committed": false,
+          "cost": 8000,
+          "incremental_cost": 8000,
+          "item_id": "mat_chip",
+          "quantity": 80,
+          "source_id": "src_alpha_chip",
+          "supplier_id": "sup_alpha"
+        },
+        {
+          "arrival_hour": 72,
+          "committed": false,
+          "cost": 725,
+          "incremental_cost": 725,
+          "item_id": "mat_chip",
+          "quantity": 5,
+          "source_id": "src_beta_chip",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 2340,
+          "incremental_cost": 2340,
+          "item_id": "mat_radio",
+          "quantity": 26,
+          "source_id": "src_beta_radio",
+          "supplier_id": "sup_beta"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 420,
+          "incremental_cost": 420,
+          "item_id": "mat_cable",
+          "quantity": 28,
+          "source_id": "src_gamma_cable",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 24,
+          "committed": false,
+          "cost": 1155,
+          "incremental_cost": 1155,
+          "item_id": "mat_case",
+          "quantity": 33,
+          "source_id": "src_gamma_case",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 240,
+          "incremental_cost": 240,
+          "item_id": "mat_fan",
+          "quantity": 8,
+          "source_id": "src_gamma_fan",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 12,
+          "committed": false,
+          "cost": 26,
+          "incremental_cost": 26,
+          "item_id": "mat_label",
+          "quantity": 13,
+          "source_id": "src_gamma_label",
+          "supplier_id": "sup_gamma"
+        },
+        {
+          "arrival_hour": 48,
+          "committed": false,
+          "cost": 280,
+          "incremental_cost": 280,
+          "item_id": "mat_power",
+          "quantity": 4,
+          "source_id": "src_gamma_power",
+          "supplier_id": "sup_gamma"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "scheduled_operations": [
+        {
+          "end_hour": 8,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 0,
+          "task_id": "ord_sensor_01__op_sensor_smt"
+        },
+        {
+          "end_hour": 20,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_01",
+          "overtime": false,
+          "start_hour": 8,
+          "task_id": "ord_sensor_01__op_sensor_assembly"
+        },
+        {
+          "end_hour": 166,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 156,
+          "task_id": "ord_critical_gateway__op_gateway_smt"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_critical_gateway",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_critical_gateway__op_gateway_assembly"
+        },
+        {
+          "end_hour": 176,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 168,
+          "task_id": "ord_sensor_02__op_sensor_smt"
+        },
+        {
+          "end_hour": 188,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_sensor_02__op_sensor_assembly"
+        },
+        {
+          "end_hour": 186,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 176,
+          "task_id": "ord_gateway_02__op_gateway_smt"
+        },
+        {
+          "end_hour": 204,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_02",
+          "overtime": false,
+          "start_hour": 188,
+          "task_id": "ord_gateway_02__op_gateway_assembly"
+        },
+        {
+          "end_hour": 204,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 192,
+          "task_id": "ord_edge_01__op_edge_smt"
+        },
+        {
+          "end_hour": 214,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_01",
+          "overtime": false,
+          "start_hour": 204,
+          "task_id": "ord_edge_01__op_edge_assembly"
+        },
+        {
+          "end_hour": 212,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 204,
+          "task_id": "ord_sensor_03__op_sensor_smt"
+        },
+        {
+          "end_hour": 222,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 212,
+          "task_id": "ord_gateway_03__op_gateway_smt"
+        },
+        {
+          "end_hour": 228,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_sensor_assembly",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 216,
+          "task_id": "ord_sensor_03__op_sensor_assembly"
+        },
+        {
+          "end_hour": 240,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_gateway_assembly",
+          "order_id": "ord_gateway_03",
+          "overtime": false,
+          "start_hour": 232,
+          "task_id": "ord_gateway_03__op_gateway_assembly"
+        },
+        {
+          "end_hour": 264,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 252,
+          "task_id": "ord_edge_02__op_edge_smt"
+        },
+        {
+          "end_hour": 282,
+          "incremental_cost": 0,
+          "line_id": "line_assembly",
+          "operation_id": "op_edge_assembly",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 272,
+          "task_id": "ord_edge_02__op_edge_assembly"
+        }
+      ],
+      "total_score": 9346980
+    }
+  ],
+  "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+  "state": "orders_generated",
+  "work_orders": [
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 2280,
+        "expected_arrival_hour": 156,
+        "item_id": "mat_board",
+        "quantity": 38,
+        "requires_external_execution": true,
+        "source_id": "src_alpha_board",
+        "supplier_id": "sup_alpha"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_001",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 8000,
+        "expected_arrival_hour": 144,
+        "item_id": "mat_chip",
+        "quantity": 80,
+        "requires_external_execution": true,
+        "source_id": "src_alpha_chip",
+        "supplier_id": "sup_alpha"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_002",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 725,
+        "expected_arrival_hour": 72,
+        "item_id": "mat_chip",
+        "quantity": 5,
+        "requires_external_execution": true,
+        "source_id": "src_beta_chip",
+        "supplier_id": "sup_beta"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_003",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 2340,
+        "expected_arrival_hour": 48,
+        "item_id": "mat_radio",
+        "quantity": 26,
+        "requires_external_execution": true,
+        "source_id": "src_beta_radio",
+        "supplier_id": "sup_beta"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_004",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 420,
+        "expected_arrival_hour": 24,
+        "item_id": "mat_cable",
+        "quantity": 28,
+        "requires_external_execution": true,
+        "source_id": "src_gamma_cable",
+        "supplier_id": "sup_gamma"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_005",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 1155,
+        "expected_arrival_hour": 24,
+        "item_id": "mat_case",
+        "quantity": 33,
+        "requires_external_execution": true,
+        "source_id": "src_gamma_case",
+        "supplier_id": "sup_gamma"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_006",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 240,
+        "expected_arrival_hour": 48,
+        "item_id": "mat_fan",
+        "quantity": 8,
+        "requires_external_execution": true,
+        "source_id": "src_gamma_fan",
+        "supplier_id": "sup_gamma"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_007",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 26,
+        "expected_arrival_hour": 12,
+        "item_id": "mat_label",
+        "quantity": 13,
+        "requires_external_execution": true,
+        "source_id": "src_gamma_label",
+        "supplier_id": "sup_gamma"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_008",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 280,
+        "expected_arrival_hour": 48,
+        "item_id": "mat_power",
+        "quantity": 4,
+        "requires_external_execution": true,
+        "source_id": "src_gamma_power",
+        "supplier_id": "sup_gamma"
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_009",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 176,
+        "late_hours": 80,
+        "order_id": "ord_critical_gateway",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 166,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_gateway_smt",
+            "order_id": "ord_critical_gateway",
+            "overtime": false,
+            "start_hour": 156,
+            "task_id": "ord_critical_gateway__op_gateway_smt"
+          },
+          {
+            "end_hour": 176,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_gateway_assembly",
+            "order_id": "ord_critical_gateway",
+            "overtime": false,
+            "start_hour": 168,
+            "task_id": "ord_critical_gateway__op_gateway_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_010",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 214,
+        "late_hours": 22,
+        "order_id": "ord_edge_01",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 200,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_edge_smt",
+            "order_id": "ord_edge_01",
+            "overtime": false,
+            "start_hour": 188,
+            "task_id": "ord_edge_01__op_edge_smt"
+          },
+          {
+            "end_hour": 214,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_edge_assembly",
+            "order_id": "ord_edge_01",
+            "overtime": false,
+            "start_hour": 204,
+            "task_id": "ord_edge_01__op_edge_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_011",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 286,
+        "late_hours": 0,
+        "order_id": "ord_edge_02",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 244,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_edge_smt",
+            "order_id": "ord_edge_02",
+            "overtime": false,
+            "start_hour": 232,
+            "task_id": "ord_edge_02__op_edge_smt"
+          },
+          {
+            "end_hour": 286,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_edge_assembly",
+            "order_id": "ord_edge_02",
+            "overtime": false,
+            "start_hour": 276,
+            "task_id": "ord_edge_02__op_edge_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_012",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 204,
+        "late_hours": 36,
+        "order_id": "ord_gateway_02",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 186,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_gateway_smt",
+            "order_id": "ord_gateway_02",
+            "overtime": false,
+            "start_hour": 176,
+            "task_id": "ord_gateway_02__op_gateway_smt"
+          },
+          {
+            "end_hour": 204,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_gateway_assembly",
+            "order_id": "ord_gateway_02",
+            "overtime": false,
+            "start_hour": 188,
+            "task_id": "ord_gateway_02__op_gateway_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_013",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 236,
+        "late_hours": 0,
+        "order_id": "ord_gateway_03",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 226,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_gateway_smt",
+            "order_id": "ord_gateway_03",
+            "overtime": false,
+            "start_hour": 216,
+            "task_id": "ord_gateway_03__op_gateway_smt"
+          },
+          {
+            "end_hour": 236,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_gateway_assembly",
+            "order_id": "ord_gateway_03",
+            "overtime": false,
+            "start_hour": 228,
+            "task_id": "ord_gateway_03__op_gateway_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_014",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 20,
+        "late_hours": 0,
+        "order_id": "ord_sensor_01",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 8,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_sensor_smt",
+            "order_id": "ord_sensor_01",
+            "overtime": false,
+            "start_hour": 0,
+            "task_id": "ord_sensor_01__op_sensor_smt"
+          },
+          {
+            "end_hour": 20,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_sensor_assembly",
+            "order_id": "ord_sensor_01",
+            "overtime": false,
+            "start_hour": 8,
+            "task_id": "ord_sensor_01__op_sensor_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_015",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 188,
+        "late_hours": 44,
+        "order_id": "ord_sensor_02",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 176,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_sensor_smt",
+            "order_id": "ord_sensor_02",
+            "overtime": false,
+            "start_hour": 168,
+            "task_id": "ord_sensor_02__op_sensor_smt"
+          },
+          {
+            "end_hour": 188,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_sensor_assembly",
+            "order_id": "ord_sensor_02",
+            "overtime": false,
+            "start_hour": 176,
+            "task_id": "ord_sensor_02__op_sensor_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_016",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 228,
+        "late_hours": 12,
+        "order_id": "ord_sensor_03",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 216,
+            "incremental_cost": 0,
+            "line_id": "line_smt",
+            "operation_id": "op_sensor_smt",
+            "order_id": "ord_sensor_03",
+            "overtime": false,
+            "start_hour": 208,
+            "task_id": "ord_sensor_03__op_sensor_smt"
+          },
+          {
+            "end_hour": 228,
+            "incremental_cost": 0,
+            "line_id": "line_assembly",
+            "operation_id": "op_sensor_assembly",
+            "order_id": "ord_sensor_03",
+            "overtime": false,
+            "start_hour": 216,
+            "task_id": "ord_sensor_03__op_sensor_assembly"
+          }
+        ]
+      },
+      "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
+      "work_order_id": "wo_017",
+      "work_order_type": "schedule_change_order"
+    }
+  ]
+}

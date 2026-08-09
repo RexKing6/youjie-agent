@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "goai-youjie-agent"
+version = "0.1.0"
+description = "Solver-verified supply-chain disruption response Agent for GOAI"
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+dependencies = [
+  "altair>=6,<7",
+  "langgraph>=1.2,<2",
+  "ortools>=9.15,<10",
+  "pydantic>=2.11,<3",
+  "pyxlsb>=1.0.10,<2",
+  "streamlit>=1.49,<2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.4,<9"]
+
+[project.scripts]
+youjie = "delivery_guard.cli:main"
+delivery-guard = "delivery_guard.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]

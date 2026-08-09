@@ -1,0 +1,111 @@
+{
+  "scenario_id": "goai_demo_factory",
+  "scenario_version": 1,
+  "horizon_hours": 336,
+  "currency": "CNY",
+  "provenance": {
+    "as_of": "2026-08-08",
+    "license": "CC-BY-4.0-derived schema plus Apache-2.0 synthetic fixture",
+    "sources": [
+      {
+        "source_id": "mendeley_automotive_supply_chain",
+        "source_type": "public_dataset",
+        "source_ref": "https://data.mendeley.com/datasets/pr3sdy5vp3/1",
+        "license": "CC BY 4.0",
+        "derived_fields": ["bom", "inventory", "capacity", "lead_time", "demand"],
+        "generated_rule": null
+      },
+      {
+        "source_id": "delivery_guard_fixture",
+        "source_type": "synthetic_fixture",
+        "source_ref": "docs/data_provenance.md",
+        "license": "Apache-2.0",
+        "derived_fields": ["order_ids", "due_hours", "supplier_alternatives", "line_routes"],
+        "generated_rule": "Small deterministic factory fixture designed for solver and adversarial validation"
+      }
+    ],
+    "derived_fields": ["all quantities", "all costs", "all customer and supplier names"],
+    "seed": 20260808
+  },
+  "items": [
+    {"item_id": "prd_sensor_hub", "item_type": "finished_good", "name": "Sensor Hub", "unit": "unit", "safety_stock": 0},
+    {"item_id": "prd_gateway", "item_type": "finished_good", "name": "Industrial Gateway", "unit": "unit", "safety_stock": 0},
+    {"item_id": "prd_edge_box", "item_type": "finished_good", "name": "Edge Control Box", "unit": "unit", "safety_stock": 0},
+    {"item_id": "mat_chip", "item_type": "raw_material", "name": "Control Chip", "unit": "piece", "safety_stock": 8},
+    {"item_id": "mat_board", "item_type": "raw_material", "name": "PCB Board", "unit": "piece", "safety_stock": 4},
+    {"item_id": "mat_case", "item_type": "raw_material", "name": "Metal Case", "unit": "piece", "safety_stock": 4},
+    {"item_id": "mat_radio", "item_type": "raw_material", "name": "Radio Module", "unit": "piece", "safety_stock": 4},
+    {"item_id": "mat_fan", "item_type": "raw_material", "name": "Cooling Fan", "unit": "piece", "safety_stock": 2},
+    {"item_id": "mat_power", "item_type": "raw_material", "name": "Power Module", "unit": "piece", "safety_stock": 2},
+    {"item_id": "mat_cable", "item_type": "raw_material", "name": "Cable Set", "unit": "set", "safety_stock": 6},
+    {"item_id": "mat_label", "item_type": "raw_material", "name": "Traceability Label", "unit": "piece", "safety_stock": 10}
+  ],
+  "bom": [
+    {"parent_item_id": "prd_sensor_hub", "component_item_id": "mat_chip", "quantity": 2},
+    {"parent_item_id": "prd_sensor_hub", "component_item_id": "mat_board", "quantity": 1},
+    {"parent_item_id": "prd_sensor_hub", "component_item_id": "mat_case", "quantity": 1},
+    {"parent_item_id": "prd_sensor_hub", "component_item_id": "mat_cable", "quantity": 1},
+    {"parent_item_id": "prd_sensor_hub", "component_item_id": "mat_label", "quantity": 1},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_chip", "quantity": 3},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_board", "quantity": 1},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_case", "quantity": 1},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_radio", "quantity": 2},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_cable", "quantity": 1},
+    {"parent_item_id": "prd_gateway", "component_item_id": "mat_label", "quantity": 1},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_chip", "quantity": 4},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_board", "quantity": 2},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_case", "quantity": 1},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_fan", "quantity": 2},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_power", "quantity": 1},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_cable", "quantity": 2},
+    {"parent_item_id": "prd_edge_box", "component_item_id": "mat_label", "quantity": 1}
+  ],
+  "inventory": [
+    {"item_id": "mat_chip", "location_id": "loc_factory", "on_hand": 25, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_board", "location_id": "loc_factory", "on_hand": 10, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_case", "location_id": "loc_factory", "on_hand": 10, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_radio", "location_id": "loc_factory", "on_hand": 2, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_fan", "location_id": "loc_factory", "on_hand": 2, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_power", "location_id": "loc_factory", "on_hand": 1, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_cable", "location_id": "loc_factory", "on_hand": 20, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_label", "location_id": "loc_factory", "on_hand": 30, "reserved": 0, "quality_hold": 0}
+  ],
+  "suppliers": [
+    {"supplier_id": "sup_alpha", "name": "Alpha Components", "risk_score": 25},
+    {"supplier_id": "sup_beta", "name": "Beta Alternate", "risk_score": 45},
+    {"supplier_id": "sup_gamma", "name": "Gamma Industrial", "risk_score": 20}
+  ],
+  "supplier_sources": [
+    {"source_id": "src_alpha_chip", "supplier_id": "sup_alpha", "item_id": "mat_chip", "lead_time_hours": 24, "max_quantity": 80, "unit_cost": 100, "enabled": true},
+    {"source_id": "src_alpha_board", "supplier_id": "sup_alpha", "item_id": "mat_board", "lead_time_hours": 36, "max_quantity": 40, "unit_cost": 60, "enabled": true},
+    {"source_id": "src_beta_chip", "supplier_id": "sup_beta", "item_id": "mat_chip", "lead_time_hours": 72, "max_quantity": 50, "unit_cost": 145, "enabled": true},
+    {"source_id": "src_beta_radio", "supplier_id": "sup_beta", "item_id": "mat_radio", "lead_time_hours": 48, "max_quantity": 30, "unit_cost": 90, "enabled": true},
+    {"source_id": "src_gamma_case", "supplier_id": "sup_gamma", "item_id": "mat_case", "lead_time_hours": 24, "max_quantity": 40, "unit_cost": 35, "enabled": true},
+    {"source_id": "src_gamma_fan", "supplier_id": "sup_gamma", "item_id": "mat_fan", "lead_time_hours": 48, "max_quantity": 20, "unit_cost": 30, "enabled": true},
+    {"source_id": "src_gamma_power", "supplier_id": "sup_gamma", "item_id": "mat_power", "lead_time_hours": 48, "max_quantity": 20, "unit_cost": 70, "enabled": true},
+    {"source_id": "src_gamma_cable", "supplier_id": "sup_gamma", "item_id": "mat_cable", "lead_time_hours": 24, "max_quantity": 50, "unit_cost": 15, "enabled": true},
+    {"source_id": "src_gamma_label", "supplier_id": "sup_gamma", "item_id": "mat_label", "lead_time_hours": 12, "max_quantity": 100, "unit_cost": 2, "enabled": true}
+  ],
+  "production_lines": [
+    {"line_id": "line_smt", "line_type": "smt", "unavailable_windows": []},
+    {"line_id": "line_assembly", "line_type": "assembly", "unavailable_windows": []}
+  ],
+  "route_operations": [
+    {"operation_id": "op_sensor_smt", "product_id": "prd_sensor_hub", "sequence": 1, "eligible_line_types": ["smt"], "batch_size": 10, "duration_per_batch_hours": 8},
+    {"operation_id": "op_sensor_assembly", "product_id": "prd_sensor_hub", "sequence": 2, "eligible_line_types": ["assembly"], "batch_size": 5, "duration_per_batch_hours": 6},
+    {"operation_id": "op_gateway_smt", "product_id": "prd_gateway", "sequence": 1, "eligible_line_types": ["smt"], "batch_size": 8, "duration_per_batch_hours": 10},
+    {"operation_id": "op_gateway_assembly", "product_id": "prd_gateway", "sequence": 2, "eligible_line_types": ["assembly"], "batch_size": 4, "duration_per_batch_hours": 8},
+    {"operation_id": "op_edge_smt", "product_id": "prd_edge_box", "sequence": 1, "eligible_line_types": ["smt"], "batch_size": 6, "duration_per_batch_hours": 12},
+    {"operation_id": "op_edge_assembly", "product_id": "prd_edge_box", "sequence": 2, "eligible_line_types": ["assembly"], "batch_size": 3, "duration_per_batch_hours": 10}
+  ],
+  "orders": [
+    {"order_id": "ord_critical_gateway", "product_id": "prd_gateway", "quantity": 4, "release_hour": 0, "due_hour": 96, "priority": "critical", "frozen": false},
+    {"order_id": "ord_sensor_01", "product_id": "prd_sensor_hub", "quantity": 8, "release_hour": 0, "due_hour": 72, "priority": "high", "frozen": false},
+    {"order_id": "ord_sensor_02", "product_id": "prd_sensor_hub", "quantity": 10, "release_hour": 12, "due_hour": 144, "priority": "normal", "frozen": false},
+    {"order_id": "ord_gateway_02", "product_id": "prd_gateway", "quantity": 6, "release_hour": 24, "due_hour": 168, "priority": "high", "frozen": false},
+    {"order_id": "ord_edge_01", "product_id": "prd_edge_box", "quantity": 3, "release_hour": 24, "due_hour": 192, "priority": "high", "frozen": false},
+    {"order_id": "ord_sensor_03", "product_id": "prd_sensor_hub", "quantity": 6, "release_hour": 48, "due_hour": 216, "priority": "normal", "frozen": false},
+    {"order_id": "ord_gateway_03", "product_id": "prd_gateway", "quantity": 4, "release_hour": 72, "due_hour": 240, "priority": "normal", "frozen": false},
+    {"order_id": "ord_edge_02", "product_id": "prd_edge_box", "quantity": 2, "release_hour": 96, "due_hour": 288, "priority": "normal", "frozen": false}
+  ]
+}

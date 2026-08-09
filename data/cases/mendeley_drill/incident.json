@@ -1,0 +1,9 @@
+{
+  "incident_id": "inc_public_seat_delay_drill",
+  "kind": "supplier_delay",
+  "target_id": "sup_seat_public",
+  "description": "Synthetic drill: the public-data seat supply is delayed by 48 hours.",
+  "delay_hours": 48,
+  "source_type": "synthetic_supplier_email",
+  "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt"
+}

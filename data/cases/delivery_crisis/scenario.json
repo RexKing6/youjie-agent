@@ -1,0 +1,134 @@
+{
+  "scenario_id": "goai_delivery_crisis",
+  "scenario_version": 1,
+  "horizon_hours": 336,
+  "currency": "CNY",
+  "provenance": {
+    "as_of": "2026-08-09",
+    "license": "Apache-2.0 synthetic competition fixture",
+    "sources": [
+      {
+        "source_id": "mendeley_automotive_supply_chain",
+        "source_type": "public_dataset",
+        "source_ref": "https://data.mendeley.com/datasets/pr3sdy5vp3/1",
+        "license": "CC BY 4.0",
+        "derived_fields": ["bom", "inventory", "capacity", "lead_time", "demand"],
+        "generated_rule": null
+      },
+      {
+        "source_id": "delivery_crisis_fixture",
+        "source_type": "synthetic_fixture",
+        "source_ref": "data/cases/delivery_crisis/provenance.json",
+        "license": "Apache-2.0",
+        "derived_fields": ["all names", "all quantities", "all costs", "all dates", "all policies"],
+        "generated_rule": "Deterministic lot-level fixture designed to expose delivery-cost-stability trade-offs"
+      }
+    ],
+    "derived_fields": ["all operational values"],
+    "seed": 20260809
+  },
+  "items": [
+    {"item_id": "prd_sensor_node", "item_type": "finished_good", "name": "Industrial Sensor Node", "unit": "unit", "safety_stock": 0},
+    {"item_id": "mat_mcu", "item_type": "raw_material", "name": "MCU", "unit": "piece", "safety_stock": 0},
+    {"item_id": "mat_pcb", "item_type": "raw_material", "name": "PCB", "unit": "piece", "safety_stock": 0},
+    {"item_id": "mat_case", "item_type": "raw_material", "name": "Enclosure", "unit": "piece", "safety_stock": 0}
+  ],
+  "bom": [
+    {"parent_item_id": "prd_sensor_node", "component_item_id": "mat_mcu", "quantity": 2},
+    {"parent_item_id": "prd_sensor_node", "component_item_id": "mat_pcb", "quantity": 1},
+    {"parent_item_id": "prd_sensor_node", "component_item_id": "mat_case", "quantity": 1}
+  ],
+  "inventory": [
+    {"item_id": "mat_mcu", "location_id": "loc_factory", "on_hand": 120, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_pcb", "location_id": "loc_factory", "on_hand": 140, "reserved": 0, "quality_hold": 0},
+    {"item_id": "mat_case", "location_id": "loc_factory", "on_hand": 140, "reserved": 0, "quality_hold": 0}
+  ],
+  "suppliers": [
+    {"supplier_id": "sup_alpha", "name": "Alpha Components", "risk_score": 35},
+    {"supplier_id": "sup_beta", "name": "Beta Emergency Supply", "risk_score": 48}
+  ],
+  "supplier_sources": [
+    {
+      "source_id": "src_alpha_mcu_committed",
+      "supplier_id": "sup_alpha",
+      "item_id": "mat_mcu",
+      "lead_time_hours": 48,
+      "max_quantity": 160,
+      "unit_cost": 10,
+      "incremental_unit_cost": 0,
+      "committed_quantity": 160,
+      "enabled": true
+    },
+    {
+      "source_id": "src_beta_mcu_emergency",
+      "supplier_id": "sup_beta",
+      "item_id": "mat_mcu",
+      "lead_time_hours": 48,
+      "max_quantity": 80,
+      "unit_cost": 13,
+      "incremental_unit_cost": 3,
+      "committed_quantity": 0,
+      "enabled": true
+    }
+  ],
+  "production_lines": [
+    {
+      "line_id": "line_smt_regular",
+      "line_type": "smt",
+      "unavailable_windows": [],
+      "available_windows": [
+        {"start_hour": 0, "end_hour": 8},
+        {"start_hour": 24, "end_hour": 32},
+        {"start_hour": 48, "end_hour": 56},
+        {"start_hour": 96, "end_hour": 104},
+        {"start_hour": 168, "end_hour": 176},
+        {"start_hour": 192, "end_hour": 200},
+        {"start_hour": 216, "end_hour": 224},
+        {"start_hour": 240, "end_hour": 248},
+        {"start_hour": 264, "end_hour": 272},
+        {"start_hour": 288, "end_hour": 296}
+      ],
+      "incremental_cost_per_batch": 0,
+      "overtime": false
+    },
+    {
+      "line_id": "line_smt_overtime",
+      "line_type": "smt",
+      "unavailable_windows": [],
+      "available_windows": [{"start_hour": 104, "end_hour": 112}],
+      "incremental_cost_per_batch": 400,
+      "overtime": true
+    }
+  ],
+  "route_operations": [
+    {
+      "operation_id": "op_sensor_smt",
+      "product_id": "prd_sensor_node",
+      "sequence": 1,
+      "eligible_line_types": ["smt"],
+      "batch_size": 10,
+      "duration_per_batch_hours": 4
+    }
+  ],
+  "orders": [
+    {"order_id": "ord_a_01", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "critical", "frozen": true, "customer_name": "ColdChain A", "order_group_id": "order_a", "split_allowed": false, "must_ship_complete": true, "late_penalty_per_unit_hour": 50},
+    {"order_id": "ord_a_02", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "critical", "frozen": true, "customer_name": "ColdChain A", "order_group_id": "order_a", "split_allowed": false, "must_ship_complete": true, "late_penalty_per_unit_hour": 50},
+    {"order_id": "ord_a_03", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "critical", "frozen": true, "customer_name": "ColdChain A", "order_group_id": "order_a", "split_allowed": false, "must_ship_complete": true, "late_penalty_per_unit_hour": 50},
+    {"order_id": "ord_a_04", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "critical", "frozen": true, "customer_name": "ColdChain A", "order_group_id": "order_a", "split_allowed": false, "must_ship_complete": true, "late_penalty_per_unit_hour": 50},
+    {"order_id": "ord_b_01", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_b_02", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_b_03", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_b_04", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_b_05", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_b_06", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 112, "priority": "normal", "frozen": false, "customer_name": "Retail B", "order_group_id": "order_b", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 5},
+    {"order_id": "ord_c_01", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 248, "priority": "normal", "frozen": false, "customer_name": "Channel C", "order_group_id": "order_c", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 2},
+    {"order_id": "ord_c_02", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 248, "priority": "normal", "frozen": false, "customer_name": "Channel C", "order_group_id": "order_c", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 2},
+    {"order_id": "ord_c_03", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 248, "priority": "normal", "frozen": false, "customer_name": "Channel C", "order_group_id": "order_c", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 2},
+    {"order_id": "ord_c_04", "product_id": "prd_sensor_node", "quantity": 10, "release_hour": 0, "due_hour": 248, "priority": "normal", "frozen": false, "customer_name": "Channel C", "order_group_id": "order_c", "split_allowed": true, "must_ship_complete": false, "late_penalty_per_unit_hour": 2}
+  ],
+  "profile_recovery_budgets": {
+    "service_first": 1200,
+    "balanced": 600,
+    "stability_first": 0
+  }
+}

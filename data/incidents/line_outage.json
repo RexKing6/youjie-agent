@@ -1,0 +1,10 @@
+{
+  "incident_id": "inc_line_outage",
+  "kind": "line_outage",
+  "target_id": "line_smt",
+  "description": "SMT line is unavailable for preventive repair.",
+  "start_hour": 0,
+  "end_hour": 72,
+  "source_type": "synthetic_fixture",
+  "source_ref": "data/incidents/line_outage.json"
+}

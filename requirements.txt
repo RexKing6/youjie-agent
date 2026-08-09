@@ -1,0 +1,7 @@
+altair==6.2.2
+langgraph==1.2.10
+ortools==9.15.6755
+pydantic==2.13.4
+pyxlsb==1.0.10
+streamlit==1.61.1
+-e .

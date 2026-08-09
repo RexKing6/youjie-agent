@@ -1,0 +1,9 @@
+{
+  "incident_id": "inc_alpha_mcu_delay",
+  "kind": "supplier_delay",
+  "target_id": "sup_alpha",
+  "description": "Alpha Components reports that PO-8812 for 160 MCUs, originally due Wednesday, will arrive five days late on Monday.",
+  "delay_hours": 120,
+  "source_type": "synthetic_supplier_email",
+  "source_ref": "data/cases/delivery_crisis/supplier_delay_email.txt"
+}

@@ -1,0 +1,367 @@
+{
+  "bom": [
+    {
+      "component_item_id": "mat_dg8",
+      "parent_item_id": "prd_cfg_1",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_g0k",
+      "parent_item_id": "prd_cfg_1",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_q2j",
+      "parent_item_id": "prd_cfg_1",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_dk8",
+      "parent_item_id": "prd_cfg_2",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_g0k",
+      "parent_item_id": "prd_cfg_2",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_q2j",
+      "parent_item_id": "prd_cfg_2",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_d83",
+      "parent_item_id": "prd_cfg_3",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_g1z",
+      "parent_item_id": "prd_cfg_3",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_bev",
+      "parent_item_id": "prd_cfg_3",
+      "quantity": 1
+    },
+    {
+      "component_item_id": "mat_q2j",
+      "parent_item_id": "prd_cfg_3",
+      "quantity": 1
+    }
+  ],
+  "currency": "CNY",
+  "horizon_hours": 96,
+  "inventory": [
+    {
+      "item_id": "mat_bev",
+      "location_id": "loc_zp7",
+      "on_hand": 52,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_d83",
+      "location_id": "loc_zp7",
+      "on_hand": 345,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_dg8",
+      "location_id": "loc_zp7",
+      "on_hand": 305,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_dk8",
+      "location_id": "loc_zp7",
+      "on_hand": 441,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_g0k",
+      "location_id": "loc_zp7",
+      "on_hand": 661,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_g1z",
+      "location_id": "loc_zp7",
+      "on_hand": 52,
+      "quality_hold": 0,
+      "reserved": 0
+    },
+    {
+      "item_id": "mat_q2j",
+      "location_id": "loc_zp7",
+      "on_hand": 0,
+      "quality_hold": 0,
+      "reserved": 0
+    }
+  ],
+  "items": [
+    {
+      "item_id": "prd_cfg_1",
+      "item_type": "finished_good",
+      "name": "公开车辆配置 DG8+G0K+Q2J",
+      "safety_stock": 0,
+      "unit": "vehicle"
+    },
+    {
+      "item_id": "prd_cfg_2",
+      "item_type": "finished_good",
+      "name": "公开车辆配置 DK8+G0K+Q2J",
+      "safety_stock": 0,
+      "unit": "vehicle"
+    },
+    {
+      "item_id": "prd_cfg_3",
+      "item_type": "finished_good",
+      "name": "公开车辆配置 D83+G1Z+BEV+Q2J",
+      "safety_stock": 0,
+      "unit": "vehicle"
+    },
+    {
+      "item_id": "mat_bev",
+      "item_type": "raw_material",
+      "name": "Mendeley battery BEV",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_d83",
+      "item_type": "raw_material",
+      "name": "Mendeley engine D83",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_dg8",
+      "item_type": "raw_material",
+      "name": "Mendeley engine DG8",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_dk8",
+      "item_type": "raw_material",
+      "name": "Mendeley engine DK8",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_g0k",
+      "item_type": "raw_material",
+      "name": "Mendeley gear G0K",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_g1z",
+      "item_type": "raw_material",
+      "name": "Mendeley gear G1Z",
+      "safety_stock": 0,
+      "unit": "unit"
+    },
+    {
+      "item_id": "mat_q2j",
+      "item_type": "raw_material",
+      "name": "Mendeley seat Q2J",
+      "safety_stock": 0,
+      "unit": "unit"
+    }
+  ],
+  "orders": [
+    {
+      "customer_name": "华东旗舰经销网络（模拟）",
+      "due_hour": 24,
+      "frozen": true,
+      "late_penalty_per_unit_hour": 50,
+      "must_ship_complete": true,
+      "order_group_id": "public_period61_cfg_1",
+      "order_id": "ord_public_cfg_1",
+      "priority": "critical",
+      "product_id": "prd_cfg_1",
+      "quantity": 91,
+      "release_hour": 0,
+      "split_allowed": false
+    },
+    {
+      "customer_name": "区域车队客户（模拟）",
+      "due_hour": 24,
+      "frozen": false,
+      "late_penalty_per_unit_hour": 30,
+      "must_ship_complete": true,
+      "order_group_id": "public_period61_cfg_2",
+      "order_id": "ord_public_cfg_2",
+      "priority": "high",
+      "product_id": "prd_cfg_2",
+      "quantity": 81,
+      "release_hour": 0,
+      "split_allowed": false
+    },
+    {
+      "customer_name": "直营网点补货（模拟）",
+      "due_hour": 24,
+      "frozen": false,
+      "late_penalty_per_unit_hour": 10,
+      "must_ship_complete": true,
+      "order_group_id": "public_period61_cfg_3",
+      "order_id": "ord_public_cfg_3",
+      "priority": "normal",
+      "product_id": "prd_cfg_3",
+      "quantity": 45,
+      "release_hour": 0,
+      "split_allowed": false
+    }
+  ],
+  "production_lines": [
+    {
+      "available_windows": [
+        {
+          "end_hour": 20,
+          "start_hour": 0
+        },
+        {
+          "end_hour": 44,
+          "start_hour": 24
+        },
+        {
+          "end_hour": 68,
+          "start_hour": 48
+        },
+        {
+          "end_hour": 92,
+          "start_hour": 72
+        }
+      ],
+      "incremental_cost_per_batch": 0,
+      "line_id": "line_zp7_public",
+      "line_type": "vehicle_assembly",
+      "overtime": false,
+      "unavailable_windows": []
+    }
+  ],
+  "profile_recovery_budgets": {
+    "balanced": 400,
+    "service_first": 800,
+    "stability_first": 0
+  },
+  "provenance": {
+    "as_of": "2026-08-09",
+    "derived_fields": [
+      "aggregated_customer_orders",
+      "planning_hours",
+      "competition_policy_and_cost_fields"
+    ],
+    "license": "Mixed: CC BY 4.0 public rows and Apache-2.0 synthetic overlay",
+    "seed": 20260809,
+    "sources": [
+      {
+        "derived_fields": [
+          "aggregate_product_ids",
+          "aggregate_order_quantities",
+          "period_to_hour_mapping",
+          "item_specific_seat_allocation_from_group_arc_capacity",
+          "discrete_line_calendar_from_daily_arc_capacity"
+        ],
+        "generated_rule": "Period 61 demand rows are grouped by identical BOM signature; source rows remain in lineage.json.",
+        "license": "CC BY 4.0",
+        "source_id": "mendeley_pr3sdy5vp3_v1",
+        "source_ref": "https://data.mendeley.com/datasets/pr3sdy5vp3/1 (sha256:1ea0bcdea3225d308be913c9ca0f377585e1863847c78d6e8eec10b6de82889e)",
+        "source_type": "public_industry_grounded_randomized_dataset"
+      },
+      {
+        "derived_fields": [
+          "customer_names",
+          "priorities",
+          "unit_costs",
+          "emergency_supplier",
+          "recovery_budgets",
+          "incident_messages",
+          "route_duration"
+        ],
+        "generated_rule": "Deterministic seed 20260809; never represented as a Mendeley fact.",
+        "license": "Apache-2.0",
+        "source_id": "competition_overlay_seed_20260809",
+        "source_ref": "data/cases/mendeley_drill/lineage.json#synthetic_overlay",
+        "source_type": "synthetic_competition_overlay"
+      }
+    ]
+  },
+  "route_operations": [
+    {
+      "batch_size": 400,
+      "duration_per_batch_hours": 4,
+      "eligible_line_types": [
+        "vehicle_assembly"
+      ],
+      "operation_id": "op_assemble_cfg_1",
+      "product_id": "prd_cfg_1",
+      "sequence": 1
+    },
+    {
+      "batch_size": 400,
+      "duration_per_batch_hours": 4,
+      "eligible_line_types": [
+        "vehicle_assembly"
+      ],
+      "operation_id": "op_assemble_cfg_2",
+      "product_id": "prd_cfg_2",
+      "sequence": 1
+    },
+    {
+      "batch_size": 400,
+      "duration_per_batch_hours": 4,
+      "eligible_line_types": [
+        "vehicle_assembly"
+      ],
+      "operation_id": "op_assemble_cfg_3",
+      "product_id": "prd_cfg_3",
+      "sequence": 1
+    }
+  ],
+  "scenario_id": "scenario_mendeley_period61_drill",
+  "scenario_version": 1,
+  "supplier_sources": [
+    {
+      "committed_quantity": 217,
+      "enabled": true,
+      "incremental_unit_cost": 0,
+      "item_id": "mat_q2j",
+      "lead_time_hours": 0,
+      "max_quantity": 217,
+      "source_id": "src_public_seat_q2j",
+      "supplier_id": "sup_seat_public",
+      "unit_cost": 0
+    },
+    {
+      "committed_quantity": 0,
+      "enabled": true,
+      "incremental_unit_cost": 8,
+      "item_id": "mat_q2j",
+      "lead_time_hours": 12,
+      "max_quantity": 100,
+      "source_id": "src_sim_emergency_q2j",
+      "supplier_id": "sup_seat_emergency_sim",
+      "unit_cost": 8
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "Mendeley seat supplier",
+      "risk_score": 35,
+      "supplier_id": "sup_seat_public"
+    },
+    {
+      "name": "应急座椅供应商（模拟）",
+      "risk_score": 55,
+      "supplier_id": "sup_seat_emergency_sim"
+    }
+  ]
+}

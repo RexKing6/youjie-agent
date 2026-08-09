@@ -1,0 +1,10 @@
+{
+  "incident_id": "inc_full_line_outage",
+  "kind": "line_outage",
+  "target_id": "line_smt",
+  "description": "SMT line is unavailable for the entire planning horizon.",
+  "start_hour": 0,
+  "end_hour": 336,
+  "source_type": "synthetic_fixture",
+  "source_ref": "data/incidents/full_line_outage.json"
+}

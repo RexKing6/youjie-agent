@@ -1,0 +1,10 @@
+From: delivery@alpha-components.example
+To: planner@demo-factory.example
+Subject: PO-8812 MCU delivery update
+Sent: 2026-08-10 08:05 CST
+
+The 160 MCU units on PO-8812 were scheduled to reach your factory on Wednesday.
+Because the upstream test station is unavailable, the earliest confirmed arrival is next Monday,
+five days later than the committed date. This update applies only to PO-8812.
+
+This is synthetic competition data. No message was sent and no real company is represented.

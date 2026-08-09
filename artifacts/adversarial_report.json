@@ -1,0 +1,85 @@
+{
+  "as_of": "2026-08-08",
+  "cases": [
+    {
+      "case_id": "adv_01_supplier_delay_recovery",
+      "detail": "verified_plans=3, drafts=17",
+      "passed": true
+    },
+    {
+      "case_id": "adv_02_line_outage_recovery",
+      "detail": "verified_plans=3",
+      "passed": true
+    },
+    {
+      "case_id": "adv_03_impossible_critical_order",
+      "detail": "verified_plans=0",
+      "passed": true
+    },
+    {
+      "case_id": "adv_04_full_line_outage",
+      "detail": "verified_plans=0",
+      "passed": true
+    },
+    {
+      "case_id": "adv_05_bom_cycle",
+      "detail": "1 validation error for Scenario",
+      "passed": true
+    },
+    {
+      "case_id": "adv_06_negative_inventory",
+      "detail": "1 validation error for Scenario",
+      "passed": true
+    },
+    {
+      "case_id": "adv_07_duplicate_order",
+      "detail": "1 validation error for Scenario",
+      "passed": true
+    },
+    {
+      "case_id": "adv_08_dangling_bom",
+      "detail": "1 validation error for Scenario",
+      "passed": true
+    },
+    {
+      "case_id": "adv_09_prompt_injection",
+      "detail": "state=awaiting_approval, work_orders=0",
+      "passed": true
+    },
+    {
+      "case_id": "adv_10_unapproved_work_orders",
+      "detail": "approval gate blocked generation",
+      "passed": true
+    },
+    {
+      "case_id": "adv_11_tampered_plan",
+      "detail": "attack tampered_plan blocked",
+      "passed": true
+    },
+    {
+      "case_id": "adv_12_stale_approval",
+      "detail": "attack stale_approval blocked",
+      "passed": true
+    },
+    {
+      "case_id": "adv_13_revoked_evidence",
+      "detail": "attack evidence_revoked blocked",
+      "passed": true
+    },
+    {
+      "case_id": "adv_14_independent_verifier",
+      "detail": "violations=['ord_sensor_01__op_sensor_smt: line type assembly not eligible for op_sensor_smt']",
+      "passed": true
+    },
+    {
+      "case_id": "adv_15_deterministic_replay",
+      "detail": "scenario_hash=a01606497d0b",
+      "passed": true
+    }
+  ],
+  "failed_cases": 0,
+  "invariant_violations": [],
+  "passed_cases": 15,
+  "suite_id": "delivery_guard_adversarial_v1",
+  "total_cases": 15
+}

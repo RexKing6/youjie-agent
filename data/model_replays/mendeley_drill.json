@@ -1,0 +1,35 @@
+{
+  "model_name": "delivery-guard-mendeley-replay-v1",
+  "generated_at": "2026-08-09",
+  "mode": "recorded_structured_output",
+  "disclosure": "Deterministic offline fixture for the synthetic incident email; not a live model call.",
+  "responses": {
+    "mendeley_seat_delay_email": {
+      "incident_kind": "supplier_delay",
+      "target_mention": "public Mendeley seat supplier",
+      "resolved_target_id": "sup_seat_public",
+      "delay_hours": 48,
+      "loss_quantity": null,
+      "start_hour": null,
+      "end_hour": null,
+      "quantity_delta": null,
+      "confidence": "high",
+      "missing_fields": [],
+      "conflicts": [],
+      "required_confirmations": [],
+      "source_spans": [
+        {
+          "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt",
+          "quote": "public Mendeley seat supplier",
+          "field_name": "resolved_target_id"
+        },
+        {
+          "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt",
+          "quote": "for the next 48 hours",
+          "field_name": "delay_hours"
+        }
+      ],
+      "security_flags": []
+    }
+  }
+}

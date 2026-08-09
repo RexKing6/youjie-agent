@@ -1,0 +1,1708 @@
+{
+  "citations": [],
+  "decision": {
+    "actor_id": "cli_public_data_planner",
+    "comment": "Approve draft-only actions in the isolated public-data drill.",
+    "decision": "approve",
+    "profile": "balanced"
+  },
+  "graph_trace": [
+    {
+      "node": "understand_incident",
+      "summary": "Produced IncidentDraft in replay mode with source spans."
+    },
+    {
+      "node": "plan_investigation",
+      "summary": "Selected 5 allowlisted actions for supplier_delay."
+    },
+    {
+      "node": "execute_investigation",
+      "summary": "Executed snapshot plus 0 cited policy results."
+    },
+    {
+      "node": "analyze_and_solve",
+      "summary": "Deterministic impact, CP-SAT, and independent verification completed."
+    },
+    {
+      "node": "human_approval",
+      "summary": "Human chose approve."
+    },
+    {
+      "node": "draft_actions",
+      "summary": "Generated 5 draft-only actions after hash recheck."
+    }
+  ],
+  "impact": {
+    "affected_orders": [
+      "ord_public_cfg_1",
+      "ord_public_cfg_2",
+      "ord_public_cfg_3"
+    ],
+    "affected_resources": [
+      "sup_seat_public"
+    ],
+    "evidence_paths": [
+      {
+        "material_id": "mat_q2j",
+        "order_id": "ord_public_cfg_1",
+        "path": [
+          "inc_agent_confirmed",
+          "sup_seat_public",
+          "prd_cfg_1",
+          "mat_q2j",
+          "ord_public_cfg_1"
+        ]
+      },
+      {
+        "material_id": "mat_q2j",
+        "order_id": "ord_public_cfg_2",
+        "path": [
+          "inc_agent_confirmed",
+          "sup_seat_public",
+          "prd_cfg_2",
+          "mat_q2j",
+          "ord_public_cfg_2"
+        ]
+      },
+      {
+        "material_id": "mat_q2j",
+        "order_id": "ord_public_cfg_3",
+        "path": [
+          "inc_agent_confirmed",
+          "sup_seat_public",
+          "prd_cfg_3",
+          "mat_q2j",
+          "ord_public_cfg_3"
+        ]
+      }
+    ],
+    "incident_id": "inc_agent_confirmed",
+    "material_demand": {
+      "mat_bev": 45,
+      "mat_d83": 45,
+      "mat_dg8": 91,
+      "mat_dk8": 81,
+      "mat_g0k": 172,
+      "mat_g1z": 45,
+      "mat_q2j": 217
+    },
+    "notes": [
+      "Incident free text was retained for audit but ignored by deterministic calculations.",
+      "Computed impact from 3 orders and 10 BOM lines."
+    ],
+    "projected_shortages": {},
+    "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525"
+  },
+  "incident": {
+    "delay_hours": 48,
+    "description": "From: drill-seat-supplier@example.invalid\nTo: planner@example.invalid\nSubject: Simulation only — Q2J seat delivery interruption\nSent: 2026-08-10 08:05 CST\n\nThis is a synthetic resilience-drill message. The public Mendeley seat supplier cannot dispatch\nQ2J seat deliveries for the next 48 hours because of a simulated loading-area shutdown.\nNo real supplier, company, shipment, or production system is represented.\n",
+    "end_hour": null,
+    "incident_id": "inc_agent_confirmed",
+    "kind": "supplier_delay",
+    "loss_quantity": null,
+    "quantity_delta": null,
+    "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt",
+    "source_type": "agent_confirmed_untrusted_text",
+    "start_hour": null,
+    "target_id": "sup_seat_public"
+  },
+  "incident_draft": {
+    "confidence": "high",
+    "conflicts": [],
+    "delay_hours": 48,
+    "end_hour": null,
+    "incident_kind": "supplier_delay",
+    "loss_quantity": null,
+    "missing_fields": [],
+    "quantity_delta": null,
+    "required_confirmations": [],
+    "resolved_target_id": "sup_seat_public",
+    "security_flags": [],
+    "source_spans": [
+      {
+        "field_name": "resolved_target_id",
+        "quote": "public Mendeley seat supplier",
+        "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt"
+      },
+      {
+        "field_name": "delay_hours",
+        "quote": "for the next 48 hours",
+        "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt"
+      }
+    ],
+    "start_hour": null,
+    "target_mention": "public Mendeley seat supplier"
+  },
+  "model_mode": "replay",
+  "model_name": "delivery-guard-mendeley-replay-v1",
+  "plan_summaries": {
+    "balanced": {
+      "alternate_supplier_units": 45,
+      "changed_order_ids": [],
+      "first_due_late_units": 172,
+      "first_due_on_time_units": 45,
+      "groups": {
+        "public_period61_cfg_1": {
+          "customer_name": "华东旗舰经销网络（模拟）",
+          "due_hour": 24,
+          "late_units": 91,
+          "max_late_hours": 28,
+          "on_time_units": 0,
+          "total_units": 91,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_2": {
+          "customer_name": "区域车队客户（模拟）",
+          "due_hour": 24,
+          "late_units": 81,
+          "max_late_hours": 32,
+          "on_time_units": 0,
+          "total_units": 81,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_3": {
+          "customer_name": "直营网点补货（模拟）",
+          "due_hour": 24,
+          "late_units": 0,
+          "max_late_hours": 0,
+          "on_time_units": 45,
+          "total_units": 45,
+          "unscheduled_units": 0
+        }
+      },
+      "overtime_cost": 0,
+      "overtime_units": 0,
+      "profile": "balanced",
+      "recovery_cost": 360,
+      "schedule_changes": 0,
+      "supplier_changes": 1
+    },
+    "service_first": {
+      "alternate_supplier_units": 91,
+      "changed_order_ids": [],
+      "first_due_late_units": 126,
+      "first_due_on_time_units": 91,
+      "groups": {
+        "public_period61_cfg_1": {
+          "customer_name": "华东旗舰经销网络（模拟）",
+          "due_hour": 24,
+          "late_units": 0,
+          "max_late_hours": 0,
+          "on_time_units": 91,
+          "total_units": 91,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_2": {
+          "customer_name": "区域车队客户（模拟）",
+          "due_hour": 24,
+          "late_units": 81,
+          "max_late_hours": 28,
+          "on_time_units": 0,
+          "total_units": 81,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_3": {
+          "customer_name": "直营网点补货（模拟）",
+          "due_hour": 24,
+          "late_units": 45,
+          "max_late_hours": 32,
+          "on_time_units": 0,
+          "total_units": 45,
+          "unscheduled_units": 0
+        }
+      },
+      "overtime_cost": 0,
+      "overtime_units": 0,
+      "profile": "service_first",
+      "recovery_cost": 728,
+      "schedule_changes": 0,
+      "supplier_changes": 1
+    },
+    "stability_first": {
+      "alternate_supplier_units": 0,
+      "changed_order_ids": [],
+      "first_due_late_units": 217,
+      "first_due_on_time_units": 0,
+      "groups": {
+        "public_period61_cfg_1": {
+          "customer_name": "华东旗舰经销网络（模拟）",
+          "due_hour": 24,
+          "late_units": 91,
+          "max_late_hours": 28,
+          "on_time_units": 0,
+          "total_units": 91,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_2": {
+          "customer_name": "区域车队客户（模拟）",
+          "due_hour": 24,
+          "late_units": 81,
+          "max_late_hours": 32,
+          "on_time_units": 0,
+          "total_units": 81,
+          "unscheduled_units": 0
+        },
+        "public_period61_cfg_3": {
+          "customer_name": "直营网点补货（模拟）",
+          "due_hour": 24,
+          "late_units": 45,
+          "max_late_hours": 36,
+          "on_time_units": 0,
+          "total_units": 45,
+          "unscheduled_units": 0
+        }
+      },
+      "overtime_cost": 0,
+      "overtime_units": 0,
+      "profile": "stability_first",
+      "recovery_cost": 0,
+      "schedule_changes": 0,
+      "supplier_changes": 0
+    }
+  },
+  "planned_actions": [
+    {
+      "reason": "Establish frozen business context",
+      "tool": "query_factory_snapshot"
+    },
+    {
+      "query": "supplier lead time capacity emergency source approval",
+      "reason": "Retrieve bounded evidence",
+      "tool": "retrieve_policy"
+    },
+    {
+      "query": "customer due date late delivery human confirmation",
+      "reason": "Retrieve bounded evidence",
+      "tool": "retrieve_policy"
+    },
+    {
+      "reason": "Compute BOM and order propagation",
+      "tool": "analyze_impact"
+    },
+    {
+      "reason": "Generate solver-verified candidates",
+      "tool": "solve_recovery"
+    }
+  ],
+  "plans": [
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 147,
+          "lateness": 6,
+          "line_capacity": 80,
+          "recovery_budget": 1,
+          "required_order": 3,
+          "supplier_capacity": 4,
+          "task_assignment": 3
+        },
+        "evidence_id": "evidence_service_first",
+        "objective_breakdown": {
+          "first_due_late_units": 126,
+          "first_due_on_time_units": 91,
+          "late_units": 126,
+          "lateness_weighted_units_hours": 8244,
+          "on_time_units": 91,
+          "overtime_cost": 0,
+          "purchase_actions": 1,
+          "purchase_cost": 728,
+          "recovery_cost": 728,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "86fb7ce13348f6b01e5ff6f423760be145dc8e7e25950541436d38ed5ba16c11",
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "solve_time_ms": 13,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 126,
+        "first_due_on_time_units": 91,
+        "late_units": 126,
+        "lateness_weighted_units_hours": 8244,
+        "on_time_units": 91,
+        "overtime_cost": 0,
+        "purchase_actions": 1,
+        "purchase_cost": 728,
+        "recovery_cost": 728,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 20,
+          "late_hours": 0,
+          "order_id": "ord_public_cfg_1",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 52,
+          "late_hours": 28,
+          "order_id": "ord_public_cfg_2",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 56,
+          "late_hours": 32,
+          "order_id": "ord_public_cfg_3",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_service_first",
+      "profile": "service_first",
+      "purchases": [
+        {
+          "arrival_hour": 48,
+          "committed": true,
+          "cost": 0,
+          "incremental_cost": 0,
+          "item_id": "mat_q2j",
+          "quantity": 217,
+          "source_id": "src_public_seat_q2j",
+          "supplier_id": "sup_seat_public"
+        },
+        {
+          "arrival_hour": 12,
+          "committed": false,
+          "cost": 728,
+          "incremental_cost": 728,
+          "item_id": "mat_q2j",
+          "quantity": 91,
+          "source_id": "src_sim_emergency_q2j",
+          "supplier_id": "sup_seat_emergency_sim"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "scheduled_operations": [
+        {
+          "end_hour": 20,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_1",
+          "order_id": "ord_public_cfg_1",
+          "overtime": false,
+          "start_hour": 16,
+          "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+        },
+        {
+          "end_hour": 52,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_2",
+          "order_id": "ord_public_cfg_2",
+          "overtime": false,
+          "start_hour": 48,
+          "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+        },
+        {
+          "end_hour": 56,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_3",
+          "order_id": "ord_public_cfg_3",
+          "overtime": false,
+          "start_hour": 52,
+          "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+        }
+      ],
+      "total_score": 82440778
+    },
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 147,
+          "lateness": 6,
+          "line_capacity": 80,
+          "recovery_budget": 1,
+          "required_order": 1,
+          "supplier_capacity": 4,
+          "task_assignment": 3
+        },
+        "evidence_id": "evidence_balanced",
+        "objective_breakdown": {
+          "first_due_late_units": 172,
+          "first_due_on_time_units": 45,
+          "late_units": 172,
+          "lateness_weighted_units_hours": 20516,
+          "on_time_units": 45,
+          "overtime_cost": 0,
+          "purchase_actions": 1,
+          "purchase_cost": 360,
+          "recovery_cost": 360,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "solve_time_ms": 3,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 172,
+        "first_due_on_time_units": 45,
+        "late_units": 172,
+        "lateness_weighted_units_hours": 20516,
+        "on_time_units": 45,
+        "overtime_cost": 0,
+        "purchase_actions": 1,
+        "purchase_cost": 360,
+        "recovery_cost": 360,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 52,
+          "late_hours": 28,
+          "order_id": "ord_public_cfg_1",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 56,
+          "late_hours": 32,
+          "order_id": "ord_public_cfg_2",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 20,
+          "late_hours": 0,
+          "order_id": "ord_public_cfg_3",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_balanced",
+      "profile": "balanced",
+      "purchases": [
+        {
+          "arrival_hour": 48,
+          "committed": true,
+          "cost": 0,
+          "incremental_cost": 0,
+          "item_id": "mat_q2j",
+          "quantity": 217,
+          "source_id": "src_public_seat_q2j",
+          "supplier_id": "sup_seat_public"
+        },
+        {
+          "arrival_hour": 12,
+          "committed": false,
+          "cost": 360,
+          "incremental_cost": 360,
+          "item_id": "mat_q2j",
+          "quantity": 45,
+          "source_id": "src_sim_emergency_q2j",
+          "supplier_id": "sup_seat_emergency_sim"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "scheduled_operations": [
+        {
+          "end_hour": 20,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_3",
+          "order_id": "ord_public_cfg_3",
+          "overtime": false,
+          "start_hour": 16,
+          "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+        },
+        {
+          "end_hour": 52,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_1",
+          "order_id": "ord_public_cfg_1",
+          "overtime": false,
+          "start_hour": 48,
+          "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+        },
+        {
+          "end_hour": 56,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_2",
+          "order_id": "ord_public_cfg_2",
+          "overtime": false,
+          "start_hour": 52,
+          "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+        }
+      ],
+      "total_score": 102583800
+    },
+    {
+      "assumptions": [
+        "All purchase orders are placed at planning hour 0.",
+        "Candidate operation starts use a 4-hour planning grid.",
+        "Time and quantity are integer-scaled; no real ERP write is performed."
+      ],
+      "evidence": {
+        "constraint_counts": {
+          "inventory_balance": 147,
+          "lateness": 6,
+          "line_capacity": 80,
+          "recovery_budget": 1,
+          "required_order": 1,
+          "supplier_capacity": 4,
+          "task_assignment": 3
+        },
+        "evidence_id": "evidence_stability_first",
+        "objective_breakdown": {
+          "first_due_late_units": 217,
+          "first_due_on_time_units": 0,
+          "late_units": 217,
+          "lateness_weighted_units_hours": 22136,
+          "on_time_units": 0,
+          "overtime_cost": 0,
+          "purchase_actions": 0,
+          "purchase_cost": 0,
+          "recovery_cost": 0,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "plan_hash": "7cdd78578fb36789d6d0174abda552edb6bfdb64816710330a0c44d6ce5acc09",
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "solve_time_ms": 2,
+        "solver_name": "OR-Tools CP-SAT",
+        "solver_status": "OPTIMAL",
+        "solver_version": "9.15.6755",
+        "verified": true,
+        "violations": []
+      },
+      "objective_breakdown": {
+        "first_due_late_units": 217,
+        "first_due_on_time_units": 0,
+        "late_units": 217,
+        "lateness_weighted_units_hours": 22136,
+        "on_time_units": 0,
+        "overtime_cost": 0,
+        "purchase_actions": 0,
+        "purchase_cost": 0,
+        "recovery_cost": 0,
+        "unfulfilled_weighted_units": 0,
+        "unscheduled_units": 0
+      },
+      "order_outcomes": [
+        {
+          "completion_hour": 52,
+          "late_hours": 28,
+          "order_id": "ord_public_cfg_1",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 56,
+          "late_hours": 32,
+          "order_id": "ord_public_cfg_2",
+          "scheduled": true
+        },
+        {
+          "completion_hour": 60,
+          "late_hours": 36,
+          "order_id": "ord_public_cfg_3",
+          "scheduled": true
+        }
+      ],
+      "plan_id": "plan_stability_first",
+      "profile": "stability_first",
+      "purchases": [
+        {
+          "arrival_hour": 48,
+          "committed": true,
+          "cost": 0,
+          "incremental_cost": 0,
+          "item_id": "mat_q2j",
+          "quantity": 217,
+          "source_id": "src_public_seat_q2j",
+          "supplier_id": "sup_seat_public"
+        }
+      ],
+      "risks": [
+        "Scenario data is public-derived and synthetic, not live factory data.",
+        "Supplier capacity is modeled as a horizon-level cap in this MVP."
+      ],
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "scheduled_operations": [
+        {
+          "end_hour": 52,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_1",
+          "order_id": "ord_public_cfg_1",
+          "overtime": false,
+          "start_hour": 48,
+          "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+        },
+        {
+          "end_hour": 56,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_2",
+          "order_id": "ord_public_cfg_2",
+          "overtime": false,
+          "start_hour": 52,
+          "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+        },
+        {
+          "end_hour": 60,
+          "incremental_cost": 0,
+          "line_id": "line_zp7_public",
+          "operation_id": "op_assemble_cfg_3",
+          "order_id": "ord_public_cfg_3",
+          "overtime": false,
+          "start_hour": 56,
+          "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+        }
+      ],
+      "total_score": 66408000
+    }
+  ],
+  "raw_text": "From: drill-seat-supplier@example.invalid\nTo: planner@example.invalid\nSubject: Simulation only — Q2J seat delivery interruption\nSent: 2026-08-10 08:05 CST\n\nThis is a synthetic resilience-drill message. The public Mendeley seat supplier cannot dispatch\nQ2J seat deliveries for the next 48 hours because of a simulated loading-area shutdown.\nNo real supplier, company, shipment, or production system is represented.\n",
+  "replay_key": "mendeley_seat_delay_email",
+  "run_metadata": {
+    "human_interrupt_observed": true,
+    "model_mode": "replay",
+    "orchestrator": "LangGraph",
+    "scenario_source": "data/cases/mendeley_drill/scenario.json"
+  },
+  "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+  "snapshot": {
+    "commercial_order_groups": 3,
+    "inventory_items": 7,
+    "orders": 3,
+    "production_lines": 1,
+    "scenario_id": "scenario_mendeley_period61_drill",
+    "scenario_version": 1,
+    "supplier_sources": 2
+  },
+  "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt",
+  "status": "completed",
+  "tool_traces": [
+    {
+      "input_summary": {
+        "model_mode": "replay",
+        "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt"
+      },
+      "result_summary": {
+        "incident_kind": "supplier_delay",
+        "missing_fields": [],
+        "security_flags": [],
+        "target_id": "sup_seat_public"
+      },
+      "source_refs": [
+        "data/cases/mendeley_drill/supplier_delay_email.txt"
+      ],
+      "success": true,
+      "tool_name": "parse_incident"
+    },
+    {
+      "input_summary": {
+        "scenario_id": "scenario_mendeley_period61_drill"
+      },
+      "result_summary": {
+        "commercial_order_groups": 3,
+        "inventory_items": 7,
+        "orders": 3,
+        "production_lines": 1,
+        "scenario_id": "scenario_mendeley_period61_drill",
+        "scenario_version": 1,
+        "supplier_sources": 2
+      },
+      "sequence": 1,
+      "source_refs": [
+        "data/cases/mendeley_drill/scenario.json"
+      ],
+      "success": true,
+      "tool_name": "query_factory_snapshot"
+    },
+    {
+      "input_summary": {
+        "query": "supplier lead time capacity emergency source approval",
+        "top_k": 2
+      },
+      "result_summary": {
+        "citations": [],
+        "security_flags": []
+      },
+      "sequence": 2,
+      "source_refs": [],
+      "success": true,
+      "tool_name": "retrieve_policy"
+    },
+    {
+      "input_summary": {
+        "query": "customer due date late delivery human confirmation",
+        "top_k": 2
+      },
+      "result_summary": {
+        "citations": [],
+        "security_flags": []
+      },
+      "sequence": 3,
+      "source_refs": [],
+      "success": true,
+      "tool_name": "retrieve_policy"
+    },
+    {
+      "input_summary": {
+        "incident_id": "inc_agent_confirmed",
+        "target_id": "sup_seat_public"
+      },
+      "result_summary": {
+        "affected_orders": 3,
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "shortages": {}
+      },
+      "sequence": 1,
+      "source_refs": [
+        "data/cases/mendeley_drill/supplier_delay_email.txt",
+        "data/cases/mendeley_drill/scenario.json"
+      ],
+      "success": true,
+      "tool_name": "analyze_impact"
+    },
+    {
+      "input_summary": {
+        "profiles": [
+          "service_first",
+          "balanced",
+          "stability_first"
+        ]
+      },
+      "result_summary": {
+        "summaries": [
+          {
+            "alternate_supplier_units": 91,
+            "changed_order_ids": [],
+            "first_due_late_units": 126,
+            "first_due_on_time_units": 91,
+            "groups": {
+              "public_period61_cfg_1": {
+                "customer_name": "华东旗舰经销网络（模拟）",
+                "due_hour": 24,
+                "late_units": 0,
+                "max_late_hours": 0,
+                "on_time_units": 91,
+                "total_units": 91,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_2": {
+                "customer_name": "区域车队客户（模拟）",
+                "due_hour": 24,
+                "late_units": 81,
+                "max_late_hours": 28,
+                "on_time_units": 0,
+                "total_units": 81,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_3": {
+                "customer_name": "直营网点补货（模拟）",
+                "due_hour": 24,
+                "late_units": 45,
+                "max_late_hours": 32,
+                "on_time_units": 0,
+                "total_units": 45,
+                "unscheduled_units": 0
+              }
+            },
+            "overtime_cost": 0,
+            "overtime_units": 0,
+            "profile": "service_first",
+            "recovery_cost": 728,
+            "schedule_changes": 0,
+            "supplier_changes": 1
+          },
+          {
+            "alternate_supplier_units": 45,
+            "changed_order_ids": [],
+            "first_due_late_units": 172,
+            "first_due_on_time_units": 45,
+            "groups": {
+              "public_period61_cfg_1": {
+                "customer_name": "华东旗舰经销网络（模拟）",
+                "due_hour": 24,
+                "late_units": 91,
+                "max_late_hours": 28,
+                "on_time_units": 0,
+                "total_units": 91,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_2": {
+                "customer_name": "区域车队客户（模拟）",
+                "due_hour": 24,
+                "late_units": 81,
+                "max_late_hours": 32,
+                "on_time_units": 0,
+                "total_units": 81,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_3": {
+                "customer_name": "直营网点补货（模拟）",
+                "due_hour": 24,
+                "late_units": 0,
+                "max_late_hours": 0,
+                "on_time_units": 45,
+                "total_units": 45,
+                "unscheduled_units": 0
+              }
+            },
+            "overtime_cost": 0,
+            "overtime_units": 0,
+            "profile": "balanced",
+            "recovery_cost": 360,
+            "schedule_changes": 0,
+            "supplier_changes": 1
+          },
+          {
+            "alternate_supplier_units": 0,
+            "changed_order_ids": [],
+            "first_due_late_units": 217,
+            "first_due_on_time_units": 0,
+            "groups": {
+              "public_period61_cfg_1": {
+                "customer_name": "华东旗舰经销网络（模拟）",
+                "due_hour": 24,
+                "late_units": 91,
+                "max_late_hours": 28,
+                "on_time_units": 0,
+                "total_units": 91,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_2": {
+                "customer_name": "区域车队客户（模拟）",
+                "due_hour": 24,
+                "late_units": 81,
+                "max_late_hours": 32,
+                "on_time_units": 0,
+                "total_units": 81,
+                "unscheduled_units": 0
+              },
+              "public_period61_cfg_3": {
+                "customer_name": "直营网点补货（模拟）",
+                "due_hour": 24,
+                "late_units": 45,
+                "max_late_hours": 36,
+                "on_time_units": 0,
+                "total_units": 45,
+                "unscheduled_units": 0
+              }
+            },
+            "overtime_cost": 0,
+            "overtime_units": 0,
+            "profile": "stability_first",
+            "recovery_cost": 0,
+            "schedule_changes": 0,
+            "supplier_changes": 0
+          }
+        ],
+        "verified_profiles": [
+          "service_first",
+          "balanced",
+          "stability_first"
+        ]
+      },
+      "sequence": 2,
+      "source_refs": [
+        "OR-Tools CP-SAT",
+        "independent verifier"
+      ],
+      "success": true,
+      "tool_name": "solve_recovery"
+    }
+  ],
+  "work_orders": [
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 0,
+        "expected_arrival_hour": 48,
+        "item_id": "mat_q2j",
+        "quantity": 217,
+        "requires_external_execution": true,
+        "source_id": "src_public_seat_q2j",
+        "supplier_id": "sup_seat_public"
+      },
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "work_order_id": "wo_001",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "estimated_cost": 360,
+        "expected_arrival_hour": 12,
+        "item_id": "mat_q2j",
+        "quantity": 45,
+        "requires_external_execution": true,
+        "source_id": "src_sim_emergency_q2j",
+        "supplier_id": "sup_seat_emergency_sim"
+      },
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "work_order_id": "wo_002",
+      "work_order_type": "supplier_purchase_request"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 52,
+        "late_hours": 28,
+        "order_id": "ord_public_cfg_1",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 52,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_1",
+            "order_id": "ord_public_cfg_1",
+            "overtime": false,
+            "start_hour": 48,
+            "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+          }
+        ]
+      },
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "work_order_id": "wo_003",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 56,
+        "late_hours": 32,
+        "order_id": "ord_public_cfg_2",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 56,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_2",
+            "order_id": "ord_public_cfg_2",
+            "overtime": false,
+            "start_hour": 52,
+            "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+          }
+        ]
+      },
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "work_order_id": "wo_004",
+      "work_order_type": "schedule_change_order"
+    },
+    {
+      "approval_id": "approval_006",
+      "approved_plan_id": "plan_balanced",
+      "execution_status": "draft_only",
+      "payload": {
+        "completion_hour": 20,
+        "late_hours": 0,
+        "order_id": "ord_public_cfg_3",
+        "requires_external_execution": true,
+        "tasks": [
+          {
+            "end_hour": 20,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_3",
+            "order_id": "ord_public_cfg_3",
+            "overtime": false,
+            "start_hour": 16,
+            "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+          }
+        ]
+      },
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "work_order_id": "wo_005",
+      "work_order_type": "schedule_change_order"
+    }
+  ],
+  "workflow": {
+    "approval": {
+      "actor_id": "cli_public_data_planner",
+      "approval_id": "approval_006",
+      "comment": "Approve draft-only actions in the isolated public-data drill.",
+      "decision": "approve",
+      "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+      "plan_id": "plan_balanced",
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "valid": true
+    },
+    "audit": [
+      {
+        "actor_type": "system",
+        "from_state": null,
+        "sequence": 1,
+        "state_hash": "1e836de55bd3c58820549266d9ab3ad720dfa9b5275b30c6da74044c8455c2c7",
+        "summary": "Scenario and incident received",
+        "to_state": "received"
+      },
+      {
+        "actor_type": "deterministic_tool",
+        "from_state": "received",
+        "sequence": 2,
+        "state_hash": "70ae5f4169ff0645bd9182ae990ca2ea67e29fbfbf333e8f1b95264aa5655fe2",
+        "summary": "Inputs validated",
+        "to_state": "validated"
+      },
+      {
+        "actor_type": "deterministic_tool",
+        "from_state": "validated",
+        "sequence": 3,
+        "state_hash": "2ae2bca97edbf4e858f1b46796275e6652c81fdb46b75f6f461461b2cc1091b4",
+        "summary": "Impact graph computed",
+        "to_state": "analyzed"
+      },
+      {
+        "actor_type": "solver",
+        "from_state": "analyzed",
+        "sequence": 4,
+        "state_hash": "9f6e527c8901977bfd30b118fc32fbfa8ed54bbce0274200613a6cd85b35cbc6",
+        "summary": "Three policy profiles solved",
+        "to_state": "solved"
+      },
+      {
+        "actor_type": "system",
+        "from_state": "solved",
+        "sequence": 5,
+        "state_hash": "be273b137ce317ec8c6f7125f3eb081e7ff1485421831aa01a2a26f394af89f9",
+        "summary": "Verified candidates are awaiting explicit approval",
+        "to_state": "awaiting_approval"
+      },
+      {
+        "actor_type": "user",
+        "from_state": "awaiting_approval",
+        "sequence": 6,
+        "state_hash": "3b628ed53b9dd688be06db6048af785d4e05d46b3a358ac2bb3f4fbd1c0343e3",
+        "summary": "Plan plan_balanced approved",
+        "to_state": "approved"
+      },
+      {
+        "actor_type": "deterministic_tool",
+        "from_state": "approved",
+        "sequence": 7,
+        "state_hash": "61deb64036c16e044b35cb008571b831a09c494e3ed4632ae07179e94d6f5f56",
+        "summary": "Generated 5 draft-only work orders",
+        "to_state": "orders_generated"
+      }
+    ],
+    "impact": {
+      "affected_orders": [
+        "ord_public_cfg_1",
+        "ord_public_cfg_2",
+        "ord_public_cfg_3"
+      ],
+      "affected_resources": [
+        "sup_seat_public"
+      ],
+      "evidence_paths": [
+        {
+          "material_id": "mat_q2j",
+          "order_id": "ord_public_cfg_1",
+          "path": [
+            "inc_agent_confirmed",
+            "sup_seat_public",
+            "prd_cfg_1",
+            "mat_q2j",
+            "ord_public_cfg_1"
+          ]
+        },
+        {
+          "material_id": "mat_q2j",
+          "order_id": "ord_public_cfg_2",
+          "path": [
+            "inc_agent_confirmed",
+            "sup_seat_public",
+            "prd_cfg_2",
+            "mat_q2j",
+            "ord_public_cfg_2"
+          ]
+        },
+        {
+          "material_id": "mat_q2j",
+          "order_id": "ord_public_cfg_3",
+          "path": [
+            "inc_agent_confirmed",
+            "sup_seat_public",
+            "prd_cfg_3",
+            "mat_q2j",
+            "ord_public_cfg_3"
+          ]
+        }
+      ],
+      "incident_id": "inc_agent_confirmed",
+      "material_demand": {
+        "mat_bev": 45,
+        "mat_d83": 45,
+        "mat_dg8": 91,
+        "mat_dk8": 81,
+        "mat_g0k": 172,
+        "mat_g1z": 45,
+        "mat_q2j": 217
+      },
+      "notes": [
+        "Incident free text was retained for audit but ignored by deterministic calculations.",
+        "Computed impact from 3 orders and 10 BOM lines."
+      ],
+      "projected_shortages": {},
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525"
+    },
+    "incident": {
+      "delay_hours": 48,
+      "description": "From: drill-seat-supplier@example.invalid\nTo: planner@example.invalid\nSubject: Simulation only — Q2J seat delivery interruption\nSent: 2026-08-10 08:05 CST\n\nThis is a synthetic resilience-drill message. The public Mendeley seat supplier cannot dispatch\nQ2J seat deliveries for the next 48 hours because of a simulated loading-area shutdown.\nNo real supplier, company, shipment, or production system is represented.\n",
+      "end_hour": null,
+      "incident_id": "inc_agent_confirmed",
+      "kind": "supplier_delay",
+      "loss_quantity": null,
+      "quantity_delta": null,
+      "source_ref": "data/cases/mendeley_drill/supplier_delay_email.txt",
+      "source_type": "agent_confirmed_untrusted_text",
+      "start_hour": null,
+      "target_id": "sup_seat_public"
+    },
+    "plans": [
+      {
+        "assumptions": [
+          "All purchase orders are placed at planning hour 0.",
+          "Candidate operation starts use a 4-hour planning grid.",
+          "Time and quantity are integer-scaled; no real ERP write is performed."
+        ],
+        "evidence": {
+          "constraint_counts": {
+            "inventory_balance": 147,
+            "lateness": 6,
+            "line_capacity": 80,
+            "recovery_budget": 1,
+            "required_order": 3,
+            "supplier_capacity": 4,
+            "task_assignment": 3
+          },
+          "evidence_id": "evidence_service_first",
+          "objective_breakdown": {
+            "first_due_late_units": 126,
+            "first_due_on_time_units": 91,
+            "late_units": 126,
+            "lateness_weighted_units_hours": 8244,
+            "on_time_units": 91,
+            "overtime_cost": 0,
+            "purchase_actions": 1,
+            "purchase_cost": 728,
+            "recovery_cost": 728,
+            "unfulfilled_weighted_units": 0,
+            "unscheduled_units": 0
+          },
+          "plan_hash": "86fb7ce13348f6b01e5ff6f423760be145dc8e7e25950541436d38ed5ba16c11",
+          "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+          "solve_time_ms": 11,
+          "solver_name": "OR-Tools CP-SAT",
+          "solver_status": "OPTIMAL",
+          "solver_version": "9.15.6755",
+          "verified": true,
+          "violations": []
+        },
+        "objective_breakdown": {
+          "first_due_late_units": 126,
+          "first_due_on_time_units": 91,
+          "late_units": 126,
+          "lateness_weighted_units_hours": 8244,
+          "on_time_units": 91,
+          "overtime_cost": 0,
+          "purchase_actions": 1,
+          "purchase_cost": 728,
+          "recovery_cost": 728,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "order_outcomes": [
+          {
+            "completion_hour": 20,
+            "late_hours": 0,
+            "order_id": "ord_public_cfg_1",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 52,
+            "late_hours": 28,
+            "order_id": "ord_public_cfg_2",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 56,
+            "late_hours": 32,
+            "order_id": "ord_public_cfg_3",
+            "scheduled": true
+          }
+        ],
+        "plan_id": "plan_service_first",
+        "profile": "service_first",
+        "purchases": [
+          {
+            "arrival_hour": 48,
+            "committed": true,
+            "cost": 0,
+            "incremental_cost": 0,
+            "item_id": "mat_q2j",
+            "quantity": 217,
+            "source_id": "src_public_seat_q2j",
+            "supplier_id": "sup_seat_public"
+          },
+          {
+            "arrival_hour": 12,
+            "committed": false,
+            "cost": 728,
+            "incremental_cost": 728,
+            "item_id": "mat_q2j",
+            "quantity": 91,
+            "source_id": "src_sim_emergency_q2j",
+            "supplier_id": "sup_seat_emergency_sim"
+          }
+        ],
+        "risks": [
+          "Scenario data is public-derived and synthetic, not live factory data.",
+          "Supplier capacity is modeled as a horizon-level cap in this MVP."
+        ],
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "scheduled_operations": [
+          {
+            "end_hour": 20,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_1",
+            "order_id": "ord_public_cfg_1",
+            "overtime": false,
+            "start_hour": 16,
+            "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+          },
+          {
+            "end_hour": 52,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_2",
+            "order_id": "ord_public_cfg_2",
+            "overtime": false,
+            "start_hour": 48,
+            "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+          },
+          {
+            "end_hour": 56,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_3",
+            "order_id": "ord_public_cfg_3",
+            "overtime": false,
+            "start_hour": 52,
+            "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+          }
+        ],
+        "total_score": 82440778
+      },
+      {
+        "assumptions": [
+          "All purchase orders are placed at planning hour 0.",
+          "Candidate operation starts use a 4-hour planning grid.",
+          "Time and quantity are integer-scaled; no real ERP write is performed."
+        ],
+        "evidence": {
+          "constraint_counts": {
+            "inventory_balance": 147,
+            "lateness": 6,
+            "line_capacity": 80,
+            "recovery_budget": 1,
+            "required_order": 1,
+            "supplier_capacity": 4,
+            "task_assignment": 3
+          },
+          "evidence_id": "evidence_balanced",
+          "objective_breakdown": {
+            "first_due_late_units": 172,
+            "first_due_on_time_units": 45,
+            "late_units": 172,
+            "lateness_weighted_units_hours": 20516,
+            "on_time_units": 45,
+            "overtime_cost": 0,
+            "purchase_actions": 1,
+            "purchase_cost": 360,
+            "recovery_cost": 360,
+            "unfulfilled_weighted_units": 0,
+            "unscheduled_units": 0
+          },
+          "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+          "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+          "solve_time_ms": 3,
+          "solver_name": "OR-Tools CP-SAT",
+          "solver_status": "OPTIMAL",
+          "solver_version": "9.15.6755",
+          "verified": true,
+          "violations": []
+        },
+        "objective_breakdown": {
+          "first_due_late_units": 172,
+          "first_due_on_time_units": 45,
+          "late_units": 172,
+          "lateness_weighted_units_hours": 20516,
+          "on_time_units": 45,
+          "overtime_cost": 0,
+          "purchase_actions": 1,
+          "purchase_cost": 360,
+          "recovery_cost": 360,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "order_outcomes": [
+          {
+            "completion_hour": 52,
+            "late_hours": 28,
+            "order_id": "ord_public_cfg_1",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 56,
+            "late_hours": 32,
+            "order_id": "ord_public_cfg_2",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 20,
+            "late_hours": 0,
+            "order_id": "ord_public_cfg_3",
+            "scheduled": true
+          }
+        ],
+        "plan_id": "plan_balanced",
+        "profile": "balanced",
+        "purchases": [
+          {
+            "arrival_hour": 48,
+            "committed": true,
+            "cost": 0,
+            "incremental_cost": 0,
+            "item_id": "mat_q2j",
+            "quantity": 217,
+            "source_id": "src_public_seat_q2j",
+            "supplier_id": "sup_seat_public"
+          },
+          {
+            "arrival_hour": 12,
+            "committed": false,
+            "cost": 360,
+            "incremental_cost": 360,
+            "item_id": "mat_q2j",
+            "quantity": 45,
+            "source_id": "src_sim_emergency_q2j",
+            "supplier_id": "sup_seat_emergency_sim"
+          }
+        ],
+        "risks": [
+          "Scenario data is public-derived and synthetic, not live factory data.",
+          "Supplier capacity is modeled as a horizon-level cap in this MVP."
+        ],
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "scheduled_operations": [
+          {
+            "end_hour": 20,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_3",
+            "order_id": "ord_public_cfg_3",
+            "overtime": false,
+            "start_hour": 16,
+            "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+          },
+          {
+            "end_hour": 52,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_1",
+            "order_id": "ord_public_cfg_1",
+            "overtime": false,
+            "start_hour": 48,
+            "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+          },
+          {
+            "end_hour": 56,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_2",
+            "order_id": "ord_public_cfg_2",
+            "overtime": false,
+            "start_hour": 52,
+            "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+          }
+        ],
+        "total_score": 102583800
+      },
+      {
+        "assumptions": [
+          "All purchase orders are placed at planning hour 0.",
+          "Candidate operation starts use a 4-hour planning grid.",
+          "Time and quantity are integer-scaled; no real ERP write is performed."
+        ],
+        "evidence": {
+          "constraint_counts": {
+            "inventory_balance": 147,
+            "lateness": 6,
+            "line_capacity": 80,
+            "recovery_budget": 1,
+            "required_order": 1,
+            "supplier_capacity": 4,
+            "task_assignment": 3
+          },
+          "evidence_id": "evidence_stability_first",
+          "objective_breakdown": {
+            "first_due_late_units": 217,
+            "first_due_on_time_units": 0,
+            "late_units": 217,
+            "lateness_weighted_units_hours": 22136,
+            "on_time_units": 0,
+            "overtime_cost": 0,
+            "purchase_actions": 0,
+            "purchase_cost": 0,
+            "recovery_cost": 0,
+            "unfulfilled_weighted_units": 0,
+            "unscheduled_units": 0
+          },
+          "plan_hash": "7cdd78578fb36789d6d0174abda552edb6bfdb64816710330a0c44d6ce5acc09",
+          "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+          "solve_time_ms": 2,
+          "solver_name": "OR-Tools CP-SAT",
+          "solver_status": "OPTIMAL",
+          "solver_version": "9.15.6755",
+          "verified": true,
+          "violations": []
+        },
+        "objective_breakdown": {
+          "first_due_late_units": 217,
+          "first_due_on_time_units": 0,
+          "late_units": 217,
+          "lateness_weighted_units_hours": 22136,
+          "on_time_units": 0,
+          "overtime_cost": 0,
+          "purchase_actions": 0,
+          "purchase_cost": 0,
+          "recovery_cost": 0,
+          "unfulfilled_weighted_units": 0,
+          "unscheduled_units": 0
+        },
+        "order_outcomes": [
+          {
+            "completion_hour": 52,
+            "late_hours": 28,
+            "order_id": "ord_public_cfg_1",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 56,
+            "late_hours": 32,
+            "order_id": "ord_public_cfg_2",
+            "scheduled": true
+          },
+          {
+            "completion_hour": 60,
+            "late_hours": 36,
+            "order_id": "ord_public_cfg_3",
+            "scheduled": true
+          }
+        ],
+        "plan_id": "plan_stability_first",
+        "profile": "stability_first",
+        "purchases": [
+          {
+            "arrival_hour": 48,
+            "committed": true,
+            "cost": 0,
+            "incremental_cost": 0,
+            "item_id": "mat_q2j",
+            "quantity": 217,
+            "source_id": "src_public_seat_q2j",
+            "supplier_id": "sup_seat_public"
+          }
+        ],
+        "risks": [
+          "Scenario data is public-derived and synthetic, not live factory data.",
+          "Supplier capacity is modeled as a horizon-level cap in this MVP."
+        ],
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "scheduled_operations": [
+          {
+            "end_hour": 52,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_1",
+            "order_id": "ord_public_cfg_1",
+            "overtime": false,
+            "start_hour": 48,
+            "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+          },
+          {
+            "end_hour": 56,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_2",
+            "order_id": "ord_public_cfg_2",
+            "overtime": false,
+            "start_hour": 52,
+            "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+          },
+          {
+            "end_hour": 60,
+            "incremental_cost": 0,
+            "line_id": "line_zp7_public",
+            "operation_id": "op_assemble_cfg_3",
+            "order_id": "ord_public_cfg_3",
+            "overtime": false,
+            "start_hour": 56,
+            "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+          }
+        ],
+        "total_score": 66408000
+      }
+    ],
+    "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+    "state": "orders_generated",
+    "work_orders": [
+      {
+        "approval_id": "approval_006",
+        "approved_plan_id": "plan_balanced",
+        "execution_status": "draft_only",
+        "payload": {
+          "estimated_cost": 0,
+          "expected_arrival_hour": 48,
+          "item_id": "mat_q2j",
+          "quantity": 217,
+          "requires_external_execution": true,
+          "source_id": "src_public_seat_q2j",
+          "supplier_id": "sup_seat_public"
+        },
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "work_order_id": "wo_001",
+        "work_order_type": "supplier_purchase_request"
+      },
+      {
+        "approval_id": "approval_006",
+        "approved_plan_id": "plan_balanced",
+        "execution_status": "draft_only",
+        "payload": {
+          "estimated_cost": 360,
+          "expected_arrival_hour": 12,
+          "item_id": "mat_q2j",
+          "quantity": 45,
+          "requires_external_execution": true,
+          "source_id": "src_sim_emergency_q2j",
+          "supplier_id": "sup_seat_emergency_sim"
+        },
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "work_order_id": "wo_002",
+        "work_order_type": "supplier_purchase_request"
+      },
+      {
+        "approval_id": "approval_006",
+        "approved_plan_id": "plan_balanced",
+        "execution_status": "draft_only",
+        "payload": {
+          "completion_hour": 52,
+          "late_hours": 28,
+          "order_id": "ord_public_cfg_1",
+          "requires_external_execution": true,
+          "tasks": [
+            {
+              "end_hour": 52,
+              "incremental_cost": 0,
+              "line_id": "line_zp7_public",
+              "operation_id": "op_assemble_cfg_1",
+              "order_id": "ord_public_cfg_1",
+              "overtime": false,
+              "start_hour": 48,
+              "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+            }
+          ]
+        },
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "work_order_id": "wo_003",
+        "work_order_type": "schedule_change_order"
+      },
+      {
+        "approval_id": "approval_006",
+        "approved_plan_id": "plan_balanced",
+        "execution_status": "draft_only",
+        "payload": {
+          "completion_hour": 56,
+          "late_hours": 32,
+          "order_id": "ord_public_cfg_2",
+          "requires_external_execution": true,
+          "tasks": [
+            {
+              "end_hour": 56,
+              "incremental_cost": 0,
+              "line_id": "line_zp7_public",
+              "operation_id": "op_assemble_cfg_2",
+              "order_id": "ord_public_cfg_2",
+              "overtime": false,
+              "start_hour": 52,
+              "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+            }
+          ]
+        },
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "work_order_id": "wo_004",
+        "work_order_type": "schedule_change_order"
+      },
+      {
+        "approval_id": "approval_006",
+        "approved_plan_id": "plan_balanced",
+        "execution_status": "draft_only",
+        "payload": {
+          "completion_hour": 20,
+          "late_hours": 0,
+          "order_id": "ord_public_cfg_3",
+          "requires_external_execution": true,
+          "tasks": [
+            {
+              "end_hour": 20,
+              "incremental_cost": 0,
+              "line_id": "line_zp7_public",
+              "operation_id": "op_assemble_cfg_3",
+              "order_id": "ord_public_cfg_3",
+              "overtime": false,
+              "start_hour": 16,
+              "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+            }
+          ]
+        },
+        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+        "work_order_id": "wo_005",
+        "work_order_type": "schedule_change_order"
+      }
+    ]
+  }
+}

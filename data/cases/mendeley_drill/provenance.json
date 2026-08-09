@@ -1,0 +1,11 @@
+{
+  "dataset_doi": "10.17632/pr3sdy5vp3.1",
+  "dataset_license": "CC BY 4.0",
+  "dataset_sha256": "1ea0bcdea3225d308be913c9ca0f377585e1863847c78d6e8eec10b6de82889e",
+  "public_rows_used": true,
+  "selected_demand_rows": 217,
+  "aggregate_order_units": 217,
+  "real_company_data": false,
+  "synthetic_overlay": true,
+  "lineage_file": "data/cases/mendeley_drill/lineage.json"
+}

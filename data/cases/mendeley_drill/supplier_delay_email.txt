@@ -1,0 +1,8 @@
+From: drill-seat-supplier@example.invalid
+To: planner@example.invalid
+Subject: Simulation only — Q2J seat delivery interruption
+Sent: 2026-08-10 08:05 CST
+
+This is a synthetic resilience-drill message. The public Mendeley seat supplier cannot dispatch
+Q2J seat deliveries for the next 48 hours because of a simulated loading-area shutdown.
+No real supplier, company, shipment, or production system is represented.
