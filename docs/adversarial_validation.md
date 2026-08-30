@@ -2,13 +2,14 @@
 
 ## 结果
 
-- 自动化测试：27 passed。
+- 自动化测试：40 passed。
 - 对抗套件：15/15 passed，0 failed，0 invariant violations。
 - Agent 评测：30/30 版本化 replay 合同通过，两次输出完全一致，0 次 forbidden tool。
+- Live Agent：`qwen3.8-max` 独立 3 轮均为 30/30，共 90 次真实调用，0 次 forbidden tool；平均/p95 延迟 2.14s/2.69s。
 - 主案例：3 个方案通过 CP-SAT 与独立验证；平衡方案批准后 16 张草稿动作。
 - 两个不可行场景：0 个可批准方案；审批与工单被阻断。
 
-权威机器可读结果在 `artifacts/adversarial_report.json` 与 `artifacts/agent_eval_report.json`，完整 Agent 闭环在 `artifacts/agent_demo_run.json`，资源上限诊断在 `artifacts/infeasible_diagnostic.json`。回放报告明确声明它不是 live 模型准确率。
+权威机器可读结果在 `artifacts/adversarial_report.json`、`artifacts/agent_eval_report.json` 与 `artifacts/live_agent_eval_report.json`，完整 Agent 闭环在 `artifacts/agent_demo_run.json`，资源上限诊断在 `artifacts/infeasible_diagnostic.json`。Live 报告同时保留 `raw_actual` 与规则约束后输出，并明确模型、时间和数据边界。
 
 ## 威胁模型
 
@@ -56,6 +57,8 @@
   --cases data/evals/agent_cases.json \
   --replay data/model_replays/agent_eval_v1.json \
   --output artifacts/agent_eval_report.json
+PYTHONPATH=src .venv/bin/python scripts/run_live_model_evaluation.py \
+  --runs 3 --output artifacts/live_agent_eval_report.json
 .venv/bin/python scripts/verify_artifacts.py
 ```
 

@@ -34,11 +34,18 @@ class RecoveryWorkflow:
         self._record(None, WorkflowState.RECEIVED, "system", "Scenario and incident received")
 
     def _state_payload(self) -> dict:
+        # Solver wall-clock timing is useful telemetry but not business state.
+        # Excluding it keeps audit hashes reproducible across equivalent runs.
+        plans = [plan.model_dump(mode="json") for plan in self.plans]
+        for plan in plans:
+            evidence = plan.get("evidence")
+            if evidence:
+                evidence["solve_time_ms"] = 0
         return {
             "state": self.state.value,
             "scenario_hash": self.scenario_hash,
             "impact": self.impact,
-            "plans": self.plans,
+            "plans": plans,
             "approval": self.approval,
             "work_orders": self.work_orders,
         }

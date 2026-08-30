@@ -1,0 +1,90 @@
+{
+  "schema_version": "youjie.erpnext_real_validation/v1",
+  "generated_at": "2026-08-30T05:33:29.981478+00:00",
+  "runtime": {
+    "status": "connected",
+    "environment": "test",
+    "public_host": "127.0.0.1",
+    "authenticated_user": "Administrator",
+    "credentials_exposed": false
+  },
+  "source_revision_before": "erpnext:b4c1b6aa073d51d4360f",
+  "source_revision_after_write": "erpnext:2dcf0c85f2c7f6e54d1a",
+  "commands": [
+    {
+      "command_id": "cmd_e78daa9d150402ae",
+      "business_status": "APPLIED",
+      "record_count": 1
+    },
+    {
+      "command_id": "cmd_443e7172b38113f9",
+      "business_status": "APPLIED",
+      "record_count": 3
+    }
+  ],
+  "records": [
+    {
+      "doctype": "Material Request",
+      "name": "MAT-MR-2026-00015",
+      "creation": "2026-08-30 13:33:29.616369",
+      "modified": "2026-08-30 13:33:29.616369",
+      "docstatus": 0,
+      "status": "Draft",
+      "evidence_hash": "4c68c4e494a8653d91a8446b50d06f7f14b013ffa751cb76a0ffc90a4a1450c8"
+    },
+    {
+      "doctype": "Work Order",
+      "name": "MFG-WO-2026-00019",
+      "creation": "2026-08-30 13:33:29.782065",
+      "modified": "2026-08-30 13:33:29.782065",
+      "docstatus": 0,
+      "status": "Draft",
+      "evidence_hash": "f7e9c5b38ffedef09c43cdeeb1b5c9fe0584b4142045cfa05283c763d3b60dd8"
+    },
+    {
+      "doctype": "Work Order",
+      "name": "MFG-WO-2026-00020",
+      "creation": "2026-08-30 13:33:29.894964",
+      "modified": "2026-08-30 13:33:29.894964",
+      "docstatus": 0,
+      "status": "Draft",
+      "evidence_hash": "521daaa8598e969f3aeb55bdf2dee985e88c639b24b460631c9d415000c86a74"
+    },
+    {
+      "doctype": "Work Order",
+      "name": "MFG-WO-2026-00021",
+      "creation": "2026-08-30 13:33:29.927032",
+      "modified": "2026-08-30 13:33:29.927032",
+      "docstatus": 0,
+      "status": "Draft",
+      "evidence_hash": "bd9b2d36346d9aaf0c3a852f719d61c41ea72ef04798c8c7840aa3e3caa8c1e0"
+    }
+  ],
+  "referenced_commitments": [
+    {
+      "source_id": "src_public_seat_q2j",
+      "supplier_id": "sup_seat_public",
+      "item_id": "mat_q2j",
+      "quantity": 217,
+      "expected_arrival_hour": 48,
+      "committed": true,
+      "reason": "existing committed supply; referenced only, no new ERP document"
+    }
+  ],
+  "assertions": {
+    "authenticated_real_http": true,
+    "four_new_drafts_created_and_read_back": true,
+    "committed_supply_referenced_without_duplicate_document": true,
+    "all_documents_remain_draft": true,
+    "write_changed_source_revision": true,
+    "duplicate_retry_created_nothing": true,
+    "credentials_absent_from_evidence": true,
+    "no_submit_cancel_delete_or_device_control": true
+  },
+  "boundaries": {
+    "instance": "localhost ERPNext test instance",
+    "data": "public Mendeley-derived rows plus synthetic overlay",
+    "write_scope": "draft Material Request and Work Order only",
+    "standalone_mes_claim": false
+  }
+}

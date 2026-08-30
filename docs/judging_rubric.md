@@ -5,20 +5,20 @@
 | 评分项 | 已有证据 | 当前短板 | 提交时怎么讲 |
 |---|---|---|---|
 | 场景价值 25% | 供应商延期/停机直接影响交期；用户与动作明确 | 没有真实企业 ROI | 讲决策耗时与错误风险，不编造收益数字 |
-| Agent 闭环 25% | 邮件/随机事故→LangGraph 规划→检索→影响→三方案→验证→真实 interrupt 人审→双 hash→草稿 | 无真实 ERP 执行回流 | 现场演示批准与驳回两条分支 |
-| 体验/Demo 20% | 64 秒真实 Web 操作录屏：固定邮件、三方案、Gantt、真实人审中断、双 hash、`draft_only`、工具审计与随机事故 Agent | 当前视频为确定性 replay 演示，不等于 live 模型评测 | 在线 Demo 与视频展示同一闭环；2 分 22 秒概览版只作辅助 |
-| 技术/复现 15% | LLM replay/live 边界、CP-SAT、独立 verifier、27 测试、15 attacks、30 Agent evals、CLI artifacts | 小规模与 4 小时粒度 | 展示 exact metrics、hash、攻击报告和一键命令 |
+| Agent 闭环 25% | PNG/PDF/CSV→冲突暂停→人工选源→影响→三方案→验证→真实 interrupt 人审→双 hash→真实 ERPNext 草稿→独立 ERP/MES 反馈重算 | 无生产 tenant 与现场执行 | 现场展示真实记录 ID、部分应用、旧批准失效与重新人审 |
+| 体验/Demo 20% | 真实 Web 操作录屏：Live 模型、来源冲突、400 台无解、提示注入、人审驳回 | 线上可用性仍取决于部署密钥 | 本地 Demo 与视频展示同一闭环；Replay 保证无密钥复现 |
+| 技术/复现 15% | Live/Replay 边界、CP-SAT、独立 verifier、40 测试、15 attacks、3×30 Live Agent evals、12 案例三系统对比 | 小规模与离散时间粒度 | 展示原始模型/有界 Agent 双层指标、hash、攻击报告和一键命令 |
 | 安全合规 10% | 不可信文本隔离、人审、draft-only、无硬件控制 | 无持久 RBAC | 展示 stale/tamper/prompt-injection 阻断 |
-| 开放复用 5% | Apache-2.0、清晰 schema、离线运行、公开来源 | 未发布、未做 ERP connector | 初赛保持本地提交；获准后再公开发布 |
+| 开放复用 5% | Apache-2.0、canonical contract、OpenAPI/AsyncAPI/JSON Schema、双 profile、离线运行 | 适配器尚未通过厂商认证 | 提交 README、逐行 lineage、合同样例和复算脚本 |
 
-## 初赛提交清单
+## 复赛提交清单
 
 - [x] 作品名称与简介。
 - [x] 目标用户、痛点、交互流程、技术路线。
 - [x] 数据来源、许可、模拟逻辑和适用边界。
 - [x] 安全与合规边界。
-- [x] 11 页可编辑答辩 PPT。
-- [x] 64 秒 16:9 H.264/AAC 真实 Web 操作 Demo。
+- [x] 8 页可编辑复赛 PPT 与逐页一致 PDF。
+- [x] 2 分 02 秒 16:9 H.264/AAC 真实 Web 操作 Demo，190 语速并烧录中文字幕，含真实模型、LangGraph 人审、真实 ERPNext 写入/回读、OpenMES 同号工单下发与合同沙箱异常回流。
 - [x] 可运行 PoC、日志和机器可读验证证据。
 - [x] 代码与运行说明。
 - [ ] 按官网表单上传或公开发布：需用户本人执行/授权。
@@ -27,8 +27,9 @@
 ## 建议演示顺序
 
 1. 先演示供应商延期的完整成功闭环。
-2. 演示外部确认触发旧批准 stale 与重规划。
-3. 展示 240 台请求的 100/140 上限和资源缺口。
-4. 最后展示 15/15 攻击与 30/30 replay 合同，主动说明 replay 不等于 live 准确率。
+2. 演示 48h/72h 新鲜来源冲突在求解前暂停，人工确认后恢复。
+3. 展示 400 台请求的 305 上限、95 缺口和 0 工单。
+4. 展示提示注入隔离与人工驳回。
+5. 最后展示 40 tests、15/15 attacks、3×30 Live、30/30 Replay 和 12 案例架构对比的口径边界。
 
 来源：[官方赛道页](https://www.goaihz.com/tracks?track=apps)、[无界应用参赛手册](https://oss.goaihz.com/prod/20260716/eed923c4-570c-4f5e-bb18-4f451fb97ced.pdf)。

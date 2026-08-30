@@ -11,7 +11,7 @@ from langgraph.graph import END, START, StateGraph
 from langgraph.types import Command, interrupt
 
 from delivery_guard.context import IncidentDraft, TaskContext
-from delivery_guard.data import load_scenario
+from delivery_guard.data import apply_incident, load_scenario
 from delivery_guard.diagnostics import summarize_plan
 from delivery_guard.hashing import candidate_plan_hash
 from delivery_guard.knowledge import LocalKnowledgeBase
@@ -23,6 +23,7 @@ from delivery_guard.workflow import RecoveryWorkflow
 
 
 class GuardGraphState(TypedDict, total=False):
+    entry_mode: str
     raw_text: str
     source_ref: str
     replay_key: str
@@ -41,6 +42,14 @@ class GuardGraphState(TypedDict, total=False):
     status: str
     model_mode: str
     model_name: str
+    preflight_conflicts: list[str]
+    preflight_required_confirmations: list[str]
+    previous_graph_result: dict[str, Any]
+    previous_scenario_hash: str
+    previous_plan_hash: str
+    previous_approval_id: str
+    previous_approval_valid: bool
+    feedback_metadata: dict[str, Any]
     graph_trace: Annotated[list[dict[str, Any]], operator.add]
     tool_traces: Annotated[list[dict[str, Any]], operator.add]
 
@@ -93,6 +102,70 @@ class DeliveryGuardGraph:
     def _trace(node: str, summary: str) -> list[dict[str, Any]]:
         return [{"node": node, "summary": summary}]
 
+    @staticmethod
+    def _route_entry(state: GuardGraphState) -> str:
+        return (
+            "receive_execution_feedback"
+            if state.get("entry_mode") == "execution_feedback"
+            else "understand_incident"
+        )
+
+    def _scenario_for_state(self, state: GuardGraphState):
+        if state.get("entry_mode") != "execution_feedback":
+            return self.scenario
+        previous = state.get("previous_graph_result") or {}
+        original_payload = (
+            (previous.get("workflow") or {}).get("incident")
+            or previous.get("incident")
+        )
+        if not original_payload:
+            raise ValueError("original incident is required for feedback re-plan")
+        return apply_incident(self.scenario, Incident.model_validate(original_payload))
+
+    def _receive_execution_feedback(self, state: GuardGraphState) -> dict[str, Any]:
+        previous = state.get("previous_graph_result") or {}
+        previous_workflow = previous.get("workflow") or {}
+        previous_approval = previous_workflow.get("approval") or {}
+        feedback = state.get("feedback_metadata") or {}
+        Incident.model_validate(state["incident"])
+        if previous.get("status") != "completed":
+            raise ValueError("feedback re-plan requires a completed graph result")
+        if previous_approval.get("decision") != "approve" or previous_approval.get("valid") is not True:
+            raise ValueError("feedback re-plan requires a valid previous approval")
+        if feedback.get("changed") is not True:
+            raise ValueError("unchanged feedback must not invalidate an approval")
+        before = str(feedback.get("source_revision_before", ""))
+        after = str(feedback.get("source_revision_after", ""))
+        if not before or not after or before == after:
+            raise ValueError("feedback must provide two different source revisions")
+        return {
+            "status": "execution_feedback_received",
+            "previous_scenario_hash": previous_workflow.get("scenario_hash", ""),
+            "previous_plan_hash": previous_approval.get("plan_hash", ""),
+            "previous_approval_id": previous_approval.get("approval_id", ""),
+            "previous_approval_valid": True,
+            "work_orders": [],
+            "graph_trace": self._trace(
+                "receive_execution_feedback",
+                f"Accepted typed execution feedback {before} -> {after}; no new action was created.",
+            ),
+        }
+
+    @staticmethod
+    def _invalidate_stale_approval(state: GuardGraphState) -> dict[str, Any]:
+        return {
+            "status": "approval_invalidated",
+            "previous_approval_valid": False,
+            "work_orders": [],
+            "graph_trace": [{
+                "node": "invalidate_stale_approval",
+                "summary": (
+                    f"Invalidated {state['previous_approval_id']} because a planning dependency changed; "
+                    "fresh solver evidence and a new human decision are required."
+                ),
+            }],
+        }
+
     def _understand(self, state: GuardGraphState) -> dict[str, Any]:
         if state.get("incident"):
             incident = Incident.model_validate(state["incident"])
@@ -108,8 +181,17 @@ class DeliveryGuardGraph:
             self.model,
             replay_key=state["replay_key"],
             raw_text=state["raw_text"],
+            source_ref=state["source_ref"],
         )
         draft = resolve_and_validate_draft(draft, self.scenario)
+        draft.conflicts = sorted(set([
+            *draft.conflicts,
+            *state.get("preflight_conflicts", []),
+        ]))
+        draft.required_confirmations = sorted(set([
+            *draft.required_confirmations,
+            *state.get("preflight_required_confirmations", []),
+        ]))
         return {
             "incident_draft": draft.model_dump(mode="json"),
             "status": "needs_clarification" if (
@@ -195,6 +277,7 @@ class DeliveryGuardGraph:
         }
 
     def _investigate(self, state: GuardGraphState) -> dict[str, Any]:
+        scenario = self._scenario_for_state(state)
         context = TaskContext(
             task_id="langgraph_investigation",
             model_mode=state.get("model_mode", self.model.mode),
@@ -202,7 +285,7 @@ class DeliveryGuardGraph:
         )
         toolbox = AgentToolbox(
             context,
-            self.scenario,
+            scenario,
             self.knowledge,
             scenario_source_ref=str(self.scenario_path),
         )
@@ -233,6 +316,7 @@ class DeliveryGuardGraph:
 
     def _analyze_and_solve(self, state: GuardGraphState) -> dict[str, Any]:
         incident = Incident.model_validate(state["incident"])
+        scenario = self._scenario_for_state(state)
         context = TaskContext(
             task_id="langgraph_solver",
             model_mode=state.get("model_mode", self.model.mode),
@@ -240,7 +324,7 @@ class DeliveryGuardGraph:
         )
         toolbox = AgentToolbox(
             context,
-            self.scenario,
+            scenario,
             self.knowledge,
             scenario_source_ref=str(self.scenario_path),
         )
@@ -294,7 +378,7 @@ class DeliveryGuardGraph:
 
     def _draft_actions(self, state: GuardGraphState) -> dict[str, Any]:
         incident = Incident.model_validate(state["incident"])
-        workflow = RecoveryWorkflow(self.scenario, incident)
+        workflow = RecoveryWorkflow(self._scenario_for_state(state), incident)
         workflow.analyze()
         workflow.solve()
         profile = state["decision"]["profile"]
@@ -332,13 +416,24 @@ class DeliveryGuardGraph:
         builder = StateGraph(GuardGraphState)
         builder.add_node("understand_incident", self._understand)
         builder.add_node("clarify_incident", self._clarify)
+        builder.add_node("receive_execution_feedback", self._receive_execution_feedback)
+        builder.add_node("invalidate_stale_approval", self._invalidate_stale_approval)
         builder.add_node("plan_investigation", self._plan_investigation)
         builder.add_node("execute_investigation", self._investigate)
         builder.add_node("analyze_and_solve", self._analyze_and_solve)
         builder.add_node("human_approval", self._human_approval)
         builder.add_node("draft_actions", self._draft_actions)
         builder.add_node("finish_rejected", self._finish_rejected)
-        builder.add_edge(START, "understand_incident")
+        builder.add_conditional_edges(
+            START,
+            self._route_entry,
+            {
+                "understand_incident": "understand_incident",
+                "receive_execution_feedback": "receive_execution_feedback",
+            },
+        )
+        builder.add_edge("receive_execution_feedback", "invalidate_stale_approval")
+        builder.add_edge("invalidate_stale_approval", "plan_investigation")
         builder.add_conditional_edges(
             "understand_incident",
             self._route_after_understand,
@@ -381,14 +476,19 @@ class DeliveryGuardGraph:
         source_ref: str,
         replay_key: str,
         thread_id: str,
+        preflight_conflicts: list[str] | None = None,
+        preflight_required_confirmations: list[str] | None = None,
     ) -> dict[str, Any]:
         return self.graph.invoke(
             {
+                "entry_mode": "incident",
                 "raw_text": raw_text,
                 "source_ref": source_ref,
                 "replay_key": replay_key,
                 "model_mode": self.model.mode,
                 "model_name": self.model.model_name,
+                "preflight_conflicts": preflight_conflicts or [],
+                "preflight_required_confirmations": preflight_required_confirmations or [],
                 "graph_trace": [],
                 "tool_traces": [],
             },
@@ -398,12 +498,47 @@ class DeliveryGuardGraph:
     def start_drill(self, *, drill: Any, thread_id: str) -> dict[str, Any]:
         return self.graph.invoke(
             {
+                "entry_mode": "incident",
                 "raw_text": drill.body,
                 "source_ref": drill.incident.source_ref,
                 "replay_key": "structured_chaos_drill",
                 "incident": drill.incident.model_dump(mode="json"),
                 "model_mode": "structured_drill",
                 "model_name": "chaos-drill-agent-v1",
+                "graph_trace": [],
+                "tool_traces": [],
+            },
+            config=self._config(thread_id),
+        )
+
+    def start_feedback(
+        self,
+        *,
+        previous_graph_result: dict[str, Any],
+        feedback_incident: Incident | dict[str, Any],
+        source_revision_before: str,
+        source_revision_after: str,
+        thread_id: str,
+        source_system: str = "mes",
+    ) -> dict[str, Any]:
+        incident = (
+            feedback_incident
+            if isinstance(feedback_incident, Incident)
+            else Incident.model_validate(feedback_incident)
+        )
+        return self.graph.invoke(
+            {
+                "entry_mode": "execution_feedback",
+                "previous_graph_result": previous_graph_result,
+                "incident": incident.model_dump(mode="json"),
+                "feedback_metadata": {
+                    "changed": True,
+                    "source_system": source_system,
+                    "source_revision_before": source_revision_before,
+                    "source_revision_after": source_revision_after,
+                },
+                "model_mode": "typed_execution_feedback",
+                "model_name": "deterministic-feedback-adapter-v1",
                 "graph_trace": [],
                 "tool_traces": [],
             },

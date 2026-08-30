@@ -1,0 +1,20 @@
+{
+  "schema_version": "youjie.openmes_mapping/v1",
+  "line_code": "YOUJIE-ASSEMBLY",
+  "scenario_epoch": "2026-08-30T08:00:00+08:00",
+  "order_to_product_type": {
+    "ord_public_cfg_1": "YOUJIE-PRD-CFG-1",
+    "ord_public_cfg_2": "YOUJIE-PRD-CFG-2",
+    "ord_public_cfg_3": "YOUJIE-PRD-CFG-3"
+  },
+  "order_quantities": {
+    "ord_public_cfg_1": 91,
+    "ord_public_cfg_2": 81,
+    "ord_public_cfg_3": 45
+  },
+  "order_priorities": {
+    "ord_public_cfg_1": 100,
+    "ord_public_cfg_2": 70,
+    "ord_public_cfg_3": 30
+  }
+}

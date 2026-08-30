@@ -78,6 +78,7 @@ class DeliveryGuardAgent:
             self.model,
             replay_key=replay_key,
             raw_text=raw_text,
+            source_ref=source_ref,
         )
         draft = resolve_and_validate_draft(draft, self.scenario)
         self.context.incident_draft = draft

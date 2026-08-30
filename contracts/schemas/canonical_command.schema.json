@@ -1,0 +1,106 @@
+{
+  "$defs": {
+    "IntegrationProfile": {
+      "enum": [
+        "sap_s4_dm_contract_profile",
+        "kingdee_blacklake_contract_profile"
+      ],
+      "title": "IntegrationProfile",
+      "type": "string"
+    },
+    "TargetSystem": {
+      "enum": [
+        "erp_sandbox",
+        "mes_sandbox"
+      ],
+      "title": "TargetSystem",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "youjie.command/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "command_id": {
+      "title": "Command Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "causation_id": {
+      "title": "Causation Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "profile": {
+      "$ref": "#/$defs/IntegrationProfile"
+    },
+    "target_system": {
+      "$ref": "#/$defs/TargetSystem"
+    },
+    "command_type": {
+      "title": "Command Type",
+      "type": "string"
+    },
+    "environment": {
+      "default": "sandbox",
+      "title": "Environment",
+      "type": "string"
+    },
+    "scenario_hash": {
+      "title": "Scenario Hash",
+      "type": "string"
+    },
+    "plan_hash": {
+      "title": "Plan Hash",
+      "type": "string"
+    },
+    "approval_id": {
+      "title": "Approval Id",
+      "type": "string"
+    },
+    "expected_source_revision": {
+      "title": "Expected Source Revision",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "payload": {
+      "additionalProperties": true,
+      "title": "Payload",
+      "type": "object"
+    },
+    "payload_hash": {
+      "default": "",
+      "title": "Payload Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "command_id",
+    "correlation_id",
+    "causation_id",
+    "idempotency_key",
+    "profile",
+    "target_system",
+    "command_type",
+    "scenario_hash",
+    "plan_hash",
+    "approval_id",
+    "expected_source_revision",
+    "created_at",
+    "payload"
+  ],
+  "title": "CanonicalCommand",
+  "type": "object"
+}

@@ -87,7 +87,7 @@ def test_prompt_injection_crosses_model_boundary_but_cannot_approve():
         replay_key="prompt_injection_email",
     )
     assert context.incident_draft.delay_hours == 24
-    assert len(context.incident_draft.security_flags) == 2
+    assert context.incident_draft.security_flags == ["prompt_injection"]
     assert context.state == AgentTaskState.NEEDS_CLARIFICATION
     assert agent.workflow is None
     assert all(trace.tool_name != "draft_actions" for trace in context.tool_traces)

@@ -1,0 +1,112 @@
+openapi: 3.1.0
+info:
+  title: Youjie ERP/MES Contract Sandbox API
+  version: 1.0.0
+  description: >-
+    Project-owned, contract-compatible sandbox. NON-CERTIFIED; NO LIVE VENDOR
+    TENANT; NO DEVICE CONTROL. HTTP 202 means transport acceptance only.
+servers:
+  - url: http://127.0.0.1:{port}
+    description: Ephemeral localhost sandbox used by the Demo and tests.
+    variables:
+      port:
+        default: "8503"
+paths:
+  /health:
+    get:
+      summary: Read sandbox capability and disclosure
+      responses:
+        "200":
+          description: Healthy sandbox
+  /sandbox/v1/erp/snapshots/{scenario_id}:
+    get:
+      summary: Read canonical ERP transaction snapshot
+      parameters:
+        - $ref: "#/components/parameters/ScenarioId"
+      responses:
+        "200":
+          description: Orders, BOM, inventory, and supplier commitments with revision/hash
+  /sandbox/v1/mes/snapshots/{scenario_id}:
+    get:
+      summary: Read canonical MES operations snapshot
+      parameters:
+        - $ref: "#/components/parameters/ScenarioId"
+      responses:
+        "200":
+          description: Production lines and routing with revision/hash
+  /sandbox/v1/commands:
+    post:
+      summary: Accept an approved draft command into the outbox
+      description: A 202 response is not proof that the business operation was applied.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CanonicalCommand"
+      responses:
+        "202":
+          description: Transport accepted; business status remains PENDING
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TransportAck"
+        "409":
+          description: Same idempotency key was used with a different payload
+        "422":
+          description: Approval, hash, profile, environment, or safety contract rejected
+  /youjie/v1/callbacks:
+    post:
+      summary: Reconcile an asynchronous business execution result
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExecutionCallback"
+      responses:
+        "200":
+          description: Callback deduplicated/reconciled; stale dependencies may invalidate the plan
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CallbackReceipt"
+        "422":
+          description: Callback contract rejected
+  /sandbox/v1/operations/{operation_id}:
+    get:
+      summary: Read current business status for one external operation
+      parameters:
+        - name: operation_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Current operation state}
+        "404": {description: Unknown operation}
+  /sandbox/v1/audit/{correlation_id}:
+    get:
+      summary: Read command/ACK/callback audit evidence
+      parameters:
+        - name: correlation_id
+          in: path
+          required: true
+          schema: {type: string}
+      responses:
+        "200": {description: Ordered audit events}
+components:
+  parameters:
+    ScenarioId:
+      name: scenario_id
+      in: path
+      required: true
+      schema: {type: string}
+  schemas:
+    CanonicalCommand:
+      $ref: "./schemas/canonical_command.schema.json"
+    TransportAck:
+      $ref: "./schemas/transport_ack.schema.json"
+    ExecutionCallback:
+      $ref: "./schemas/execution_callback.schema.json"
+    CallbackReceipt:
+      $ref: "./schemas/callback_receipt.schema.json"

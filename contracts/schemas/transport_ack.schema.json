@@ -1,0 +1,113 @@
+{
+  "$defs": {
+    "BusinessStatus": {
+      "enum": [
+        "PENDING",
+        "VALIDATED",
+        "APPLIED",
+        "PARTIALLY_APPLIED",
+        "REJECTED",
+        "FAILED",
+        "TIMEOUT_UNKNOWN",
+        "MANUAL_REVIEW"
+      ],
+      "title": "BusinessStatus",
+      "type": "string"
+    },
+    "IntegrationError": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        },
+        "retryable": {
+          "default": false,
+          "title": "Retryable",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "IntegrationError",
+      "type": "object"
+    },
+    "TransportStatus": {
+      "enum": [
+        "RECEIVED",
+        "ACCEPTED",
+        "REJECTED"
+      ],
+      "title": "TransportStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "default": "youjie.ack/v1",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "ack_id": {
+      "title": "Ack Id",
+      "type": "string"
+    },
+    "command_id": {
+      "title": "Command Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "transport_status": {
+      "$ref": "#/$defs/TransportStatus"
+    },
+    "business_status": {
+      "$ref": "#/$defs/BusinessStatus",
+      "default": "PENDING"
+    },
+    "duplicate": {
+      "default": false,
+      "title": "Duplicate",
+      "type": "boolean"
+    },
+    "received_at": {
+      "title": "Received At",
+      "type": "string"
+    },
+    "errors": {
+      "items": {
+        "$ref": "#/$defs/IntegrationError"
+      },
+      "title": "Errors",
+      "type": "array"
+    }
+  },
+  "required": [
+    "ack_id",
+    "command_id",
+    "correlation_id",
+    "idempotency_key",
+    "operation_id",
+    "transport_status",
+    "received_at"
+  ],
+  "title": "TransportAck",
+  "type": "object"
+}

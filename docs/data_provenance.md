@@ -51,6 +51,14 @@
 - `ChaosDrillAgent` 生成的供应、库存、产线和需求事故；
 - 人工审批人、意见和草稿工单。
 
+复赛另增加三个多格式证据 fixture，仍属于确定性模拟层：
+
+- `supplier_email.png` / `.eml`：48 小时，PNG 绑定预计算 OCR 文本和 bbox；
+- `carrier_notice.pdf`：72 小时，PDF 绑定第 1 页文字层位置；
+- `mes_snapshot.csv`：48 小时，但在案例时点已过期 26 小时。
+
+`evidence/manifest.json` 为每个文件记录 SHA-256、媒体类型、观察时点、抽取方式、原文位置和新鲜度策略。二进制内容永远只作为不可信数据，不能修改工具权限或审批门。
+
 模拟层使用 Apache-2.0。它不能被描述为 Mendeley 原始事实或真实企业价格。
 
 ## 许可与安全

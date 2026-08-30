@@ -1,0 +1,71 @@
+"""Contract-compatible ERP/MES sandbox integration for the semifinal demo."""
+
+from delivery_guard.integration.contracts import (
+    AdapterCapability,
+    BusinessStatus,
+    CanonicalCommand,
+    ExecutionCallback,
+    IntegrationProfile,
+    TargetSystem,
+    TransportAck,
+    TransportStatus,
+)
+from delivery_guard.integration.orchestrator import (
+    build_commands,
+    build_system_snapshots,
+    replan_after_capacity_feedback,
+    run_partial_failure_demo,
+)
+from delivery_guard.integration.erpnext import (
+    ERPNextAdapter,
+    ERPNextConfig,
+    ERPNextExecutionLedger,
+    ERPNextExecutionResult,
+    ERPNextHttpClient,
+    ERPNextMapping,
+    build_erpnext_commands,
+    compare_execution_snapshots,
+)
+from delivery_guard.integration.openmes import (
+    OPENMES_UPSTREAM_COMMIT,
+    OpenMESAdapter,
+    OpenMESConfig,
+    OpenMESExecutionLedger,
+    OpenMESExecutionResult,
+    OpenMESHttpClient,
+    OpenMESMapping,
+    build_openmes_command,
+    compare_openmes_snapshots,
+)
+
+__all__ = [
+    "AdapterCapability",
+    "BusinessStatus",
+    "CanonicalCommand",
+    "ExecutionCallback",
+    "IntegrationProfile",
+    "TargetSystem",
+    "TransportAck",
+    "TransportStatus",
+    "build_commands",
+    "build_system_snapshots",
+    "replan_after_capacity_feedback",
+    "run_partial_failure_demo",
+    "ERPNextAdapter",
+    "ERPNextConfig",
+    "ERPNextExecutionLedger",
+    "ERPNextExecutionResult",
+    "ERPNextHttpClient",
+    "ERPNextMapping",
+    "build_erpnext_commands",
+    "compare_execution_snapshots",
+    "OPENMES_UPSTREAM_COMMIT",
+    "OpenMESAdapter",
+    "OpenMESConfig",
+    "OpenMESExecutionLedger",
+    "OpenMESExecutionResult",
+    "OpenMESHttpClient",
+    "OpenMESMapping",
+    "build_openmes_command",
+    "compare_openmes_snapshots",
+]

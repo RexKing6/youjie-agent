@@ -1,0 +1,218 @@
+{
+  "schema_version": "youjie.openmes_real_validation/v1",
+  "generated_at": "2026-08-30T07:41:27.334492+00:00",
+  "runtime": {
+    "product": "Mes-Open/OpenMes",
+    "status": "connected",
+    "environment": "test",
+    "public_host": "127.0.0.1:8090",
+    "upstream_commit": "f0ccdd1c7a57804212ed337d340aebfeebacc372",
+    "credentials_exposed": false
+  },
+  "approval": {
+    "approval_id": "approval_006",
+    "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+    "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf"
+  },
+  "erpnext": {
+    "public_host": "127.0.0.1",
+    "work_orders": [
+      {
+        "order_id": "ord_public_cfg_1",
+        "erpnext_work_order": "MFG-WO-2026-00031",
+        "production_item": "YOUJIE-PRD-CFG-1",
+        "qty": 91
+      },
+      {
+        "order_id": "ord_public_cfg_2",
+        "erpnext_work_order": "MFG-WO-2026-00032",
+        "production_item": "YOUJIE-PRD-CFG-2",
+        "qty": 81
+      },
+      {
+        "order_id": "ord_public_cfg_3",
+        "erpnext_work_order": "MFG-WO-2026-00033",
+        "production_item": "YOUJIE-PRD-CFG-3",
+        "qty": 45
+      }
+    ],
+    "duplicate_retry_created_nothing": true
+  },
+  "openmes": {
+    "command_id": "cmd_e97ce8f96e1767cc",
+    "business_status": "APPLIED",
+    "imported": 3,
+    "updated": 0,
+    "records": [
+      {
+        "order_no": "MFG-WO-2026-00031",
+        "status": "PENDING",
+        "planned_qty": 91.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-1",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:41:27+08:00",
+        "evidence_hash": "93b5f544c7021b8e810d226964923bff5a096a856f2be15140a8f1da765ffeae"
+      },
+      {
+        "order_no": "MFG-WO-2026-00032",
+        "status": "PENDING",
+        "planned_qty": 81.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-2",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:41:27+08:00",
+        "evidence_hash": "e741ea2a407133c1ebd87a0277d55aa9c307f21fabeda41a8fe865075dd97c48"
+      },
+      {
+        "order_no": "MFG-WO-2026-00033",
+        "status": "PENDING",
+        "planned_qty": 45.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-3",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:41:27+08:00",
+        "evidence_hash": "fa180365ebb7480676f3d3c943c691fe9445edffe15531b10be66600360b934e"
+      }
+    ],
+    "duplicate_retry_created_nothing": true,
+    "source_revision_before": "openmes:4f53cda18c2baa0c0354",
+    "source_revision_after_import": "openmes:b960894b4a0e3e47659d",
+    "handoff_delta": {
+      "changed": true,
+      "source_revision_before": "openmes:4f53cda18c2baa0c0354",
+      "source_revision_after": "openmes:b960894b4a0e3e47659d",
+      "changed_entities": [
+        "openmes_work_order:MFG-WO-2026-00031",
+        "openmes_work_order:MFG-WO-2026-00032",
+        "openmes_work_order:MFG-WO-2026-00033"
+      ],
+      "invalidates_approval": true
+    },
+    "feedback_baseline": {
+      "schema_version": "youjie.openmes_snapshot/v1",
+      "source_system": "OpenMES",
+      "environment": "test",
+      "public_host": "127.0.0.1:8090",
+      "upstream_commit": "f0ccdd1c7a57804212ed337d340aebfeebacc372",
+      "source_revision": "openmes:b960894b4a0e3e47659d",
+      "content_hash": "b960894b4a0e3e47659d7ca3c1311031ff6ef1aee2fb15f3a84171a17a3bd0f1",
+      "records": [
+        {
+          "order_no": "MFG-WO-2026-00031",
+          "status": "PENDING",
+          "planned_qty": 91.0,
+          "produced_qty": 0.0,
+          "line_code": "YOUJIE-ASSEMBLY",
+          "product_type_code": "YOUJIE-PRD-CFG-1",
+          "completed_at": null,
+          "updated_at": "2026-08-30T15:41:27+08:00",
+          "evidence_hash": "93b5f544c7021b8e810d226964923bff5a096a856f2be15140a8f1da765ffeae"
+        },
+        {
+          "order_no": "MFG-WO-2026-00032",
+          "status": "PENDING",
+          "planned_qty": 81.0,
+          "produced_qty": 0.0,
+          "line_code": "YOUJIE-ASSEMBLY",
+          "product_type_code": "YOUJIE-PRD-CFG-2",
+          "completed_at": null,
+          "updated_at": "2026-08-30T15:41:27+08:00",
+          "evidence_hash": "e741ea2a407133c1ebd87a0277d55aa9c307f21fabeda41a8fe865075dd97c48"
+        },
+        {
+          "order_no": "MFG-WO-2026-00033",
+          "status": "PENDING",
+          "planned_qty": 45.0,
+          "produced_qty": 0.0,
+          "line_code": "YOUJIE-ASSEMBLY",
+          "product_type_code": "YOUJIE-PRD-CFG-3",
+          "completed_at": null,
+          "updated_at": "2026-08-30T15:41:27+08:00",
+          "evidence_hash": "fa180365ebb7480676f3d3c943c691fe9445edffe15531b10be66600360b934e"
+        }
+      ],
+      "watched_order_nos": [
+        "MFG-WO-2026-00031",
+        "MFG-WO-2026-00032",
+        "MFG-WO-2026-00033"
+      ],
+      "missing_order_nos": []
+    }
+  },
+  "feedback_validation": {
+    "status": "change_detected_and_old_approval_invalidated",
+    "validated_at": "2026-08-30T07:42:46.755541+00:00",
+    "delta": {
+      "changed": true,
+      "source_revision_before": "openmes:b960894b4a0e3e47659d",
+      "source_revision_after": "openmes:1a62b4c9a4feac146c30",
+      "changed_entities": [
+        "openmes_work_order:MFG-WO-2026-00031"
+      ],
+      "invalidates_approval": true
+    },
+    "records": [
+      {
+        "order_no": "MFG-WO-2026-00031",
+        "status": "ACCEPTED",
+        "planned_qty": 91.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-1",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:42:41+08:00",
+        "evidence_hash": "9e25428bd3de205e75b3910fbb39adf78328d8d9f09eea63bdb648150b2d0d04"
+      },
+      {
+        "order_no": "MFG-WO-2026-00032",
+        "status": "PENDING",
+        "planned_qty": 81.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-2",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:41:27+08:00",
+        "evidence_hash": "e741ea2a407133c1ebd87a0277d55aa9c307f21fabeda41a8fe865075dd97c48"
+      },
+      {
+        "order_no": "MFG-WO-2026-00033",
+        "status": "PENDING",
+        "planned_qty": 45.0,
+        "produced_qty": 0.0,
+        "line_code": "YOUJIE-ASSEMBLY",
+        "product_type_code": "YOUJIE-PRD-CFG-3",
+        "completed_at": null,
+        "updated_at": "2026-08-30T15:41:27+08:00",
+        "evidence_hash": "fa180365ebb7480676f3d3c943c691fe9445edffe15531b10be66600360b934e"
+      }
+    ],
+    "previous_approval_id": "approval_006",
+    "previous_approval_valid": false,
+    "new_commands_blocked": true,
+    "next_required_action": "refresh ERP/MES facts, re-solve, and obtain a new human approval"
+  },
+  "assertions": {
+    "authenticated_real_openmes_http": true,
+    "three_erpnext_work_orders_mapped": true,
+    "three_openmes_work_orders_imported_and_read_back": true,
+    "same_business_order_numbers_across_systems": true,
+    "all_initial_openmes_states_pending": true,
+    "import_changed_openmes_revision": true,
+    "duplicate_retries_created_nothing": true,
+    "credentials_absent_from_evidence": true,
+    "no_line_start_stop_machine_or_ot_write": true,
+    "human_openmes_change_detected": true,
+    "old_approval_invalidated_after_mes_feedback": true
+  },
+  "boundaries": {
+    "erpnext_role": "ISA-95 Level 4 business and planning test record",
+    "openmes_role": "ISA-95 Level 3 execution-state test record",
+    "device_control": false,
+    "production_tenant": false,
+    "physical_execution_claim": false
+  }
+}

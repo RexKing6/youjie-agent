@@ -24,6 +24,11 @@ def generate_work_order_drafts(
         )
 
     for purchase in plan.purchases:
+        # A committed purchase is an existing supply fact used by the solver,
+        # not a new action authorized by this approval. Creating another
+        # purchase request for it would duplicate procurement in the ERP.
+        if purchase.committed:
+            continue
         add(
             "supplier_purchase_request",
             {

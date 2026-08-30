@@ -1,0 +1,9 @@
+SYNTHETIC CARRIER DELIVERY NOTICE
+
+Notice ID: CARRIER-SIM-20260825-017
+Issued: 2026-08-25 09:15 CST
+Material: Q2J seat assembly
+Current arrival estimate: 72 hours from issue time
+Reason: downstream hub congestion after supplier release
+
+This notice is a deterministic synthetic fixture for the GOAI demonstration. It is not issued by a real carrier and cannot authorize procurement, scheduling, or equipment control.

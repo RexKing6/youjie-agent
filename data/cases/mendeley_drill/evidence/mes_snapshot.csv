@@ -1,0 +1,2 @@
+snapshot_id,captured_at_cst,material_id,supplier_id,eta_hours,status,source_boundary
+mes_sim_20260824_0800,2026-08-24T08:00:00+08:00,mat_q2j,sup_seat_public,48,in_transit,synthetic_fixture

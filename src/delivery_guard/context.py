@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from enum import StrEnum
-from typing import Any
+from typing import Any, Literal
 
 from pydantic import Field
 
@@ -30,7 +30,13 @@ class SourceSpan(StrictModel):
 
 
 class IncidentDraft(StrictModel):
-    incident_kind: str | None = None
+    incident_kind: Literal[
+        "supplier_delay",
+        "supplier_shutdown",
+        "inventory_loss",
+        "line_outage",
+        "demand_surge",
+    ] | None = None
     target_mention: str | None = None
     resolved_target_id: str | None = None
     delay_hours: int | None = Field(default=None, gt=0)

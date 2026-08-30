@@ -95,6 +95,12 @@ class OpenAICompatibleLanguageModel:
                 },
             },
         }
+        # Qwen reasoning models default to a slow thinking mode. Incident
+        # extraction is a bounded JSON-schema task, so disable thinking to
+        # reduce latency and keep structured output reliable.
+        if self.model_name.casefold().startswith("qwen"):
+            body["enable_thinking"] = False
+            body["max_completion_tokens"] = 4096
         request = urllib.request.Request(
             f"{self.base_url}/chat/completions",
             data=json.dumps(body).encode("utf-8"),

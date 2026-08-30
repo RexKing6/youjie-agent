@@ -1,0 +1,64 @@
+{
+  "$defs": {
+    "BusinessStatus": {
+      "enum": [
+        "PENDING",
+        "VALIDATED",
+        "APPLIED",
+        "PARTIALLY_APPLIED",
+        "REJECTED",
+        "FAILED",
+        "TIMEOUT_UNKNOWN",
+        "MANUAL_REVIEW"
+      ],
+      "title": "BusinessStatus",
+      "type": "string"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "event_id": {
+      "title": "Event Id",
+      "type": "string"
+    },
+    "command_id": {
+      "title": "Command Id",
+      "type": "string"
+    },
+    "operation_id": {
+      "title": "Operation Id",
+      "type": "string"
+    },
+    "accepted": {
+      "title": "Accepted",
+      "type": "boolean"
+    },
+    "duplicate": {
+      "default": false,
+      "title": "Duplicate",
+      "type": "boolean"
+    },
+    "stale_sequence": {
+      "default": false,
+      "title": "Stale Sequence",
+      "type": "boolean"
+    },
+    "current_business_status": {
+      "$ref": "#/$defs/BusinessStatus"
+    },
+    "plan_stale": {
+      "default": false,
+      "title": "Plan Stale",
+      "type": "boolean"
+    }
+  },
+  "required": [
+    "event_id",
+    "command_id",
+    "operation_id",
+    "accepted",
+    "current_business_status"
+  ],
+  "title": "CallbackReceipt",
+  "type": "object"
+}

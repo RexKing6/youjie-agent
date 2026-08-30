@@ -4,7 +4,7 @@
     "approval_id": "approval_006",
     "comment": "Explicit approval for deterministic offline demo artifact",
     "decision": "approve",
-    "plan_hash": "5a3f8e1ba047b1c01cbc7a3875817b0bf4bf4b6042d3891b1e67998ce593b390",
+    "plan_hash": "e27d861801b341fbd6df832e35071a0c199508307bc88ad848f44ad3f334aa68",
     "plan_id": "plan_balanced",
     "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
     "valid": true
@@ -38,7 +38,7 @@
       "actor_type": "solver",
       "from_state": "analyzed",
       "sequence": 4,
-      "state_hash": "92e1fa639adc9fbe42dd3af2aa6a168579b4c424e6a5bbf6329d07df1538a773",
+      "state_hash": "4318f8991b676982431f4613b5e925459922c7e8dcf696284f439dae30802ce7",
       "summary": "Three policy profiles solved",
       "to_state": "solved"
     },
@@ -46,7 +46,7 @@
       "actor_type": "system",
       "from_state": "solved",
       "sequence": 5,
-      "state_hash": "01c951177726802a6c87c8bd38f1017ac3f87e0e6449c2038f82ac082c2c991e",
+      "state_hash": "52eb512f8288f340dec045e7d0c46467478c4ab6d5c2b50c3da80bdba8944d84",
       "summary": "Verified candidates are awaiting explicit approval",
       "to_state": "awaiting_approval"
     },
@@ -54,7 +54,7 @@
       "actor_type": "user",
       "from_state": "awaiting_approval",
       "sequence": 6,
-      "state_hash": "4e112963170c4dd603eeb30fbdfc65b55b15cd83f2e9d1358c31ab2c1d6dd275",
+      "state_hash": "14c24b980c8fa2e385984f79f4672df117ac67a50cf96eae416ee2a0e97f0f4e",
       "summary": "Plan plan_balanced approved",
       "to_state": "approved"
     },
@@ -62,7 +62,7 @@
       "actor_type": "deterministic_tool",
       "from_state": "approved",
       "sequence": 7,
-      "state_hash": "3d8a116d0f49426b68ac1a4097cb97551af4f74a16fa8d6e348f54feea52025a",
+      "state_hash": "21e86758d6325d6151325d5a4bb4363e26374b4792d928c513356a697f651c87",
       "summary": "Generated 17 draft-only work orders",
       "to_state": "orders_generated"
     }
@@ -323,7 +323,7 @@
         },
         "plan_hash": "98a2a91214aecafde2624e70260c526359f2a0ae3328367aca77b00d31c8a323",
         "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
-        "solve_time_ms": 663,
+        "solve_time_ms": 666,
         "solver_name": "OR-Tools CP-SAT",
         "solver_status": "OPTIMAL",
         "solver_version": "9.15.6755",
@@ -686,9 +686,9 @@
           "unfulfilled_weighted_units": 0,
           "unscheduled_units": 0
         },
-        "plan_hash": "5a3f8e1ba047b1c01cbc7a3875817b0bf4bf4b6042d3891b1e67998ce593b390",
+        "plan_hash": "e27d861801b341fbd6df832e35071a0c199508307bc88ad848f44ad3f334aa68",
         "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
-        "solve_time_ms": 732,
+        "solve_time_ms": 614,
         "solver_name": "OR-Tools CP-SAT",
         "solver_status": "OPTIMAL",
         "solver_version": "9.15.6755",
@@ -722,7 +722,7 @@
           "scheduled": true
         },
         {
-          "completion_hour": 286,
+          "completion_hour": 266,
           "late_hours": 0,
           "order_id": "ord_edge_02",
           "scheduled": true
@@ -734,13 +734,13 @@
           "scheduled": true
         },
         {
-          "completion_hour": 236,
+          "completion_hour": 240,
           "late_hours": 0,
           "order_id": "ord_gateway_03",
           "scheduled": true
         },
         {
-          "completion_hour": 20,
+          "completion_hour": 32,
           "late_hours": 0,
           "order_id": "ord_sensor_01",
           "scheduled": true
@@ -859,23 +859,23 @@
       "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
       "scheduled_operations": [
         {
-          "end_hour": 8,
+          "end_hour": 20,
           "incremental_cost": 0,
           "line_id": "line_smt",
           "operation_id": "op_sensor_smt",
           "order_id": "ord_sensor_01",
           "overtime": false,
-          "start_hour": 0,
+          "start_hour": 12,
           "task_id": "ord_sensor_01__op_sensor_smt"
         },
         {
-          "end_hour": 20,
+          "end_hour": 32,
           "incremental_cost": 0,
           "line_id": "line_assembly",
           "operation_id": "op_sensor_assembly",
           "order_id": "ord_sensor_01",
           "overtime": false,
-          "start_hour": 8,
+          "start_hour": 20,
           "task_id": "ord_sensor_01__op_sensor_assembly"
         },
         {
@@ -949,6 +949,16 @@
           "task_id": "ord_edge_01__op_edge_smt"
         },
         {
+          "end_hour": 208,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 200,
+          "task_id": "ord_sensor_03__op_sensor_smt"
+        },
+        {
           "end_hour": 214,
           "incremental_cost": 0,
           "line_id": "line_assembly",
@@ -959,14 +969,14 @@
           "task_id": "ord_edge_01__op_edge_assembly"
         },
         {
-          "end_hour": 216,
+          "end_hour": 222,
           "incremental_cost": 0,
           "line_id": "line_smt",
-          "operation_id": "op_sensor_smt",
-          "order_id": "ord_sensor_03",
+          "operation_id": "op_gateway_smt",
+          "order_id": "ord_gateway_03",
           "overtime": false,
-          "start_hour": 208,
-          "task_id": "ord_sensor_03__op_sensor_smt"
+          "start_hour": 212,
+          "task_id": "ord_gateway_03__op_gateway_smt"
         },
         {
           "end_hour": 228,
@@ -979,23 +989,13 @@
           "task_id": "ord_sensor_03__op_sensor_assembly"
         },
         {
-          "end_hour": 226,
-          "incremental_cost": 0,
-          "line_id": "line_smt",
-          "operation_id": "op_gateway_smt",
-          "order_id": "ord_gateway_03",
-          "overtime": false,
-          "start_hour": 216,
-          "task_id": "ord_gateway_03__op_gateway_smt"
-        },
-        {
-          "end_hour": 236,
+          "end_hour": 240,
           "incremental_cost": 0,
           "line_id": "line_assembly",
           "operation_id": "op_gateway_assembly",
           "order_id": "ord_gateway_03",
           "overtime": false,
-          "start_hour": 228,
+          "start_hour": 232,
           "task_id": "ord_gateway_03__op_gateway_assembly"
         },
         {
@@ -1009,13 +1009,13 @@
           "task_id": "ord_edge_02__op_edge_smt"
         },
         {
-          "end_hour": 286,
+          "end_hour": 266,
           "incremental_cost": 0,
           "line_id": "line_assembly",
           "operation_id": "op_edge_assembly",
           "order_id": "ord_edge_02",
           "overtime": false,
-          "start_hour": 276,
+          "start_hour": 256,
           "task_id": "ord_edge_02__op_edge_assembly"
         }
       ],
@@ -1051,9 +1051,9 @@
           "unfulfilled_weighted_units": 0,
           "unscheduled_units": 0
         },
-        "plan_hash": "280009f6b694724389e590ceca4346cb2b79d5a88b52c6591099f5254fbf74d5",
+        "plan_hash": "203dd60258895fe8afec21cc7889e40a8cff425307ea289cf477bf28b9ada3b7",
         "scenario_hash": "a01606497d0bab46fee8b7c6466d82d0e1105267bdda39784b04e005a7ed6fa0",
-        "solve_time_ms": 695,
+        "solve_time_ms": 597,
         "solver_name": "OR-Tools CP-SAT",
         "solver_status": "OPTIMAL",
         "solver_version": "9.15.6755",
@@ -1087,7 +1087,7 @@
           "scheduled": true
         },
         {
-          "completion_hour": 282,
+          "completion_hour": 270,
           "late_hours": 0,
           "order_id": "ord_edge_02",
           "scheduled": true
@@ -1105,7 +1105,7 @@
           "scheduled": true
         },
         {
-          "completion_hour": 20,
+          "completion_hour": 64,
           "late_hours": 0,
           "order_id": "ord_sensor_01",
           "scheduled": true
@@ -1234,13 +1234,13 @@
           "task_id": "ord_sensor_01__op_sensor_smt"
         },
         {
-          "end_hour": 20,
+          "end_hour": 64,
           "incremental_cost": 0,
           "line_id": "line_assembly",
           "operation_id": "op_sensor_assembly",
           "order_id": "ord_sensor_01",
           "overtime": false,
-          "start_hour": 8,
+          "start_hour": 52,
           "task_id": "ord_sensor_01__op_sensor_assembly"
         },
         {
@@ -1304,14 +1304,24 @@
           "task_id": "ord_gateway_02__op_gateway_assembly"
         },
         {
-          "end_hour": 204,
+          "end_hour": 200,
           "incremental_cost": 0,
           "line_id": "line_smt",
           "operation_id": "op_edge_smt",
           "order_id": "ord_edge_01",
           "overtime": false,
-          "start_hour": 192,
+          "start_hour": 188,
           "task_id": "ord_edge_01__op_edge_smt"
+        },
+        {
+          "end_hour": 208,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_sensor_smt",
+          "order_id": "ord_sensor_03",
+          "overtime": false,
+          "start_hour": 200,
+          "task_id": "ord_sensor_03__op_sensor_smt"
         },
         {
           "end_hour": 214,
@@ -1324,23 +1334,13 @@
           "task_id": "ord_edge_01__op_edge_assembly"
         },
         {
-          "end_hour": 212,
-          "incremental_cost": 0,
-          "line_id": "line_smt",
-          "operation_id": "op_sensor_smt",
-          "order_id": "ord_sensor_03",
-          "overtime": false,
-          "start_hour": 204,
-          "task_id": "ord_sensor_03__op_sensor_smt"
-        },
-        {
-          "end_hour": 222,
+          "end_hour": 218,
           "incremental_cost": 0,
           "line_id": "line_smt",
           "operation_id": "op_gateway_smt",
           "order_id": "ord_gateway_03",
           "overtime": false,
-          "start_hour": 212,
+          "start_hour": 208,
           "task_id": "ord_gateway_03__op_gateway_smt"
         },
         {
@@ -1354,6 +1354,16 @@
           "task_id": "ord_sensor_03__op_sensor_assembly"
         },
         {
+          "end_hour": 232,
+          "incremental_cost": 0,
+          "line_id": "line_smt",
+          "operation_id": "op_edge_smt",
+          "order_id": "ord_edge_02",
+          "overtime": false,
+          "start_hour": 220,
+          "task_id": "ord_edge_02__op_edge_smt"
+        },
+        {
           "end_hour": 240,
           "incremental_cost": 0,
           "line_id": "line_assembly",
@@ -1364,23 +1374,13 @@
           "task_id": "ord_gateway_03__op_gateway_assembly"
         },
         {
-          "end_hour": 264,
-          "incremental_cost": 0,
-          "line_id": "line_smt",
-          "operation_id": "op_edge_smt",
-          "order_id": "ord_edge_02",
-          "overtime": false,
-          "start_hour": 252,
-          "task_id": "ord_edge_02__op_edge_smt"
-        },
-        {
-          "end_hour": 282,
+          "end_hour": 270,
           "incremental_cost": 0,
           "line_id": "line_assembly",
           "operation_id": "op_edge_assembly",
           "order_id": "ord_edge_02",
           "overtime": false,
-          "start_hour": 272,
+          "start_hour": 260,
           "task_id": "ord_edge_02__op_edge_assembly"
         }
       ],
@@ -1620,7 +1620,7 @@
       "approved_plan_id": "plan_balanced",
       "execution_status": "draft_only",
       "payload": {
-        "completion_hour": 286,
+        "completion_hour": 266,
         "late_hours": 0,
         "order_id": "ord_edge_02",
         "requires_external_execution": true,
@@ -1636,13 +1636,13 @@
             "task_id": "ord_edge_02__op_edge_smt"
           },
           {
-            "end_hour": 286,
+            "end_hour": 266,
             "incremental_cost": 0,
             "line_id": "line_assembly",
             "operation_id": "op_edge_assembly",
             "order_id": "ord_edge_02",
             "overtime": false,
-            "start_hour": 276,
+            "start_hour": 256,
             "task_id": "ord_edge_02__op_edge_assembly"
           }
         ]
@@ -1692,29 +1692,29 @@
       "approved_plan_id": "plan_balanced",
       "execution_status": "draft_only",
       "payload": {
-        "completion_hour": 236,
+        "completion_hour": 240,
         "late_hours": 0,
         "order_id": "ord_gateway_03",
         "requires_external_execution": true,
         "tasks": [
           {
-            "end_hour": 226,
+            "end_hour": 222,
             "incremental_cost": 0,
             "line_id": "line_smt",
             "operation_id": "op_gateway_smt",
             "order_id": "ord_gateway_03",
             "overtime": false,
-            "start_hour": 216,
+            "start_hour": 212,
             "task_id": "ord_gateway_03__op_gateway_smt"
           },
           {
-            "end_hour": 236,
+            "end_hour": 240,
             "incremental_cost": 0,
             "line_id": "line_assembly",
             "operation_id": "op_gateway_assembly",
             "order_id": "ord_gateway_03",
             "overtime": false,
-            "start_hour": 228,
+            "start_hour": 232,
             "task_id": "ord_gateway_03__op_gateway_assembly"
           }
         ]
@@ -1728,29 +1728,29 @@
       "approved_plan_id": "plan_balanced",
       "execution_status": "draft_only",
       "payload": {
-        "completion_hour": 20,
+        "completion_hour": 32,
         "late_hours": 0,
         "order_id": "ord_sensor_01",
         "requires_external_execution": true,
         "tasks": [
           {
-            "end_hour": 8,
+            "end_hour": 20,
             "incremental_cost": 0,
             "line_id": "line_smt",
             "operation_id": "op_sensor_smt",
             "order_id": "ord_sensor_01",
             "overtime": false,
-            "start_hour": 0,
+            "start_hour": 12,
             "task_id": "ord_sensor_01__op_sensor_smt"
           },
           {
-            "end_hour": 20,
+            "end_hour": 32,
             "incremental_cost": 0,
             "line_id": "line_assembly",
             "operation_id": "op_sensor_assembly",
             "order_id": "ord_sensor_01",
             "overtime": false,
-            "start_hour": 8,
+            "start_hour": 20,
             "task_id": "ord_sensor_01__op_sensor_assembly"
           }
         ]
@@ -1806,13 +1806,13 @@
         "requires_external_execution": true,
         "tasks": [
           {
-            "end_hour": 216,
+            "end_hour": 208,
             "incremental_cost": 0,
             "line_id": "line_smt",
             "operation_id": "op_sensor_smt",
             "order_id": "ord_sensor_03",
             "overtime": false,
-            "start_hour": 208,
+            "start_hour": 200,
             "task_id": "ord_sensor_03__op_sensor_smt"
           },
           {

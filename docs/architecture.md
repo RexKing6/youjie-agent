@@ -10,6 +10,7 @@ flowchart TB
     X["Mendeley .xlsb\nhash + sheet rows"]
     O["Synthetic overlay\n邮件/聊天/成本/审批"]
     C["ChaosDrillAgent\nseeded bounded incident"]
+    M["PNG / PDF / CSV\nhash + locator + freshness"]
   end
   subgraph Graph["LangGraph control plane"]
     U["understand_incident"]
@@ -27,7 +28,15 @@ flowchart TB
     R["Independent verifier"]
     W["RecoveryWorkflow"]
   end
+  subgraph Integration["L3/L4 contract sandbox"]
+    ES["ERP snapshot + draft command"]
+    MS["MES snapshot + schedule draft"]
+    OB["SQLite outbox / inbox"]
+    CB["async business callback"]
+    RP["stale plan → re-solve → new approval"]
+  end
   X --> V
+  M --> U
   O --> U
   C --> V
   U --> Q --> P
@@ -36,6 +45,10 @@ flowchart TB
   S --> I --> CP --> R --> H
   H -->|approve| D --> W
   H -->|reject| E["END / zero actions"]
+  D --> OB --> ES
+  OB --> MS
+  ES --> CB
+  MS --> CB --> RP --> H
 ```
 
 ## 图节点
@@ -49,6 +62,8 @@ flowchart TB
 | `analyze_and_solve` | 调用影响引擎、三策略 CP-SAT、独立 verifier | LLM 不参与数值计算 |
 | `human_approval` | LangGraph checkpoint + interrupt，等待批准或驳回 | 只有人能作决定 |
 | `draft_actions` | 从原场景重算，核对 scenario/plan hash，再生成草稿 | 不能执行外部写回 |
+
+`understand_incident` 在求解前额外检查证据 hash、新鲜度和字段冲突。两个新鲜来源对同一字段给出不同值时，状态只允许进入 `clarify_incident`；过期来源会被展示，但不能替代人工选择权威新鲜来源。
 
 图使用 `InMemorySaver` 和稳定 `thread_id` 演示暂停/恢复。生产化需要 SQLite/Postgres 等持久 checkpointer、加密、RBAC 和多实例幂等。
 
@@ -86,10 +101,20 @@ LangGraph interrupt 期间外部事实可能变化。恢复后系统不直接相
 
 它输出结构化 Incident 和模拟邮件/聊天/MES 文案。文字仍是不可信展示数据；实际变更只来自通过 Pydantic 的 Incident。相同 seed 完全复现。
 
+## ERP/MES 回流边界
+
+集成分成三个不会混称的层次：
+
+1. `erpnext_open_source_test_profile` 连接真实本机 ERPNext v16 开源测试实例。适配器通过 token-auth REST 读取 BOM、库存、Work Order、Job Card、Material Request，仅创建 Material Request / Work Order 草稿并立即 GET 回读；SQLite ledger 提供幂等和部分失败后的人工复核锁。它不是生产租户，也不把 ERPNext 的制造模块冒充独立 MES。
+2. `openmes_open_source_test_profile` 连接真实本机 OpenMES 测试实例，固定上游 commit `f0ccdd1c7a57804212ed337d340aebfeebacc372`。ERPNext Work Order 名称成为跨系统 `order_no`；OpenMES 官方 ERP API 接收批准后的工单，并按状态回读 `produced_qty/status/updated_at`。适配器不暴露任何产线启停、机器命令或 OT 写入路径。
+3. 项目自建 localhost HTTP/JSON + SQLite outbox/inbox 合同沙箱。两个 profile 分别模拟 SAP S/4HANA + SAP Digital Manufacturing，以及金蝶云星空 + 黑湖智造的典型集成形态；它们共享 canonical contract，均明确标为 `NON-CERTIFIED · NO LIVE TENANT`。
+
+命令只允许由有效人工批准、scenario hash 和 plan hash 共同生成。HTTP 202 只把 outbox 状态推进到已发送，业务状态仍为 `PENDING`；只有 callback 或主动查询才能变为 `APPLIED/REJECTED/...`。MES 回流的产能 revision 若改变计划依赖，旧批准立即失效，重新求解后回到人审，不能继续复用旧工单。设备控制类 command 在 Pydantic 合同边界直接拒绝。
+
 ## 生产化缺口
 
 - 持久 checkpointer、审批 RBAC、双人复核、审计签名；
-- ERP/MES staging connector、outbox/saga、幂等写入和补偿；
+- 已有真实本机 ERPNext REST 草稿写入/回读、真实 OpenMES 工单导入/生产状态回读、HTTP 合同沙箱、SQLite outbox/inbox、幂等与部分失败演练；仍缺生产 tenant 的 RBAC/OAuth、分页/限流、网络隔离、持久消息基础设施、补偿审批和厂商验收；
 - 多工厂、多仓、在途、替代料、setup、人员技能和分时供应容量；
 - 授权脱敏历史事故回放与真实人工基线；
-- live 模型单独评测，不能拿 replay 合同替代泛化准确率。
+- 已完成 `qwen3.8-max` 3×30 合成黄金集评测；仍需授权脱敏历史事故、人工基线和模型升级回归，不能把该分数外推为生产准确率。

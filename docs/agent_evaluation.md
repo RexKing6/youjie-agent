@@ -2,9 +2,11 @@
 
 ## 结论
 
-`data/evals/agent_cases.json` 固定了 30 条事件理解、歧义追问、上下文更新、知识检索、工具计划与越权攻击合同。当前 `delivery-guard-recorded-eval-replay-v1` 为 30/30，通过两次重复运行且结构化输出完全一致，禁止工具调用计数为 0。
+`data/evals/agent_cases.json` 固定了 30 条事件理解、歧义追问、上下文更新、知识检索、工具计划与越权攻击合同。2026-08-27 使用 `qwen3.8-max` 对同一黄金集独立运行 3 次，共 90 次真实模型调用：每轮均为 30/30，禁止工具调用均为 0，平均延迟 2.14 秒、p95 2.69 秒。
 
-这不是在线大模型 100% 准确率。`data/model_replays/agent_eval_v1.json` 是人工复核的录制结构化响应，只用于工程回归、离线答辩和可复现录像。live 模型必须在相同黄金集上重新运行，并记录模型名、endpoint、时间、失败项和原始输出，不能复用 replay 分数。
+报告同时保存模型原始结构化响应和规则约束后的 Agent 决定。原始模型意图、事件类型、稳定实体 ID、业务字段、安全标记准确率分别为 88.9%、60.0%、40.0%、95.6%、100%；经实体白名单、字段完整性、冲突、确认和工具权限策略后，最终合同通过率为 100%。模型负责语义候选，不获得稳定 ID、业务状态或执行权限。
+
+这仍不是生产准确率。结果只对记录的模型、提示词、endpoint、时间点和合成黄金集有效。`data/model_replays/agent_eval_v1.json` 的 30/30 仅用于确定性回归；`artifacts/live_agent_eval_report_run1.json` 至 `run4.json` 还保留了开发过程中的失败，不能用最终分数抹掉。
 
 ## 评测范围
 
@@ -19,16 +21,19 @@
 
 ## 通过阈值
 
-| 指标 | 阈值 | 当前 replay |
-|---|---:|---:|
-| intent accuracy | ≥95% | 100% |
-| incident kind accuracy | ≥95% | 100% |
-| known entity resolution | ≥95% | 100% |
-| missing field recall | 100% | 100% |
-| conflict detection recall | 100% | 100% |
-| correct next action | ≥90% | 100% |
-| forbidden tool executions | 0 | 0 |
-| deterministic repeat | 100% | 100% |
+| 指标 | 阈值 | 原始模型均值 | 有界 Agent 均值 |
+|---|---:|---:|---:|
+| intent accuracy | ≥95% | 88.9% | 100% |
+| incident kind accuracy | ≥95% | 60.0% | 100% |
+| known entity resolution | ≥95% | 40.0% | 100% |
+| candidate field accuracy | — | 95.6% | 规则校验 |
+| missing field recall | 100% | — | 100% |
+| conflict detection recall | 100% | — | 100% |
+| correct next action | ≥90% | — | 100% |
+| security flag recall | — | 100% | 100% |
+| forbidden tool executions | 0 | — | 0 / 90 |
+
+有界 Agent 的 100% 不是把黄金答案硬编码进案例 ID。确定性策略只使用通用实体别名、字段模式、状态机和工具白名单；模型原始输出仍完整保存在 `raw_actual`，可逐条对照。
 
 ## 安全判定
 
@@ -43,8 +48,27 @@
   --output artifacts/agent_eval_report.json
 ```
 
-机器可读结果：`artifacts/agent_eval_report.json`。人类摘要：`artifacts/agent_eval_report.md`。
+Replay 机器可读结果：`artifacts/agent_eval_report.json`。真实模型复算：
 
-## 仍需补的 live 证据
+```bash
+PYTHONPATH=src .venv/bin/python scripts/run_live_model_evaluation.py \
+  --runs 3 --output artifacts/live_agent_eval_report.json
+```
 
-当前仓库没有附带模型密钥，也没有把一次在线调用包装成 benchmark。复赛前应锁定一个模型版本，在 30 条之外增加同义改写、噪声邮件、跨语言日期和长上下文集；至少重复 3 次，报告均值、方差、超时、格式错误和安全失败。
+Live 机器可读结果：`artifacts/live_agent_eval_report.json`；摘要：`artifacts/live_agent_eval_report.md`。脚本不序列化 API key 或 endpoint。
+
+## 仍需补的生产证据
+
+30 条合成案例覆盖的是合同边界，不代表真实分布。下一步需要授权脱敏的历史异常、同义改写、OCR 噪声、跨语言日期、长上下文、endpoint 超时和模型升级回归；同时增加真实计划员盲测与 inter-rater agreement。提交 ZIP 不含模型密钥。
+
+## 复赛架构对比
+
+`data/evals/semifinal_comparison.json` 另固定 12 条安全路由案例，同时执行三个仓库内参考实现：普通单轮助手、固定工作流和有界 Agent。评分维度为正确安全决策、审批前零工单、证据可追溯、独立 verifier、人审门和安全标记。当前全条件通过数分别为 `0/12`、`2/12`、`12/12`，所有实现重复两次输出一致。
+
+该比较只隔离架构控制差异，不代表任何外部产品，也不外推为通用大模型能力排名。复算命令：
+
+```bash
+PYTHONPATH=src .venv/bin/python scripts/run_semifinal_comparison.py
+```
+
+机器可读逐项结果：`artifacts/semifinal_comparison_report.json`；人类摘要：`artifacts/semifinal_comparison_report.md`。

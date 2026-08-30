@@ -6,6 +6,7 @@
     "decision": "approve",
     "profile": "balanced"
   },
+  "entry_mode": "incident",
   "graph_trace": [
     {
       "node": "understand_incident",
@@ -29,7 +30,7 @@
     },
     {
       "node": "draft_actions",
-      "summary": "Generated 5 draft-only actions after hash recheck."
+      "summary": "Generated 4 draft-only actions after hash recheck."
     }
   ],
   "impact": {
@@ -681,6 +682,8 @@
       "total_score": 66408000
     }
   ],
+  "preflight_conflicts": [],
+  "preflight_required_confirmations": [],
   "raw_text": "From: drill-seat-supplier@example.invalid\nTo: planner@example.invalid\nSubject: Simulation only — Q2J seat delivery interruption\nSent: 2026-08-10 08:05 CST\n\nThis is a synthetic resilience-drill message. The public Mendeley seat supplier cannot dispatch\nQ2J seat deliveries for the next 48 hours because of a simulated loading-area shutdown.\nNo real supplier, company, shipment, or production system is represented.\n",
   "replay_key": "mendeley_seat_delay_email",
   "run_metadata": {
@@ -940,23 +943,6 @@
       "approved_plan_id": "plan_balanced",
       "execution_status": "draft_only",
       "payload": {
-        "estimated_cost": 0,
-        "expected_arrival_hour": 48,
-        "item_id": "mat_q2j",
-        "quantity": 217,
-        "requires_external_execution": true,
-        "source_id": "src_public_seat_q2j",
-        "supplier_id": "sup_seat_public"
-      },
-      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-      "work_order_id": "wo_001",
-      "work_order_type": "supplier_purchase_request"
-    },
-    {
-      "approval_id": "approval_006",
-      "approved_plan_id": "plan_balanced",
-      "execution_status": "draft_only",
-      "payload": {
         "estimated_cost": 360,
         "expected_arrival_hour": 12,
         "item_id": "mat_q2j",
@@ -966,7 +952,7 @@
         "supplier_id": "sup_seat_emergency_sim"
       },
       "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-      "work_order_id": "wo_002",
+      "work_order_id": "wo_001",
       "work_order_type": "supplier_purchase_request"
     },
     {
@@ -992,7 +978,7 @@
         ]
       },
       "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-      "work_order_id": "wo_003",
+      "work_order_id": "wo_002",
       "work_order_type": "schedule_change_order"
     },
     {
@@ -1018,7 +1004,7 @@
         ]
       },
       "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-      "work_order_id": "wo_004",
+      "work_order_id": "wo_003",
       "work_order_type": "schedule_change_order"
     },
     {
@@ -1044,7 +1030,7 @@
         ]
       },
       "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-      "work_order_id": "wo_005",
+      "work_order_id": "wo_004",
       "work_order_type": "schedule_change_order"
     }
   ],
@@ -1112,8 +1098,8 @@
         "actor_type": "deterministic_tool",
         "from_state": "approved",
         "sequence": 7,
-        "state_hash": "61deb64036c16e044b35cb008571b831a09c494e3ed4632ae07179e94d6f5f56",
-        "summary": "Generated 5 draft-only work orders",
+        "state_hash": "4db59afbe685aa963e4be74a588a81ea81ba19332868f371d14a548ee3321abe",
+        "summary": "Generated 4 draft-only work orders",
         "to_state": "orders_generated"
       }
     ],
@@ -1596,23 +1582,6 @@
         "approved_plan_id": "plan_balanced",
         "execution_status": "draft_only",
         "payload": {
-          "estimated_cost": 0,
-          "expected_arrival_hour": 48,
-          "item_id": "mat_q2j",
-          "quantity": 217,
-          "requires_external_execution": true,
-          "source_id": "src_public_seat_q2j",
-          "supplier_id": "sup_seat_public"
-        },
-        "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-        "work_order_id": "wo_001",
-        "work_order_type": "supplier_purchase_request"
-      },
-      {
-        "approval_id": "approval_006",
-        "approved_plan_id": "plan_balanced",
-        "execution_status": "draft_only",
-        "payload": {
           "estimated_cost": 360,
           "expected_arrival_hour": 12,
           "item_id": "mat_q2j",
@@ -1622,7 +1591,7 @@
           "supplier_id": "sup_seat_emergency_sim"
         },
         "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-        "work_order_id": "wo_002",
+        "work_order_id": "wo_001",
         "work_order_type": "supplier_purchase_request"
       },
       {
@@ -1648,7 +1617,7 @@
           ]
         },
         "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-        "work_order_id": "wo_003",
+        "work_order_id": "wo_002",
         "work_order_type": "schedule_change_order"
       },
       {
@@ -1674,7 +1643,7 @@
           ]
         },
         "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-        "work_order_id": "wo_004",
+        "work_order_id": "wo_003",
         "work_order_type": "schedule_change_order"
       },
       {
@@ -1700,7 +1669,7 @@
           ]
         },
         "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
-        "work_order_id": "wo_005",
+        "work_order_id": "wo_004",
         "work_order_type": "schedule_change_order"
       }
     ]

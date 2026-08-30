@@ -1,6 +1,6 @@
 import pytest
 
-from delivery_guard.hashing import candidate_plan_hash
+from delivery_guard.hashing import candidate_plan_hash, stable_hash
 from delivery_guard.models import WorkflowState
 
 
@@ -42,3 +42,10 @@ def test_stale_scenario_invalidates_approval(solved_workflow):
 def test_solver_evidence_hash_matches_plan(solved_workflow):
     for plan in solved_workflow.plans:
         assert plan.evidence.plan_hash == candidate_plan_hash(plan)
+
+
+def test_audit_state_hash_excludes_solver_wall_clock_telemetry(solved_workflow):
+    before = stable_hash(solved_workflow._state_payload())
+    for plan in solved_workflow.plans:
+        plan.evidence.solve_time_ms += 1000
+    assert stable_hash(solved_workflow._state_payload()) == before

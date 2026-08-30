@@ -1,0 +1,26 @@
+asyncapi: 3.0.0
+info:
+  title: Youjie ERP/MES execution feedback contract
+  version: 1.0.0
+  description: >-
+    Logical async callback contract for the competition sandbox. A production
+    adapter may implement webhook or a native event transport without changing
+    the canonical event semantics.
+channels:
+  executionFeedback:
+    address: /youjie/v1/callbacks
+    messages:
+      executionCallback:
+        $ref: "#/components/messages/ExecutionCallback"
+operations:
+  receiveExecutionFeedback:
+    action: receive
+    channel:
+      $ref: "#/channels/executionFeedback"
+    summary: Deduplicate, order, reconcile, and invalidate stale plans if needed.
+components:
+  messages:
+    ExecutionCallback:
+      name: ExecutionCallback
+      payload:
+        $ref: "./schemas/execution_callback.schema.json"

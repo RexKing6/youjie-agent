@@ -1,0 +1,228 @@
+{
+  "profile": "sap_s4_dm_contract_profile",
+  "disclosure": "CONTRACT-COMPATIBLE SANDBOX · NON-CERTIFIED · NO LIVE TENANT",
+  "commands": [
+    {
+      "schema_version": "youjie.command/v1",
+      "command_id": "cmd_9296eece7a4781e5",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "causation_id": "plan_balanced",
+      "idempotency_key": "sha256:9296eece7a4781e510d105c349453b09cccdb60c893cf1d997a31cbf9d7df7a7",
+      "profile": "sap_s4_dm_contract_profile",
+      "target_system": "erp_sandbox",
+      "command_type": "CREATE_PURCHASE_REQUISITION_AND_ORDER_RISK_DRAFTS",
+      "environment": "sandbox",
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+      "approval_id": "approval_006",
+      "expected_source_revision": "erp-rev-17",
+      "created_at": "2026-08-29T10:20:30+08:00",
+      "payload": {
+        "purchase_requisition_drafts": [
+          {
+            "estimated_cost": 0,
+            "expected_arrival_hour": 48,
+            "item_id": "mat_q2j",
+            "quantity": 217,
+            "requires_external_execution": true,
+            "source_id": "src_public_seat_q2j",
+            "supplier_id": "sup_seat_public"
+          },
+          {
+            "estimated_cost": 360,
+            "expected_arrival_hour": 12,
+            "item_id": "mat_q2j",
+            "quantity": 45,
+            "requires_external_execution": true,
+            "source_id": "src_sim_emergency_q2j",
+            "supplier_id": "sup_seat_emergency_sim"
+          }
+        ],
+        "order_risk_update_drafts": [],
+        "native_workflow_boundary": "create_or_submit_draft_only; native audit/approve forbidden"
+      },
+      "payload_hash": "5cd35717d3aec161cd3000cb9d4f071f1ba93ab930e16bc78eef7a3566fc6233"
+    },
+    {
+      "schema_version": "youjie.command/v1",
+      "command_id": "cmd_0de756ff1b18186b",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "causation_id": "plan_balanced",
+      "idempotency_key": "sha256:0de756ff1b18186baa059740dcd88d3db2c978c784dc356e2f225ab7791a05d2",
+      "profile": "sap_s4_dm_contract_profile",
+      "target_system": "mes_sandbox",
+      "command_type": "CREATE_SCHEDULE_CHANGE_DRAFT",
+      "environment": "sandbox",
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+      "approval_id": "approval_006",
+      "expected_source_revision": "mes-rev-12",
+      "created_at": "2026-08-29T10:20:30+08:00",
+      "payload": {
+        "schedule_change_drafts": [
+          {
+            "completion_hour": 52,
+            "late_hours": 28,
+            "order_id": "ord_public_cfg_1",
+            "requires_external_execution": true,
+            "tasks": [
+              {
+                "end_hour": 52,
+                "incremental_cost": 0,
+                "line_id": "line_zp7_public",
+                "operation_id": "op_assemble_cfg_1",
+                "order_id": "ord_public_cfg_1",
+                "overtime": false,
+                "start_hour": 48,
+                "task_id": "ord_public_cfg_1__op_assemble_cfg_1"
+              }
+            ]
+          },
+          {
+            "completion_hour": 56,
+            "late_hours": 32,
+            "order_id": "ord_public_cfg_2",
+            "requires_external_execution": true,
+            "tasks": [
+              {
+                "end_hour": 56,
+                "incremental_cost": 0,
+                "line_id": "line_zp7_public",
+                "operation_id": "op_assemble_cfg_2",
+                "order_id": "ord_public_cfg_2",
+                "overtime": false,
+                "start_hour": 52,
+                "task_id": "ord_public_cfg_2__op_assemble_cfg_2"
+              }
+            ]
+          },
+          {
+            "completion_hour": 20,
+            "late_hours": 0,
+            "order_id": "ord_public_cfg_3",
+            "requires_external_execution": true,
+            "tasks": [
+              {
+                "end_hour": 20,
+                "incremental_cost": 0,
+                "line_id": "line_zp7_public",
+                "operation_id": "op_assemble_cfg_3",
+                "order_id": "ord_public_cfg_3",
+                "overtime": false,
+                "start_hour": 16,
+                "task_id": "ord_public_cfg_3__op_assemble_cfg_3"
+              }
+            ]
+          }
+        ],
+        "device_control": false
+      },
+      "payload_hash": "94f8316c228f63ea3fa5e5888e652f06471c52702fc3ceea3b69555b57eae58a"
+    }
+  ],
+  "transport_acks": [
+    {
+      "schema_version": "youjie.ack/v1",
+      "ack_id": "ack_6d8b6b7dd831832f",
+      "command_id": "cmd_9296eece7a4781e5",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "idempotency_key": "sha256:9296eece7a4781e510d105c349453b09cccdb60c893cf1d997a31cbf9d7df7a7",
+      "operation_id": "extop_c98f09ec7cad8457",
+      "transport_status": "ACCEPTED",
+      "business_status": "PENDING",
+      "duplicate": false,
+      "received_at": "2026-08-29T10:20:30+08:00",
+      "errors": []
+    },
+    {
+      "schema_version": "youjie.ack/v1",
+      "ack_id": "ack_ee91417f6b8a98c6",
+      "command_id": "cmd_0de756ff1b18186b",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "idempotency_key": "sha256:0de756ff1b18186baa059740dcd88d3db2c978c784dc356e2f225ab7791a05d2",
+      "operation_id": "extop_079b00d3eff80d0e",
+      "transport_status": "ACCEPTED",
+      "business_status": "PENDING",
+      "duplicate": false,
+      "received_at": "2026-08-29T10:20:30+08:00",
+      "errors": []
+    }
+  ],
+  "callbacks": [
+    {
+      "schema_version": "youjie.callback/v1",
+      "event_id": "evt_f5656b9adb5d1715",
+      "source": "urn:youjie:erp_sandbox:sap_s4_dm_contract_profile",
+      "command_id": "cmd_9296eece7a4781e5",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "operation_id": "extop_c98f09ec7cad8457",
+      "sequence": 1,
+      "business_status": "APPLIED",
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+      "source_revision_after": "erp-rev-18",
+      "occurred_at": "2026-08-29T10:20:30+08:00",
+      "target_record_ids": [
+        "PR-SANDBOX-00017"
+      ],
+      "changed_entities": [],
+      "errors": [],
+      "evidence_hash": "a84a8374cdca9a82f64668997af5893e03aaa6d714ed3c4de1fc81aaaf8b64c1"
+    },
+    {
+      "schema_version": "youjie.callback/v1",
+      "event_id": "evt_15e5a4cff5299a5f",
+      "source": "urn:youjie:mes_sandbox:sap_s4_dm_contract_profile",
+      "command_id": "cmd_0de756ff1b18186b",
+      "correlation_id": "cor_0fc10aec93066f3a",
+      "operation_id": "extop_079b00d3eff80d0e",
+      "sequence": 1,
+      "business_status": "REJECTED",
+      "scenario_hash": "4f24d380724e228085337422906416e02f6af6ff3bba333ac9e101a006159525",
+      "plan_hash": "3f2776e609e47adc8fb5aa3f260e740d10ffa67c9c905a1da646e81316e8b8cf",
+      "source_revision_after": "mes-rev-13",
+      "occurred_at": "2026-08-29T10:20:30+08:00",
+      "target_record_ids": [],
+      "changed_entities": [
+        "capacity:line_zp7_public"
+      ],
+      "errors": [
+        {
+          "code": "STALE_CAPACITY_REVISION",
+          "message": "Sandbox-injected business outcome",
+          "retryable": false
+        }
+      ],
+      "evidence_hash": "edb080470e740846030c637c1d60860ef1d0af231abd8a865c345383d5214d55"
+    }
+  ],
+  "callback_receipts": [
+    {
+      "event_id": "evt_f5656b9adb5d1715",
+      "command_id": "cmd_9296eece7a4781e5",
+      "operation_id": "extop_c98f09ec7cad8457",
+      "accepted": true,
+      "duplicate": false,
+      "stale_sequence": false,
+      "current_business_status": "APPLIED",
+      "plan_stale": false
+    },
+    {
+      "event_id": "evt_15e5a4cff5299a5f",
+      "command_id": "cmd_0de756ff1b18186b",
+      "operation_id": "extop_079b00d3eff80d0e",
+      "accepted": true,
+      "duplicate": false,
+      "stale_sequence": false,
+      "current_business_status": "REJECTED",
+      "plan_stale": true
+    }
+  ],
+  "overall_business_status": "PARTIALLY_APPLIED",
+  "safety": {
+    "real_vendor_tenant": false,
+    "certified_connector": false,
+    "device_control": false,
+    "native_erp_approval": false
+  }
+}

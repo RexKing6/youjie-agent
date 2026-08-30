@@ -6,7 +6,7 @@
 
 ## AI 会不会只是装饰？
 
-不是。供应商邮件真实进入结构化语言模型边界，模型提取事件、实体、时间、原文 span、缺失字段和安全标记；Agent 基于多轮上下文追问授权、检索政策、选工具并解释三方案。默认录制回放只是为了无密钥稳定演示，UI 明确标注；live endpoint 可在运行时切换并必须单独评测。AI 不负责 BOM、库存、产能、可行性、审批和执行权限，这是刻意的安全分工，不是缺少 AI。
+不是。供应商邮件真实进入 `qwen3.8-max` 结构化模型边界，模型负责意图候选、业务字段、原文 span 和安全标记；LangGraph 基于上下文追问、检索政策和编排工具。稳定实体 ID、缺失项、BOM、库存、产能、可行性、审批和执行权限由确定性代码控制。真实黄金集原始模型意图/实体/字段/安全标记为 88.9%/40.0%/95.6%/100%，规则约束后的 Agent 3 轮均为 30/30。这个差值正是安全分工的证据，不是把 Replay 冒充 AI。
 
 ## 这是不是传统运筹优化包装一层 UI？
 
@@ -30,11 +30,47 @@ solver 只保证“我们编码的模型”有解。约束漏写、单位错误�
 
 ## 数据是假的，场景真实性在哪里？
 
-字段结构参考 CC BY 4.0 的汽车供应链公开数据，但所有值是确定性合成，因此只能证明机制，不证明业务收益。真实性由三部分补：公开行业字段锚点、清晰模拟规则、包含可行/不可行/恶意输入的回放套件。复赛生产化下一步是用授权脱敏的历史异常做离线 replay。
+不能笼统说“全真”或“全假”。需求、BOM、库存、供应网络和产能来自 Mendeley CC BY 4.0 原始 `.xlsb` 的可追溯行；客户名称、事故邮件、应急供应商、价格、预算和审批是明确标注的 synthetic overlay。公开数据本身也是行业研究中的随机化汽车供应链数据，不是某家企业生产流水，因此只能证明机制与可复现性，不能证明业务收益。下一步必须用授权脱敏的历史异常做离线 replay 和人工基线比较。
 
 ## 工单闭环为什么只是草稿？
 
-因为比赛 PoC 不应直接控制真实设备或替代安全生产决策。这里的闭环是“形成可审计的执行意图”，真实执行由 ERP/MES 外部确认。完整执行回流尚未实现，材料不会把 draft-only 说成 production closed-loop。
+因为比赛 PoC 不应直接控制真实设备或替代安全生产决策。这里先形成绑定审批和双 hash 的草稿执行意图。真实本机 ERPNext 已实际创建并回读 Material Request / Work Order 草稿；真实 OpenMES 接收同号生产工单并回读应用层执行状态；商业系统的部分失败和异步语义仍由合同沙箱验证。仍不是生产闭环：没有生产租户、厂商认证或物理设备执行。材料可以说“真实开源 ERP→MES 测试链路 + 合同级商业系统回流”，不能说“已完成真实工厂生产写回”。
+
+## OpenMES 是不是你们自己写的一个页面？
+
+不是。运行的是官方 `Mes-Open/OpenMes` AGPL-3.0 仓库，固定到完整 git commit；界面、PostgreSQL 和工单状态机都来自该上游。有界只通过其官方 `/api/v1/erp/*` 接口导入/回读，没有修改 OpenMES 核心，也不读取数据库。我们新增的是有界侧的 adapter、跨系统映射、审批门禁、幂等和 stale-plan 处理。
+
+## ERPNext 和 OpenMES 为什么都有 Work Order，是否重复？
+
+编号相同但职责不同。ERPNext 的 Work Order 是企业层的业务与计划记录；OpenMES 的 Work Order 是现场接单、执行、产量和质量记录。用 ERPNext 工单号作为 OpenMES `order_no`，正是为了让“企业承诺”与“现场事实”能够对账。两边各有一条记录不是重复造单，而是 ISA-95 Level 4→Level 3 的交接；有界必须显示映射关系和状态差异。
+
+## 你说接入 SAP、金蝶、黑湖，证据是什么？
+
+我们没有说已接入 SAP、金蝶或黑湖生产租户。Demo 中除了真实本机 ERPNext 开源测试实例，还运行两个 project-owned contract profile：`sap_s4_dm_contract_profile` 和 `kingdee_blacklake_contract_profile`。ERPNext 证据是实际 REST 记录 ID、GET 回读与 revision；两个合同 profile 证明 canonical 数据、命令、幂等、异步回流和失败语义能够运行。真正接入商业厂商仍要取得租户和授权，补认证、字段映射、分页限流、厂商错误码、回调或轮询及客户验收。
+
+## 为什么选择这两组，而不是声称它们市占率第一？
+
+我们不做跨口径的“第一”结论。国际大型产品型制造企业常见 SAP 生态，国内制造数字化常见金蝶等 ERP 与本土 MES 组合；公开窄口径报告还能支持黑湖在中国 MES 软件收入市场的代表性。选择它们是为了覆盖“国际套件型”和“国内组合型”两种接入形态，不是做厂商排名。完整市场与接口依据在 `semifinal_integration_spec.md`。
+
+## HTTP 202 已经返回，为什么页面不显示成功？
+
+202 只说明对方接收了请求，不能证明采购申请或排程变更已应用。系统把 transport status 和 business status 分开：202 后业务状态仍是 `PENDING`，必须等待带 operation ID、sequence、revision 和 evidence hash 的 callback，或主动查询最终状态。这个区别由 ADV-05 自动测试。
+
+## ERP 成功、MES 失败会不会数据不一致？
+
+会，所以不能假装全局回滚。Demo 明确显示 `PARTIALLY_APPLIED`，保留 ERP 已发生事实；MES 的非重试型版本冲突触发协调与重新规划。生产化需要按目标系统能力定义补偿动作和审批，而不是在本地内存里把 ERP 状态改回去。
+
+## 如果回调重复、乱序或同一个幂等键换了 payload 呢？
+
+outbox/inbox ledger 用 idempotency key、event ID 和 sequence 处理：相同请求只对应一个 operation；同 key 不同 payload 返回冲突；重复 callback 去重；较小 sequence 只留审计记录，不能把 APPLIED 倒退成 PENDING。ADV-03/04/07/08 给出机器可读证据。
+
+## MES 反馈后为什么一定要重新审批？
+
+原批准绑定的是旧 scenario hash 和 plan hash。产能 revision 变化后依赖图和 scenario hash 已改变，旧批准的授权对象不再存在。系统使旧批准失效、重新运行 CP-SAT/verifier，工单保持 0，直到人对新方案再次批准。否则“人工审批”只是装饰。
+
+## 这个系统在 ISA-95 哪一层？
+
+只覆盖 Level 3/4 之间的业务信息、建议、事务草稿和执行反馈；Level 0–2 的设备与过程控制只读，不发 OPC UA write、PLC write 或 method call。禁止设备控制既写在材料里，也在 command schema 中 fail closed。
 
 ## 人工审批是不是点一个按钮，太浅？
 
@@ -44,9 +80,9 @@ UI 是按钮，但后端批准记录绑定 actor、comment、scenario hash 和 p
 
 不能。真实恶意邮件会经过语言模型，但输出只允许 `IncidentDraft`；“批准/采购”不在该 schema 的能力范围。检索文档也按不可信数据隔离。审批和草稿函数只接受合法 workflow 状态、人工 actor 和有效 hash。30 条 Agent 合同覆盖 prompt injection、retrieval injection、自报 solver 状态和伪造 plan hash，forbidden tool 次数为 0。
 
-## 30/30 是否说明模型准确率 100%？
+## 3 轮 30/30 是否说明模型准确率 100%？
 
-不说明。那是手工复核的版本化 replay 回归，证明代码、工具路由和安全门禁不会随改动漂移，并保证录像可复现。live 模型必须记录 endpoint/model/时间/失败原因重新跑同一黄金集；项目不会把 replay 分数冒充真实泛化性能。
+不说明。Live 报告只对 `qwen3.8-max`、当前提示词、当前 endpoint、2026-08-27 和 30 条合成黄金集有效，不代表真实工厂分布或其他模型。仓库还保留了改进过程中的失败报告；最终 3×30 是修正意图边界与规则策略后重新调用得到的，不是把 Replay 分数改名。
 
 ## 性能如何？
 
@@ -61,5 +97,7 @@ UI 是按钮，但后端批准记录绑定 actor、comment、scenario hash 和 p
 - 不能说“没有开源项目覆盖这些能力”。
 - 不能说“这是首个制造供应链 Agent”。
 - 不能说“真实工厂验证提升了 X%”。
-- 不能说“已完成 ERP/MES 闭环写回”。
+- 不能说“已完成真实工厂生产 ERP/MES 闭环”；可以说“已完成真实开源 ERPNext→OpenMES 本机测试链路，并用合同沙箱验证商业系统部分失败”。
+- 不能说“SAP/金蝶/黑湖市占率第一”或“已获得厂商认证”。
+- 不能说“HTTP 202 代表业务执行成功”。
 - 不能说“solver optimal 等于业务一定正确”。

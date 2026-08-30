@@ -1,0 +1,32 @@
+{
+  "schema_version": "youjie.erpnext_mapping/v1",
+  "company": "Youjie Demo Manufacturing",
+  "default_warehouse": "Stores - YDM",
+  "wip_warehouse": "Work In Progress - YDM",
+  "finished_goods_warehouse": "Finished Goods - YDM",
+  "scenario_epoch": "2026-08-30T08:00:00+08:00",
+  "item_codes": {
+    "mat_bev": "YOUJIE-MAT-BEV",
+    "mat_d83": "YOUJIE-MAT-D83",
+    "mat_dg8": "YOUJIE-MAT-DG8",
+    "mat_dk8": "YOUJIE-MAT-DK8",
+    "mat_g0k": "YOUJIE-MAT-G0K",
+    "mat_g1z": "YOUJIE-MAT-G1Z",
+    "mat_q2j": "YOUJIE-MAT-Q2J"
+  },
+  "order_to_production_item": {
+    "ord_public_cfg_1": "YOUJIE-PRD-CFG-1",
+    "ord_public_cfg_2": "YOUJIE-PRD-CFG-2",
+    "ord_public_cfg_3": "YOUJIE-PRD-CFG-3"
+  },
+  "order_to_bom": {
+    "ord_public_cfg_1": "BOM-YOUJIE-PRD-CFG-1-001",
+    "ord_public_cfg_2": "BOM-YOUJIE-PRD-CFG-2-001",
+    "ord_public_cfg_3": "BOM-YOUJIE-PRD-CFG-3-001"
+  },
+  "order_quantities": {
+    "ord_public_cfg_1": 91,
+    "ord_public_cfg_2": 81,
+    "ord_public_cfg_3": 45
+  }
+}

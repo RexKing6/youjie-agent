@@ -1,0 +1,72 @@
+{
+  "schema_version": "1.0",
+  "case_as_of": "2026-08-25T10:00:00+08:00",
+  "provenance": "Deterministic synthetic evidence overlay for the public-derived Mendeley case.",
+  "license": "Apache-2.0",
+  "derived_fields": [
+    "OCR bounding box",
+    "PDF line locator",
+    "freshness flag",
+    "delay conflict"
+  ],
+  "seed": 20260825,
+  "records": [
+    {
+      "evidence_id": "ev_supplier_email_png",
+      "filename": "supplier_email.png",
+      "media_type": "image/png",
+      "sha256": "b9ac37e11c987fd1ceeb533e73fa42ac15e4ec4a949d68b6921e3aa0ce6536b5",
+      "observed_at": "2026-08-25T09:00:00+08:00",
+      "freshness_hours": 8,
+      "extraction_mode": "precomputed_ocr_fixture",
+      "synthetic_boundary": "Rendered from supplier_email.eml; no real supplier or mailbox data.",
+      "claims": [
+        {
+          "field_name": "delay_hours",
+          "value": 48,
+          "unit": "hours",
+          "source_locator": "bbox(130,511,760,551)",
+          "quote": "cannot leave the facility for the next 48 hours"
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev_carrier_notice_pdf",
+      "filename": "carrier_notice.pdf",
+      "media_type": "application/pdf",
+      "sha256": "1f5ce756df6cc21ef7090345ea5258fdfa0b34d23ce16845e032a75ce1ab6a23",
+      "observed_at": "2026-08-25T09:15:00+08:00",
+      "freshness_hours": 8,
+      "extraction_mode": "pdf_text_layer",
+      "synthetic_boundary": "Generated from carrier_notice_source.txt; not a real carrier document.",
+      "claims": [
+        {
+          "field_name": "delay_hours",
+          "value": 72,
+          "unit": "hours",
+          "source_locator": "page=1, text=Current arrival estimate",
+          "quote": "Current arrival estimate: 72 hours"
+        }
+      ]
+    },
+    {
+      "evidence_id": "ev_mes_snapshot_csv",
+      "filename": "mes_snapshot.csv",
+      "media_type": "text/csv",
+      "sha256": "5361fdb6c28ee6543dde9675b90ae2d14c4190d1affc17c9b2f7eae1b6dd71bf",
+      "observed_at": "2026-08-24T08:00:00+08:00",
+      "freshness_hours": 8,
+      "extraction_mode": "csv_schema_parser",
+      "synthetic_boundary": "Synthetic MES-like snapshot; not exported from a real system.",
+      "claims": [
+        {
+          "field_name": "delay_hours",
+          "value": 48,
+          "unit": "hours",
+          "source_locator": "row=2,column=eta_hours",
+          "quote": "eta_hours=48"
+        }
+      ]
+    }
+  ]
+}

@@ -32,6 +32,7 @@
     ],
     "subject": "供应异常演练：src_sim_emergency_q2j"
   },
+  "entry_mode": "incident",
   "graph_trace": [
     {
       "node": "understand_incident",
@@ -55,7 +56,7 @@
     },
     {
       "node": "draft_actions",
-      "summary": "Generated 4 draft-only actions after hash recheck."
+      "summary": "Generated 3 draft-only actions after hash recheck."
     }
   ],
   "impact": {
@@ -441,7 +442,7 @@
         },
         "plan_hash": "17c812aefa841ac198d4f24a7e6bbc1998fabb9deeac046bd41bd13f453c5414",
         "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-        "solve_time_ms": 2,
+        "solve_time_ms": 3,
         "solver_name": "OR-Tools CP-SAT",
         "solver_status": "OPTIMAL",
         "solver_version": "9.15.6755",
@@ -902,23 +903,6 @@
       "approved_plan_id": "plan_balanced",
       "execution_status": "draft_only",
       "payload": {
-        "estimated_cost": 0,
-        "expected_arrival_hour": 0,
-        "item_id": "mat_q2j",
-        "quantity": 217,
-        "requires_external_execution": true,
-        "source_id": "src_public_seat_q2j",
-        "supplier_id": "sup_seat_public"
-      },
-      "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-      "work_order_id": "wo_001",
-      "work_order_type": "supplier_purchase_request"
-    },
-    {
-      "approval_id": "approval_006",
-      "approved_plan_id": "plan_balanced",
-      "execution_status": "draft_only",
-      "payload": {
         "completion_hour": 20,
         "late_hours": 0,
         "order_id": "ord_public_cfg_1",
@@ -937,7 +921,7 @@
         ]
       },
       "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-      "work_order_id": "wo_002",
+      "work_order_id": "wo_001",
       "work_order_type": "schedule_change_order"
     },
     {
@@ -963,7 +947,7 @@
         ]
       },
       "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-      "work_order_id": "wo_003",
+      "work_order_id": "wo_002",
       "work_order_type": "schedule_change_order"
     },
     {
@@ -989,7 +973,7 @@
         ]
       },
       "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-      "work_order_id": "wo_004",
+      "work_order_id": "wo_003",
       "work_order_type": "schedule_change_order"
     }
   ],
@@ -1057,8 +1041,8 @@
         "actor_type": "deterministic_tool",
         "from_state": "approved",
         "sequence": 7,
-        "state_hash": "7f953d5671813c37c2abfc0da33ad37cc40775f80dbde3adc9cb670cf2d0b09f",
-        "summary": "Generated 4 draft-only work orders",
+        "state_hash": "cbc79fc4ce6eb3a555db02be96ada6563185ee5bfb44eb4bab5902235e275dea",
+        "summary": "Generated 3 draft-only work orders",
         "to_state": "orders_generated"
       }
     ],
@@ -1521,23 +1505,6 @@
         "approved_plan_id": "plan_balanced",
         "execution_status": "draft_only",
         "payload": {
-          "estimated_cost": 0,
-          "expected_arrival_hour": 0,
-          "item_id": "mat_q2j",
-          "quantity": 217,
-          "requires_external_execution": true,
-          "source_id": "src_public_seat_q2j",
-          "supplier_id": "sup_seat_public"
-        },
-        "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-        "work_order_id": "wo_001",
-        "work_order_type": "supplier_purchase_request"
-      },
-      {
-        "approval_id": "approval_006",
-        "approved_plan_id": "plan_balanced",
-        "execution_status": "draft_only",
-        "payload": {
           "completion_hour": 20,
           "late_hours": 0,
           "order_id": "ord_public_cfg_1",
@@ -1556,7 +1523,7 @@
           ]
         },
         "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-        "work_order_id": "wo_002",
+        "work_order_id": "wo_001",
         "work_order_type": "schedule_change_order"
       },
       {
@@ -1582,7 +1549,7 @@
           ]
         },
         "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-        "work_order_id": "wo_003",
+        "work_order_id": "wo_002",
         "work_order_type": "schedule_change_order"
       },
       {
@@ -1608,7 +1575,7 @@
           ]
         },
         "scenario_hash": "c6202785b0e7e305f2a2e189a011eca5af987e52f581795c5a8afc1b9b5048da",
-        "work_order_id": "wo_004",
+        "work_order_id": "wo_003",
         "work_order_type": "schedule_change_order"
       }
     ]
