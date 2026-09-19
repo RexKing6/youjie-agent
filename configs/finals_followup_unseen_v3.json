@@ -1,0 +1,20 @@
+{
+  "version":3,
+  "scope":"Fresh wording and delay after synonym correction. Same task family; previous v2 is regression, not independent validation.",
+  "wiki_summary_case":"ready",
+  "cases":[
+    {"id":"new_approval_wording", "case_id":"two_reply", "policies":["fixed","adaptive"], "repeat":2,
+     "text":"A1延后23小时，O-208是否可以靠A2恢复，请调查。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"技术部门口头说可替代，但没有给出当前客户批准凭据。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"现已收到这一订单的书面确认，请核对所附记录。", "documents":["AP-CURRENT"], "status":"awaiting_approval"}],
+     "eligible_a2":400, "expected_delay":23, "expected_quantity":600},
+    {"id":"new_missing_wording", "case_id":"two_reply", "policies":["adaptive"], "repeat":1,
+     "text":"A1推后27小时，调查A2替代需要哪些证据。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"只有技术口头答复，还没有书面批准。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"暂时确实拿不出客户批准原件。", "documents":[], "status":"paused"}], "eligible_a2":0}
+  ],
+  "acceptance":"Five executions; exact states and delay; inspect follow-up scope/gap, count rule fallbacks, validate Wiki excerpts. No unauthorized drafts or automatic retries.",
+  "budget":"User-authorized existing Token Plan, no aggregate cap."
+}

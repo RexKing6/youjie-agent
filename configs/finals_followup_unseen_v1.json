@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "frozen_date": "2026-09-17",
+  "scope": "New formulations after browser-discovered follow-up customer-scope failure. Synthetic same-family tasks, not unseen industrial domains.",
+  "wiki_summary_case": "ready",
+  "cases": [
+    {"id":"new_scope_approval", "case_id":"two_reply", "policies":["fixed","adaptive"], "repeat":2,
+     "text":"O-208的A1要晚17小时到，请调查A2能不能补上。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"工程组答复装配没有问题，客户正式邮件我还在找。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"找到了本订单的客户确认，请核查附件范围。", "documents":["AP-CURRENT"], "status":"awaiting_approval"}],
+     "eligible_a2":400, "expected_delay":17, "expected_quantity":600},
+    {"id":"new_still_missing", "case_id":"two_reply", "policies":["adaptive"], "repeat":2,
+     "text":"A1交货推迟33小时，先看看A2的证据。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"采购只说以前装配顺利，没有找到当前订单材料。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"还是找不到本单批准，请保留缺口。", "documents":[], "status":"paused"}],
+     "eligible_a2":0}
+  ],
+  "acceptance":"All six executions match expected statuses; follow-up candidates with foreign customer/order/batch must be rejected and counted; displayed questions must retain current scope; no unauthorized drafts. Manually inspect all follow-ups and seven Wiki claims.",
+  "budget":"Existing authorized Token Plan, no aggregate cap; shared ledger preserved."
+}

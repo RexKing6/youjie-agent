@@ -6,6 +6,22 @@
 - 复赛 PPT / PDF：[`docs/youjie_goai_semifinal_pitch_8slides.pptx`](docs/youjie_goai_semifinal_pitch_8slides.pptx) / [`docs/youjie_goai_semifinal_pitch_8slides.pdf`](docs/youjie_goai_semifinal_pitch_8slides.pdf)
 - 真实操作视频：[`docs/youjie_semifinal_demo.mp4`](docs/youjie_semifinal_demo.mp4)
 
+## 决赛增量：替代料证据调查（本地验证，未正式封版）
+
+保留原有主案例，新增 http://localhost:3000/finals：模拟资料 → 可追溯Wiki → 按缺口持续补证 → 资格数量进入排程 → 单独审批 → 本机真实ERPNext草稿/MES同号工单 → 执行回读、对账及剩余计划重算。业务资料及测试产量仍是模拟，不是设备实产，没有库存或财务过账。
+
+2026-09-19 增加 Agent Harness 工作台：一个编排Agent、五个共享Skill契约、本机stdio MCP实际工具调用、执行轨迹、预算重算与同Run回流。规格见[Harness SPEC](docs/finals_harness_spec_20260919.md)，最新证据与未完成项见[Harness验收](docs/finals_harness_validation_20260919.md)。当前主案例及真实实例链路通过；扩展在线对照遇服务商配额不足，未完成，不认定全面可提交。没有自动切换离线。
+
+- [操作讲稿、输入变体与答疑](docs/finals_demo_and_questions.md)
+- [当前验收、证据与未完成项](docs/finals_v2_implementation_readiness_20260917.md)
+- [完整范围和实现约定](docs/finals_complete_spec_v2.md)
+- [决赛版本复现说明](docs/finals_v2_reproduction.md)
+- 离线后端：`.venv/bin/python -m delivery_guard.finals_api --port 8766`；前端沿用 `frontend/site/` 的既有开发服务。
+- 本项目操作者已授权使用已有Token Plan进行本机测试；不沿用早期100次/20元上限。该授权不转移给下载者，不附带Key，也不代表提供方许可公开部署。默认离线；使用在线模式须自行配置合法凭据与预算。项目不自动切换模型或重试刷成功。
+- 同协议离线预检：`.venv/bin/python scripts/evaluate_finals_models.py --output artifacts/your_new_offline_report.json`。实际在线执行显式添加 `--live`，并使用新的输出路径；共用授权账本，不重置计数，不自动重试或降级。
+
+历史真实模型固定/动态回归记录见`artifacts/finals_v2/tasks_live_20260917_04/report.json`。固定工作流同样能循环补证，该历史批次两者均通过且固定更快；不以流程图或离线规则结果证明Agent优越性。历史三轮真实软件证据见`artifacts/finals_v2/real_chain_20260917_03/report.json`；这些不代替当前版本验收。
+
 有界面向制造计划员，把供应商邮件、群聊或演练告警变成可追溯事故，使用 LangGraph 规划和执行受限工具链，再由 OR-Tools CP-SAT 与独立验证器生成三种恢复方案。图会在人工审批处真实暂停；只有场景哈希、计划哈希和验证证据仍一致，才生成 `draft_only` 工单。
 
 这不是要替代 ERP/MES，也不控制设备。LLM 负责理解不可信文本；LangGraph 负责状态、路由、中断与恢复；确定性代码负责 BOM、库存、产能、求解、验证和权限门禁。复赛版包含三类不会混称的集成证据：真实本机 ERPNext v16 测试实例创建并回读 Material Request / Work Order 草稿；真实本机 OpenMES 测试实例接收同号工单并回读生产状态；项目自有合同沙箱验证商业 ERP/MES 的异步回调、部分失败和重排语义。它们都不是生产厂商认证接入。

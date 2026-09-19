@@ -1,0 +1,16 @@
+{
+  "schema": "youjie.finals_physical_mapping/v2",
+  "synthetic": true,
+  "environment": "test",
+  "a1": "YOUJIE-FINALS-A1",
+  "a2": "YOUJIE-FINALS-A2",
+  "product": "YOUJIE-FINALS-PRODUCT",
+  "company": "Youjie Demo Manufacturing",
+  "warehouse": "Stores - YDM",
+  "wip_warehouse": "Work In Progress - YDM",
+  "fg_warehouse": "Finished Goods - YDM",
+  "epoch": "2026-09-17T08:00:00+08:00",
+  "mes_line": "YOUJIE-FINALS-LINE",
+  "mes_product": "YOUJIE-FINALS-PRODUCT",
+  "provisioning_status": "native_test_items_and_boms_provisioned_20260917_not_full_chain_acceptance"
+}

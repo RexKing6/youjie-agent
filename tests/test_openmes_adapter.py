@@ -130,6 +130,37 @@ def test_openmes_execute_imports_then_reads_back_and_deduplicates():
     assert client.import_calls == 1
 
 
+def test_openmes_snapshot_follows_native_cursor_pagination():
+    client=OpenMESHttpClient(OpenMESConfig(base_url="http://127.0.0.1:8090",api_key="test"))
+    calls=[]
+    def request(method,path,query):
+        calls.append(query)
+        if "cursor" not in query:
+            return {"data":[],"meta":{"has_more":True,"next_cursor":"page-two"}}
+        return {"data":[{"order_no":"WO-TARGET","status":"PENDING","planned_qty":600,"produced_qty":0}],
+                "meta":{"has_more":False,"next_cursor":None}}
+    client._request=request
+    snapshot=client.work_order_snapshot(["WO-TARGET"])
+    assert not snapshot["missing_order_nos"] and len(calls)==2
+    assert calls[1]["cursor"]=="page-two"
+
+
+def test_openmes_repeated_cursor_is_error_not_missing_or_completed():
+    client=OpenMESHttpClient(OpenMESConfig(base_url="http://127.0.0.1:8090",api_key="test"))
+    client._request=lambda *a,**k:{"data":[],"meta":{"has_more":True,"next_cursor":"same"}}
+    with pytest.raises(OpenMESAdapterError,match="CURSOR"):
+        client.work_order_snapshot(["WO-TARGET"])
+
+
+def test_openmes_readback_wrong_quantity_is_not_applied():
+    client=FakeOpenMESClient()
+    client.rows["MFG-WO-1"]["planned_qty"]=600
+    adapter=OpenMESAdapter(client)
+    cmd=build_openmes_command(approved_result(),mapping(),[{"order_id":"ord_1","erpnext_work_order":"MFG-WO-1"}],expected_source_revision="before")
+    with pytest.raises(OpenMESAdapterError,match="READBACK_MISMATCH"):
+        adapter.execute(cmd)
+
+
 def test_openmes_execute_fails_closed_when_readback_is_missing():
     client = FakeOpenMESClient()
     client.rows = {}

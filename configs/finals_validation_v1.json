@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "as_of": "2026-09-16",
+  "scope": "synthetic single-order material qualification and bounded investigation",
+  "seed": 20260916,
+  "development": ["two_reply", "ready", "wrong_customer", "quality_pending", "conflicting_approval", "quantity_limit"],
+  "held_out": ["unicode_spacing_and_case", "irrelevant_document_permutation", "simultaneous_scope_and_quantity_changes", "stale_reply_after_feedback", "cross_run_replay", "contradiction_with_missing_quality"],
+  "baseline": "fixed investigation order with identical extraction model, evidence, qualification and solver",
+  "candidate": "adaptive allowlisted next action from current gaps",
+  "metrics": ["expected_terminal_state", "false_release", "citation_validity", "tool_calls", "model_calls", "human_replies", "duration_ms", "solver_verification", "unauthorized_writes"],
+  "acceptance": {"false_release": 0, "unauthorized_writes": 0, "max_human_replies": 2, "max_tools_per_turn": 8, "all_critical_invariants_pass": true},
+  "live_plan_pending_authorization": {"max_requests": 100, "max_cost_cny": 20, "repetitions_for_selected_cases": 3},
+  "limitations": ["synthetic data does not establish industrial ROI", "offline rule tests do not establish LLM accuracy", "cases used to fix code become development cases", "holdout labels are engineering-authored, not independent expert validation"],
+  "stop": ["first financial or request limit", "any credential exposure", "any unapproved external action"]
+}

@@ -1,0 +1,17 @@
+{
+  "date": "2026-09-16",
+  "authorization": "User replied 允许啊，快搞 to maximum 100 requests and CNY20 total, existing project model, synthetic data only",
+  "authorization_amendment": "User subsequently explicitly said Token Plan calls need no request or fee limit; continue project evaluation without repeated budget questions. Existing credential, model and synthetic-data scope unchanged.",
+  "max_requests": null,
+  "max_cny": null,
+  "model": "qwen3.8-max",
+  "scope": "finals synthetic Wiki and bounded investigation, comparison and stability tests; no business writes or publication",
+  "current_preflight": "User explicitly requested existing Token Plan credential for operator-initiated evaluation; exact endpoint opt-in only, live responses received; not permission for unattended backend deployment or a claim of provider approval",
+  "required_config": "existing project config read-only; operator-token-plan flag required for this evaluation; no automatic credential or endpoint changes",
+  "ledger": "artifacts/finals_20260916/live_budget_approved_20260916.jsonl",
+  "price_microyuan_per_token": {"input": 12, "output": 36},
+  "price_source": "https://help.aliyun.com/zh/model-studio/qwen3-8-max",
+  "endpoint_policy_source": "https://help.aliyun.com/zh/model-studio/base-url",
+  "checked_date": "2026-09-16",
+  "limitations": ["API usage based public-list-price accounting is not provider invoice or actual Token Plan charges", "uncertain requests retain full reserve", "no automatic retries or fallback endpoints", "new endpoint/model requires tariff and authorization scope revalidation", "Existing official backend-use restriction remains documented; this opt-in records user authorization for operator evaluation, not provider approval"]
+}

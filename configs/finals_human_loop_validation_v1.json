@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "as_of": "2026-09-19",
+  "scope": "synthetic evidence-completeness-driven Human-in-the-loop validation",
+  "seed": 20260919,
+  "baseline": "historical at-most-two-human-replies implementation",
+  "candidate": "human replies remain available while status is awaiting_evidence or needs_input; every unresolved live-model reply may produce a scoped follow-up question",
+  "cases": [
+    "three_insufficient_replies_then_valid_registered_evidence",
+    "explicit_user_stop",
+    "repeated_prose_never_grants_authority",
+    "wrong-scope-followup-is-rejected",
+    "resolved-gaps-enter-solver",
+    "per-turn-tool-budget-still-stops"
+  ],
+  "acceptance": {
+    "fixed_human_reply_cap": null,
+    "solve_requires_zero_qualification_gaps": true,
+    "false_release": 0,
+    "unauthorized_writes": 0,
+    "max_tools_per_turn": 8,
+    "explicit_stop_supported": true,
+    "followup_trace_required": true
+  },
+  "limitations": [
+    "Human turns require an explicit user request and are not an unattended automatic loop",
+    "Synthetic evidence does not establish production performance or customer ROI",
+    "The model proposes follow-up wording; deterministic qualification remains the release authority"
+  ]
+}

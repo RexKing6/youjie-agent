@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "scope": "Replacement holdout after first renamed set exposed cross-document entity contamination; consistent title/body replacement. V1 is now development evidence and retained.",
+  "repeats": 3,
+  "case": "ready",
+  "variants": [
+    {"id": "development_original", "replacements": {}},
+    {"id": "new_consistent_source_identifiers", "replacements": {"A2": "M63", "A1": "M42", "O-208": "O-527", "O-107": "O-419", "客户甲": "客户己", "客户乙": "客户庚", "B17": "B38"}}
+  ],
+  "acceptance": "Literal citations and source-local concrete entities and material directions must pass; every summary is additionally reviewed against full original source. Any changed code invalidates frozen run; any inputs used for tuning become development data."
+}

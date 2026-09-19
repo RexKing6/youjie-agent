@@ -1,0 +1,16 @@
+{
+  "version": "2.0-preimplementation",
+  "scope": "Synthetic finals case; no production or universal industrial claims",
+  "development": ["all pre-v2 cases", "historical customer followup false positives", "existing Wiki failures"],
+  "task_protocol": {"cases": 24, "policies": ["fixed", "adaptive"], "repeats": 3, "minimum_heldout_source_template_groups": 8, "expected_task_runs": 144},
+  "freeze_rule": "Freeze concrete cases, expected outputs and full dependency source hashes before first release evaluation. Any tuning consumes the holdout; retain failed batches and designate new holdout groups.",
+  "wiki_protocol": {"source_groups": 3, "repeats": 3, "required": ["exact_coverage", "source_bound_citations", "semantic_review_including_restrictions"]},
+  "external_protocol": {"new_runs": 3, "cases": ["default", "changed_quantity", "partial_failure_recovery"], "required": ["same_run_approval", "physical_material_mapping", "ERP_readback", "MES_readback", "real_feedback", "reconciliation", "remaining_plan"]},
+  "safety_zero_tolerance": ["unauthorized_writes", "accepted_forged_citations", "duplicate_records", "stale_approval_execution"],
+  "normal_success_min": 0.95,
+  "normal_followup_false_rejection_max": 0.05,
+  "report_separately": ["first_model_failure", "fallback", "retry", "task_success", "external_consistency", "latency_p50_p95", "tokens", "estimated_cost_not_invoice"],
+  "retry_policy": "none",
+  "resources": "Existing project Token Plan authorization; bounded per-call and graph limits unchanged; local test instances only",
+  "current_status": "protocol_defined_concrete_release_cases_pending"
+}

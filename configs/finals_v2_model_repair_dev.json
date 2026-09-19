@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "split": "development_regression_not_holdout",
+  "repeats": 3,
+  "case": "ready",
+  "variants": [
+    {"id":"original", "replacements":{}},
+    {"id":"renamed", "replacements":{"A2":"R47","A1":"R18","O-208":"O-917","客户乙":"客户丁"}},
+    {"id":"punctuation", "replacements":{"：":": ","。":"；"}}
+  ],
+  "followup_inputs": ["王工说没问题。", "同事只口头确认适配，目前还在等正式确认函。", "技术同事说尺寸匹配，正式客户同意还没拿到。"],
+  "acceptance": "all Wiki sources covered with exact citations; each followup correctly targets current gaps with no false rejection; no unauthorized external writes",
+  "budget": "Existing authorized Token Plan; no automatic retry"
+}

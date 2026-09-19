@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "frozen_date": "2026-09-17",
+  "scope": "Post gap-guard fresh formulations; v1 exposed extraneous quality request and is development evidence. Same synthetic task families, not new domain validation.",
+  "wiki_summary_case": "ready",
+  "cases": [
+    {"id":"current_customer_evidence", "case_id":"two_reply", "policies":["fixed","adaptive"], "repeat":2,
+     "text":"A1的交期要推后21小时，查一下本单替代材料的适用条件。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"技术同事说尺寸匹配，正式客户同意还没拿到。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"把这份本单邮件补进来，批准范围以附件为准。", "documents":["AP-CURRENT"], "status":"awaiting_approval"}],
+     "eligible_a2":400, "expected_delay":21, "expected_quantity":600},
+    {"id":"cannot_supply_evidence", "case_id":"two_reply", "policies":["adaptive"], "repeat":2,
+     "text":"A1延期29小时，供应商建议改用A2，我们先查证。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"仓库说以前见过A2，但批准原件没找到。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"这次仍无任何可补的批准文件。", "documents":[], "status":"paused"}],
+     "eligible_a2":0}
+  ],
+  "acceptance":"Six executions, states and quantities correct. Review every follow-up for current scope and unresolved gap; count rejected proposals separately. Review all Wiki excerpts. No automatic retry.",
+  "budget":"Existing authorized Token Plan uncapped, shared ledger."
+}

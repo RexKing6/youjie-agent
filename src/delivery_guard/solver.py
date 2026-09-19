@@ -36,9 +36,12 @@ def solve_candidate(
     scenario_hash: str,
     profile: str,
     time_limit_seconds: float = 5.0,
+    objective_mode: str = "weighted",
 ) -> CandidatePlan:
     if profile not in PROFILE_WEIGHTS:
         raise ValueError(f"unknown profile: {profile}")
+    if objective_mode not in {"weighted", "lexicographic"}:
+        raise ValueError("unknown objective mode")
     weights = PROFILE_WEIGHTS[profile]
     model = cp_model.CpModel()
     horizon = scenario.horizon_hours
@@ -232,7 +235,32 @@ def solve_candidate(
     solver.parameters.num_search_workers = 1
     solver.parameters.random_seed = 0
     started = time.perf_counter()
-    status_code = solver.solve(model)
+    status_code = solver.solve(model) if objective_mode == "weighted" else cp_model.UNKNOWN
+    lex_proven = 0
+    if objective_mode == "lexicographic":
+        # Explicit priority stages; never claim weighted arithmetic is lexicographic.
+        # Keep the last feasible solution if a later priority exhausts the shared limit.
+        stages = [unfulfilled_score, lateness_score, recovery_cost, action_count, sum(task_start_expr.values())]
+        last_feasible = None
+        for stage in stages:
+            remaining = time_limit_seconds - (time.perf_counter()-started)
+            if remaining <= 0:
+                break
+            model.minimize(stage)
+            candidate_solver = cp_model.CpSolver()
+            candidate_solver.parameters.max_time_in_seconds = remaining
+            candidate_solver.parameters.num_search_workers = 1
+            candidate_solver.parameters.random_seed = 0
+            candidate_status = candidate_solver.solve(model)
+            if candidate_status in {cp_model.OPTIMAL, cp_model.FEASIBLE}:
+                last_feasible = candidate_solver
+            if candidate_status != cp_model.OPTIMAL:
+                break
+            lex_proven += 1
+            model.add(stage == candidate_solver.value(stage))
+        if last_feasible is not None:
+            solver = last_feasible
+            status_code = cp_model.OPTIMAL if lex_proven == len(stages) else cp_model.FEASIBLE
     solve_time_ms = int((time.perf_counter() - started) * 1000)
     status_name = solver.status_name(status_code)
 
@@ -345,7 +373,10 @@ def solve_candidate(
                 )
             ),
         }
-        total_score = int(solver.objective_value)
+        total_score = int(solver.value(objective)) if objective_mode == "lexicographic" else int(solver.objective_value)
+        if objective_mode == "lexicographic":
+            objective_breakdown["lexicographic_stages_proven"] = lex_proven
+            objective_breakdown["lexicographic_stages_total"] = 5
     else:
         for order in scenario.orders:
             outcomes.append(
@@ -370,6 +401,7 @@ def solve_candidate(
         objective_breakdown=objective_breakdown,
         total_score=total_score,
         assumptions=[
+            *(["Lexicographic priority: unfulfilled, lateness, incremental cost, action count, earliest start; total_score is only a weighted comparison index."] if objective_mode == "lexicographic" else []),
             "All purchase orders are placed at planning hour 0.",
             f"Candidate operation starts use a {PLANNING_STEP_HOURS}-hour planning grid.",
             "Time and quantity are integer-scaled; no real ERP write is performed.",
@@ -399,8 +431,8 @@ def solve_candidate(
     return bare_plan.model_copy(update={"evidence": evidence})
 
 
-def solve_profiles(scenario: Scenario, scenario_hash: str) -> list[CandidatePlan]:
+def solve_profiles(scenario: Scenario, scenario_hash: str, *, objective_mode: str = "weighted") -> list[CandidatePlan]:
     return [
-        solve_candidate(scenario, scenario_hash, profile)
+        solve_candidate(scenario, scenario_hash, profile, objective_mode=objective_mode)
         for profile in ("service_first", "balanced", "stability_first")
     ]

@@ -1,0 +1,11 @@
+{
+  "version": 3,
+  "scope": "Extractive Wiki regression and new synthetic source identifiers; previous paraphrase runs retained as failures. Freeze before calls; no tuning on this new set.",
+  "repeats": 3,
+  "case": "ready",
+  "variants": [
+    {"id": "development_original", "replacements": {}},
+    {"id": "extractive_unseen_identifiers", "replacements": {"A2": "K82", "A1": "K51", "O-208": "O-638", "O-107": "O-426", "客户甲": "客户辛", "客户乙": "客户壬", "B17": "B49"}}
+  ],
+  "acceptance": "Every displayed fact summary is canonical source fields plus a model-selected literal excerpt; quote and excerpt spans must both match this source. No generated factual paraphrase is accepted. Review source selection and scope separately. All six runs must pass on frozen code."
+}

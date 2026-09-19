@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "frozen_date": "2026-09-16",
+  "scope": "New model-input formulations frozen after repair; engineered synthetic holdout within existing business families, not independent expert cases. Do not tune on these before execution. If used to repair, reclassify as development.",
+  "wiki_summary_case": "partial",
+  "cases": [
+    {"id":"new_quantity_and_delay","case_id":"ready","policies":["fixed","adaptive"],"repeat":1,"text":"请核对O-208，A1需求为730件，延期17小时；A2的库存和适用条件都要查清。","initial_status":"awaiting_approval","replies":[],"eligible_a2":400,"expected_delay":17,"expected_quantity":730},
+    {"id":"new_two_reply_wording","case_id":"two_reply","policies":["adaptive"],"repeat":1,"text":"O-208里A1延迟29小时，请查邮件和会议记录，看看A2能不能补上。","initial_status":"awaiting_evidence","replies":[{"text":"王工只确认之前做过，当前客户是否同意还不清楚。","documents":[],"status":"awaiting_evidence"},{"text":"这是本订单的客户邮件，麻烦核实适用条件。","documents":["AP-CURRENT"],"status":"awaiting_approval"}],"eligible_a2":400,"expected_delay":29,"expected_quantity":600},
+    {"id":"new_quality_wording","case_id":"quality_pending","policies":["adaptive"],"repeat":1,"text":"A1推迟13小时，先查B17质量状态，不要只看库存数量。","initial_status":"awaiting_evidence","replies":[{"text":"检验部门补了B17放行记录，请重新核查。","documents":["QC-RELEASE"],"status":"awaiting_approval"}],"eligible_a2":400,"expected_delay":13,"expected_quantity":600},
+    {"id":"new_foreign_customer_evidence","case_id":"two_reply","policies":["adaptive"],"repeat":1,"text":"A1延期11小时，请查替代证据。","initial_status":"awaiting_evidence","replies":[{"text":"先提供旧订单资料，请看看能不能沿用。","documents":["AP-OTHER"],"status":"awaiting_evidence"},{"text":"手里只有同一份旧批准，暂时没有其他文件。","documents":["AP-OTHER"],"status":"paused"}],"eligible_a2":0},
+    {"id":"new_unknown_material","case_id":"ready","policies":["adaptive"],"repeat":1,"text":"供应商通知A76延期17小时，你能先帮我调查吗？","initial_status":"needs_input","replies":[]},
+    {"id":"new_conflicting_hours","case_id":"ready","policies":["adaptive"],"repeat":1,"text":"关于A1，两份消息分别写延期13小时和延期27小时，我还不知道哪份准确。","initial_status":"needs_input","replies":[]},
+    {"id":"new_emotional_irrelevant","case_id":"ready","policies":["adaptive"],"repeat":1,"text":"烦死了，你这破东西到底在讲什么？","initial_status":"needs_input","replies":[]},
+    {"id":"new_explicit_stop","case_id":"ready","policies":["adaptive"],"repeat":1,"text":"暂停调查A1，这次先不继续。","initial_status":"paused","replies":[]}
+  ],
+  "acceptance": "Every declared state and quantity must pass; no unauthorized drafts; report failures without online retries; compare both strategies on same new numeric case. Single repetitions do not establish stability; original development protocol separately repeats main case three times.",
+  "budget": "Shares original ledger with all other runs. No execution until sufficient request authorization; do not reset the 98 used requests. Planned extra request ceiling is subject to explicit user confirmation, not this file."
+}

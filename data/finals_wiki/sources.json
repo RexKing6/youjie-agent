@@ -1,0 +1,18 @@
+{
+  "provenance": {"as_of": "2026-09-16", "license": "Apache-2.0", "seed": 20260916, "synthetic": true, "derived_fields": ["all documents, orders, quantities, costs and roles are authored simulation"], "boundary": "Not employer data, not Mendeley data, not a real engineering qualification"},
+  "documents": [
+    {"id": "TECH-CURRENT", "title": "O-208技术适用确认（模拟客户批准附件）", "role": "engineer", "body": "【全部为模拟资料】\n客户：客户乙\n订单：O-208\n版本：B\n物料：A2\n替代：A1\n批次：B17\n决定：技术可用\n内容：本模拟非安全关键装配件已核对尺寸及工艺适配；本记录仅适用于上述范围，不替代客户批准和批次质量放行，不构成通用螺丝或航空认证。"},
+    {"id": "MAIL-DELAY", "title": "供应商延期通知（模拟邮件）", "role": "supplier", "body": "【全部为模拟资料】\n发件人：模拟供应商联络员\n物料：A1\n订单：O-208\n延期小时：24\n内容：原定第8小时到货的A1预计延迟24小时。我们推荐考虑A2，但本邮件不构成客户替代批准。"},
+    {"id": "HISTORY-01", "title": "上次替代处置记录（模拟历史流程）", "role": "history", "body": "【全部为模拟资料】\n订单：O-107\n客户：客户甲\n版本：B\n物料：A2\n替代：A1\n内容：上次先核对客户批准，再核对批次检验，最后重排并人工审批。成功使用过不代表其他客户或订单可沿用。"},
+    {"id": "MINUTES-01", "title": "技术评审会议纪要（模拟）", "role": "engineer", "body": "【全部为模拟资料】\n客户：客户甲\n版本：B\n物料：A2\n替代：A1\n决定：技术可用\n内容：王工确认在客户甲的B版产品中具备技术可用性。客户乙尚未确认，必须查其订单对应的批准文件和当前批次质量记录。"},
+    {"id": "CHAT-01", "title": "采购沟通（模拟聊天）", "role": "procurement", "body": "【全部为模拟资料】\n物料：A2\n替代：A1\n内容：A2上次都用过了，所有客户都能替吧？先赶交付。\n备注：这是采购个人推测，不是客户或质量批准。"},
+    {"id": "AP-OTHER", "title": "客户甲替代批准（模拟邮件）", "role": "customer_authority", "body": "【全部为模拟资料】\n客户：客户甲\n订单：O-107\n版本：B\n物料：A2\n替代：A1\n批次：B17\n数量上限：400\n决定：批准\n内容：仅批准上述订单和批次；质量放行后方可使用。"},
+    {"id": "AP-CURRENT", "title": "客户乙本订单替代批准（模拟邮件）", "role": "customer_authority", "body": "【全部为模拟资料】\n客户：客户乙\n订单：O-208\n版本：B\n物料：A2\n替代：A1\n批次：B17\n数量上限：400\n决定：批准\n内容：仅批准上述订单、版本和批次，最多400件；批次检验放行后方可使用。其他订单不得沿用。"},
+    {"id": "AP-PARTIAL", "title": "客户乙部分数量批准（模拟邮件）", "role": "customer_authority", "body": "【全部为模拟资料】\n客户：客户乙\n订单：O-208\n版本：B\n物料：A2\n替代：A1\n批次：B17\n数量上限：300\n决定：批准\n内容：仅批准300件，不得扩大数量；质量放行后使用。"},
+    {"id": "AP-DENY", "title": "同订单暂停替代通知（模拟邮件）", "role": "customer_authority", "body": "【全部为模拟资料】\n客户：客户乙\n订单：O-208\n版本：B\n物料：A2\n替代：A1\n批次：B17\n数量上限：0\n决定：禁止\n内容：暂不允许上述替代。本记录未说明与其他批准的正式撤销关系，需核对。"},
+    {"id": "AP-RESOLVE", "title": "冲突正式核对结论（模拟邮件）", "role": "customer_authority", "body": "【全部为模拟资料】\n客户：客户乙\n订单：O-208\n版本：B\n物料：A2\n替代：A1\n批次：B17\n数量上限：400\n决定：批准\n明确替代：AP-CURRENT,AP-DENY\n内容：经核对，以上两份记录由本结论取代。仅批准本订单B17批次400件，仍须质量放行。"},
+    {"id": "QC-PASS", "title": "B17检验结果（模拟质量记录）", "role": "quality_authority", "body": "【全部为模拟资料】\n物料：A2\n批次：B17\n决定：放行\n内容：批次满足本模拟案例预先设定的质量条件；可用数量仍以最新库存冻结记录为准。本记录不等于客户批准。"},
+    {"id": "QC-WAIT", "title": "B17待检记录（模拟）", "role": "quality_authority", "body": "【全部为模拟资料】\n物料：A2\n批次：B17\n决定：待检\n内容：尚未完成检验，不得按合格数量投入计划。"},
+    {"id": "QC-RELEASE", "title": "B17补充质量放行（模拟）", "role": "quality_authority", "body": "【全部为模拟资料】\n物料：A2\n批次：B17\n决定：放行\n明确替代：QC-WAIT\n内容：本记录明确取代待检状态。库存冻结数量须另查，放行不取消库存占用。"}
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "version": 1,
+  "scope": "Development regression of documented live false refusal; not independent validation; original shared 100-request ceiling",
+  "wiki_summary_case": "conflict",
+  "cases": [
+    {"id":"conflict_then_supersession","case_id":"conflict","policies":["adaptive"],"repeat":1,"text":"A1延期36小时，先核对当前批准的冲突","initial_status":"awaiting_evidence","replies":[{"text":"提供当前客户正式核对结论，明确取代旧记录","documents":["AP-RESOLVE"],"status":"awaiting_approval"}],"eligible_a2":400,"expected_delay":36,"expected_quantity":600}
+  ]
+}

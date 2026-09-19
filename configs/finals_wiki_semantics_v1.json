@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "scope": "Development repeats plus newly frozen renamed synthetic Wiki sources; does not establish general semantic correctness",
+  "repeats": 3,
+  "case": "ready",
+  "variants": [
+    {"id": "development_original", "replacements": {}},
+    {"id": "unseen_source_identifiers", "replacements": {"A2": "Z14", "A1": "Z07", "O-208": "O-314", "O-107": "O-109", "客户甲": "客户丁", "客户乙": "客户戊", "B17": "B26"}}
+  ],
+  "acceptance": "All returned citations are literal; no material reversal; all runs produce claims; human/assistant semantic review is separately required before acceptance. Never count citation pass as semantic pass.",
+  "classification": "If these inputs are used to tune prompts or code, they become development fixtures. Keep first output immutable."
+}

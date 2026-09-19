@@ -1,0 +1,19 @@
+{
+  "base_protocol": "configs/finals_v2_tasks_v1.json",
+  "development_ids": ["dev_stop"],
+  "scope": "Targeted development regression after v4 conflict input exposed a shared stop-keyword false positive. Historical heldout_expression is only a runner group label here: this consumed case is NOT a new independent holdout. Same live model, fixed/adaptive, three repeats, no automatic retry, no external writes. This 12-task check does not replace the full 144-task release gate.",
+  "cases": [
+    {
+      "id": "v4_conflict_resolution_consumed",
+      "split": "heldout_expression",
+      "case_id": "conflict",
+      "policies": ["fixed", "adaptive"],
+      "repeat": 3,
+      "text": "A1延期20小时，我看到一份同意一份暂停，不能单凭日期挑一个，请核对冲突。",
+      "initial_status": "awaiting_evidence",
+      "replies": [{"text": "已附有权方对这两份记录的处理结论，请按里面明确的取代关系判断。", "documents": ["AP-RESOLVE"], "status": "awaiting_approval"}],
+      "expected_delay": 20,
+      "eligible_a2": 400
+    }
+  ]
+}

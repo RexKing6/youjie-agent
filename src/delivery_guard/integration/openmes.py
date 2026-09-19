@@ -267,17 +267,30 @@ class OpenMESHttpClient:
         wanted = set(order_nos)
         found: dict[str, dict[str, Any]] = {}
         for status in OPENMES_STATUSES:
-            payload = self._request(
-                "GET",
-                "/api/v1/erp/production/completions",
-                query={"status": status, "per_page": "100"},
-            )
-            rows = payload.get("data")
-            if not isinstance(rows, list):
-                raise OpenMESAdapterError("OPENMES_EXPORT_INVALID", "OpenMES production response has no data list")
-            for row in rows:
-                if isinstance(row, dict) and row.get("order_no") in wanted:
-                    found[str(row["order_no"])] = row
+            cursor, seen_cursors = None, set()
+            for _ in range(100):
+                query = {"status": status, "per_page": "100"}
+                if cursor:
+                    query["cursor"] = cursor
+                payload = self._request("GET", "/api/v1/erp/production/completions", query=query)
+                rows = payload.get("data")
+                if not isinstance(rows, list):
+                    raise OpenMESAdapterError("OPENMES_EXPORT_INVALID", "OpenMES production response has no data list")
+                for row in rows:
+                    if isinstance(row, dict) and row.get("order_no") in wanted:
+                        name = str(row["order_no"])
+                        if name in found and found[name] != row:
+                            raise OpenMESAdapterError("OPENMES_SNAPSHOT_CONFLICT", "work order changed during paginated read")
+                        found[name] = row
+                meta = payload.get("meta") or {}
+                if len(found) == len(wanted) or not meta.get("has_more"):
+                    break
+                cursor = meta.get("next_cursor")
+                if not isinstance(cursor, str) or not cursor or cursor in seen_cursors:
+                    raise OpenMESAdapterError("OPENMES_CURSOR_INVALID", "pagination cursor missing or repeated")
+                seen_cursors.add(cursor)
+            else:
+                raise OpenMESAdapterError("OPENMES_PAGE_LIMIT", "bounded export incomplete; do not infer missing records")
             if len(found) == len(wanted):
                 break
         records = []
@@ -383,6 +396,13 @@ class OpenMESAdapter:
                 "OPENMES_READBACK_MISSING",
                 f"imported work orders missing on readback: {snapshot['missing_order_nos']}",
             )
+        expected = {str(o["order_no"]):o for o in orders}
+        for row in snapshot["records"]:
+            wanted = expected[row["order_no"]]
+            if (float(row["planned_qty"]) != float(wanted["planned_qty"])
+                    or row.get("line_code") != wanted.get("line_code")
+                    or row.get("product_type_code") != wanted.get("product_type_code")):
+                raise OpenMESManualReviewRequired("OPENMES_READBACK_MISMATCH", "imported work order differs from approved payload")
         result = OpenMESExecutionResult(
             command_id=command.command_id,
             idempotency_key=command.idempotency_key,

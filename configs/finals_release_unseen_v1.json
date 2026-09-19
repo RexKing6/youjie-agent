@@ -1,0 +1,20 @@
+{
+  "version":1,
+  "scope":"Release frozen fresh formulations and numbers. Synthetic same-family holdout; not independent industrial expert validation.",
+  "wiki_summary_case":"ready",
+  "cases":[
+    {"id":"release_approval", "case_id":"two_reply", "policies":["fixed","adaptive"], "repeat":1,
+     "text":"A1到货延后28小时，O-208请查替代料依据。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"同事只口头确认适配，目前还在等正式确认函。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"确认函已补齐，按本单附件处理。", "documents":["AP-CURRENT"], "status":"awaiting_approval"}],
+     "eligible_a2":400,"expected_delay":28,"expected_quantity":600},
+    {"id":"release_no_proof", "case_id":"two_reply", "policies":["adaptive"], "repeat":1,
+     "text":"A1延期34小时，检查替代证据能否支持生产安排。", "initial_status":"awaiting_evidence",
+     "replies":[
+       {"text":"只有大家口头讨论过，并无正式文件。", "documents":[], "status":"awaiting_evidence"},
+       {"text":"第二次也没找到文件，不能提供书面依据。", "documents":[], "status":"paused"}],"eligible_a2":0}
+  ],
+  "acceptance":"3/3 expected states and quantities, no unauthorized drafts; inspect all follow-ups and Wiki claims, report fallbacks; source must remain frozen.",
+  "budget":"Existing user authorization for Token Plan uncapped."
+}

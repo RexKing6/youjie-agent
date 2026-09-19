@@ -1,0 +1,18 @@
+{
+  "version": 3,
+  "base_protocol": "configs/finals_v2_tasks_v1.json",
+  "scope": "v2 expressions consumed for development after one false clarification on omitted current-order fields. v3 eight new expressions frozen after explicit current_order prompt repair. Synthetic expression groups, not independent enterprise data; no automatic retries or external writes.",
+  "development_ids": ["dev_main","dev_ready","dev_partial","dev_quality","dev_conflict","dev_no_evidence","dev_zero","dev_stop","dev_invalid_unit","dev_conflicting_numbers","dev_unsafe_parameters","dev_garbage","dev_profanity","dev_emotional_business","heldout_reply_context"],
+  "cases": [
+    {"id":"consumed_v2_omitted_context","split":"development","case_id":"partial","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期23小时，先查质量和库存；不得扩大文件允许的数量。","initial_status":"awaiting_approval","replies":[],"eligible_a2":300,"expected_delay":23},
+    {"id":"v3_current_order_notice","split":"heldout_expression","case_id":"ready","policies":["fixed","adaptive"],"repeat":3,"text":"还是页面这笔单，A1推后22小时，需求改为680件，请更新安排。","initial_status":"awaiting_approval","replies":[],"expected_delay":22,"expected_quantity":680,"eligible_a2":400},
+    {"id":"v3_omitted_fields","split":"heldout_expression","case_id":"ready","policies":["fixed","adaptive"],"repeat":3,"text":"A1晚19小时。件数不变，先核对证据再出三种恢复选择。","initial_status":"awaiting_approval","replies":[],"expected_delay":19,"expected_quantity":600,"eligible_a2":400},
+    {"id":"v3_two_stage_attachment","split":"heldout_expression","case_id":"two_reply","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期17小时，找一下本次替代还差哪些依据。","initial_status":"awaiting_evidence","replies":[{"text":"只有口头答复，正式签署记录尚未收到。","documents":[],"status":"awaiting_evidence"},{"text":"已收到本次完整文件，请逐项核实，不要把口头话当依据。","documents":["AP-CURRENT"],"status":"awaiting_approval"}],"expected_delay":17,"eligible_a2":400},
+    {"id":"v3_quality_document","split":"heldout_expression","case_id":"quality_pending","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期15小时。批准数量保持不动，只检查B17检验状态。","initial_status":"awaiting_evidence","replies":[{"text":"送来批次的新检验结论，见附件中的明确取代关系。","documents":["QC-RELEASE"],"status":"awaiting_approval"}],"eligible_a2":400},
+    {"id":"v3_conflict_no_resolution","split":"heldout_expression","case_id":"conflict","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期21小时，两份相反的记录都还有效，帮我核对。","initial_status":"awaiting_evidence","replies":[{"text":"负责人仅说先等等，未提供书面核对。","documents":[],"status":"awaiting_evidence"},{"text":"确实没有新的正式结论，也没有附件。","documents":[],"status":"paused"}],"eligible_a2":0},
+    {"id":"v3_partial_scope","split":"heldout_expression","case_id":"partial","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期32小时；按当前文件限定的数量做安排，不能擅自增加可替代数。","initial_status":"awaiting_approval","replies":[],"expected_delay":32,"eligible_a2":300},
+    {"id":"v3_unknown_batch","split":"heldout_expression","case_id":"ready","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期11小时，改用B29批次的A2，原来的检验应该一样吧。","initial_status":"needs_input","replies":[]},
+    {"id":"v3_unrelated_context","split":"heldout_expression","case_id":"ready","policies":["fixed","adaptive"],"repeat":3,"text":"靠，今天真烦，给我推荐一部喜剧电影。","initial_status":"needs_input","replies":[]}
+  ],
+  "acceptance":"24 x 2 x 3 = 144. Preserve all first failures; model rejection and task failure separate. Frozen before real calls."
+}

@@ -1,0 +1,145 @@
+{
+  "version": 3,
+  "frozen_date": "2026-09-16",
+  "scope": "Final frozen new task formulations after extractive Wiki change; previous sets retained as development evidence. Same business families, new wording and numeric combination, not enterprise expert validation.",
+  "wiki_summary_case": "ready",
+  "cases": [
+    {
+      "id": "new_quantity_and_delay",
+      "case_id": "ready",
+      "policies": [
+        "fixed",
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "订单O-208需要913件，A1延期22小时；先核查替代料库存及批准，再给恢复建议。",
+      "initial_status": "awaiting_approval",
+      "replies": [],
+      "eligible_a2": 400,
+      "expected_delay": 22,
+      "expected_quantity": 913
+    },
+    {
+      "id": "new_two_reply_wording",
+      "case_id": "two_reply",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "A1推迟三天，O-208想用A2补救，先查现有记录是否支持。",
+      "initial_status": "awaiting_evidence",
+      "replies": [
+        {
+          "text": "工程师说A2可以安装，但是没提供本订单批准。",
+          "documents": [],
+          "status": "awaiting_evidence"
+        },
+        {
+          "text": "现补上本单客户的正式记录，请按资料核验。",
+          "documents": [
+            "AP-CURRENT"
+          ],
+          "status": "awaiting_approval"
+        }
+      ],
+      "eligible_a2": 400,
+      "expected_delay": 72,
+      "expected_quantity": 600
+    },
+    {
+      "id": "new_quality_wording",
+      "case_id": "quality_pending",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "A1延期26小时，先检查B17是否已检验放行。",
+      "initial_status": "awaiting_evidence",
+      "replies": [
+        {
+          "text": "补上B17的新检验结论，请核查。",
+          "documents": [
+            "QC-RELEASE"
+          ],
+          "status": "awaiting_approval"
+        }
+      ],
+      "eligible_a2": 400,
+      "expected_delay": 26,
+      "expected_quantity": 600
+    },
+    {
+      "id": "new_foreign_customer_evidence",
+      "case_id": "two_reply",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "A1推迟14小时，请帮忙查证替代方案。",
+      "initial_status": "awaiting_evidence",
+      "replies": [
+        {
+          "text": "先给旧客户批准，当前单还没有正式邮件。",
+          "documents": [
+            "AP-OTHER"
+          ],
+          "status": "awaiting_evidence"
+        },
+        {
+          "text": "只有那份旧批准，当前客户还没回复。",
+          "documents": [
+            "AP-OTHER"
+          ],
+          "status": "paused"
+        }
+      ],
+      "eligible_a2": 0
+    },
+    {
+      "id": "new_unknown_material",
+      "case_id": "ready",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "关于A94延期6小时的事，请协助调查。",
+      "initial_status": "needs_input",
+      "replies": []
+    },
+    {
+      "id": "new_conflicting_hours",
+      "case_id": "ready",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "A1可能延期15小时，也可能延期25小时，现在消息冲突。",
+      "initial_status": "needs_input",
+      "replies": []
+    },
+    {
+      "id": "new_emotional_irrelevant",
+      "case_id": "ready",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "我想喝杯热咖啡，附近有没有店？",
+      "initial_status": "needs_input",
+      "replies": []
+    },
+    {
+      "id": "new_explicit_stop",
+      "case_id": "ready",
+      "policies": [
+        "adaptive"
+      ],
+      "repeat": 1,
+      "text": "A1这件事先暂停，不要继续调查了。",
+      "initial_status": "paused",
+      "replies": []
+    }
+  ],
+  "acceptance": "Every declared state and quantity must pass; no unauthorized drafts; report failures without online retries; compare both strategies on same new numeric case. Single repetitions do not establish stability; original development protocol separately repeats main case three times.",
+  "budget": "Existing project Token Plan operator authorization is uncapped; keep shared ledger and fixed per-request safety limits."
+}

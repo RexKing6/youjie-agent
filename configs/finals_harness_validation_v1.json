@@ -1,0 +1,20 @@
+{
+  "version": "1", "scope": "single order X; synthetic business data; real local software",
+  "baseline": "same model, evidence, tool catalog, solver and safety gates; fixed order versus adaptive selection; no guaranteed win",
+  "acceptance": [
+    "MCP handshake/list/call actually crosses subprocess transport; reject unknown tool and malformed inputs",
+    "Skill catalog is shared by orchestrator and UI, trace reflects only actually executed actions",
+    "missing/current/wrong-scope/conflicting evidence cannot authorize substitution",
+    "three or more incomplete replies remain resumable and never grant approval",
+    "prompt injection/garbage/unknown material/contradictory numbers cannot bypass gates",
+    "tool timeout/provider failure safely stops without fake success or offline fallback",
+    "same run retains trace across supplementation, planning, approval and feedback",
+    "supply shortage is derived; quote/logistics fixtures disclosed, no external messages sent",
+    "budget constraint modifies solver input and invalidates previous approval",
+    "150 shortage case yields genuinely different feasible cost/delay alternatives",
+    "ERPNext/OpenMES draft and readback remain guarded; stale approval and duplicate events blocked",
+    "responsive page usable at landscape height; primary business result remains accessible"
+  ],
+  "live": {"policy":"adaptive", "model":"existing authorized TokenPlan configuration", "automatic_model_retries":0, "required":"fresh run with partial approval, supply investigation, plans, constraint update"},
+  "reporting":"counts by failure category; historical development tests not independent effectiveness or customer ROI"
+}

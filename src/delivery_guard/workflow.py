@@ -86,10 +86,10 @@ class RecoveryWorkflow:
         self._record(before, WorkflowState.ANALYZED, "deterministic_tool", "Impact graph computed")
         return self.impact
 
-    def solve(self) -> list[CandidatePlan]:
+    def solve(self, *, objective_mode: str = "weighted") -> list[CandidatePlan]:
         if self.state != WorkflowState.ANALYZED:
             raise RuntimeError(f"solve not allowed from {self.state}")
-        self.plans = solve_profiles(self.adjusted_scenario, self.scenario_hash)
+        self.plans = solve_profiles(self.adjusted_scenario, self.scenario_hash, objective_mode=objective_mode)
         before = self.state
         self._record(before, WorkflowState.SOLVED, "solver", "Three policy profiles solved")
         before = self.state

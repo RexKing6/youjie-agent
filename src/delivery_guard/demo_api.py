@@ -357,6 +357,13 @@ class DemoApiApplication:
             "result": json_safe(result),
         }
 
+    @staticmethod
+    def _require_current_external_approval(session: dict[str, Any]) -> None:
+        if session.get("erpnext_approval_invalidated") or session.get("openmes_approval_invalidated"):
+            raise ValueError(
+                "旧审批已失效：ERP/MES 事实已变化；必须核对最新事实、重新规划并批准，禁止继续下发。"
+            )
+
     def approve(self, payload: dict[str, Any]) -> dict[str, Any]:
         session_id = str(payload.get("session_id", ""))
         profile = str(payload.get("profile", "balanced"))
@@ -366,6 +373,7 @@ class DemoApiApplication:
             session = self.sessions.get(session_id)
             if session is None:
                 raise KeyError("unknown session_id")
+            self._require_current_external_approval(session)
             result = session["result"]
             if result.get("status") != "awaiting_approval":
                 raise ValueError("只有 awaiting_approval 状态可以批准。")
@@ -397,6 +405,7 @@ class DemoApiApplication:
             session = self.sessions.get(session_id)
             if session is None:
                 raise KeyError("unknown session_id")
+            self._require_current_external_approval(session)
             result = session["result"]
             graph = session["graph"]
             if result.get("status") != "completed":
@@ -420,6 +429,7 @@ class DemoApiApplication:
             session = self.sessions.get(session_id)
             if session is None:
                 raise KeyError("unknown session_id")
+            self._require_current_external_approval(session)
             result = session["result"]
             if result.get("status") != "completed":
                 raise ValueError("只有完成真人审批的结果才能写入 ERPNext 测试实例。")
@@ -515,6 +525,7 @@ class DemoApiApplication:
             session = self.sessions.get(session_id)
             if session is None:
                 raise KeyError("unknown session_id")
+            self._require_current_external_approval(session)
             result = session["result"]
             erpnext_links = session.get("erpnext_links")
             if result.get("status") != "completed":

@@ -1,0 +1,8 @@
+{
+  "scope": "Consumed browser failure and neighboring development expressions. Same live model, fixed/adaptive, three repeats. No automatic retry, no external writes. Not independent heldout evidence; does not replace full regression.",
+  "cases": [
+    {"id":"order_still_needs_600","split":"development","case_id":"partial","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期24小时，订单O-208仍需600件，请比较准时交货与不追加成本的恢复方案。","initial_status":"awaiting_approval","replies":[],"expected_delay":24,"eligible_a2":300},
+    {"id":"order_total_550","split":"development","case_id":"partial","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期24小时，本单合计550件，请比较恢复方案。","initial_status":"awaiting_approval","replies":[],"expected_delay":24,"eligible_a2":300},
+    {"id":"order_total_conflict","split":"development","case_id":"ready","policies":["fixed","adaptive"],"repeat":3,"text":"A1延期24小时，订单O-208仍需550件，本单合计600件","initial_status":"needs_input","replies":[]}
+  ]
+}

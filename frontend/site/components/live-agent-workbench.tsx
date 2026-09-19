@@ -32,7 +32,9 @@ async function requestJson(path: string, init?: RequestInit) {
     ...init,
     headers: { 'Content-Type': 'application/json', ...(init?.headers || {}) },
   });
-  const payload = await response.json();
+  const raw: unknown = await response.json();
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) throw new Error('服务返回无效 JSON 对象');
+  const payload = raw as JsonObject;
   if (!response.ok) throw new Error(payload.message || payload.error || `HTTP ${response.status}`);
   return payload;
 }

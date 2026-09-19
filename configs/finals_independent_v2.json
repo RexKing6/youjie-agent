@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "frozen_date": "2026-09-16",
+  "seed": 9152047,
+  "sample_count": 24,
+  "repeats": 2,
+  "policies": ["fixed", "adaptive"],
+  "quantities": [233, 417, 799, 1189],
+  "delay_hours": [7, 19, 31, 55],
+  "approval_documents": ["AP-CURRENT", "AP-PARTIAL"],
+  "post_approval_holds": [175, 275, 375, 450],
+  "normal_arrival_hour": 8,
+  "production_hours_per_600": 4,
+  "generation": "seeded Cartesian-product sample; two-reply flow then approval and changed-stock replan, repeated under both policies",
+  "oracle": "independent closed-form single-order material eligibility, service-first quantity/cost/completion, unchanged final facts across policies/repeats; no solver output used to set expectations",
+  "acceptance": {"false_release": 0, "stale_approval_acceptances": 0, "mismatched_quantity_or_schedule": 0, "repeat_or_policy_disagreements": 0},
+  "scope": "offline bounded synthetic case; not independent expert review, not LLM evaluation",
+  "failure_policy": "preserve first report; if used for a code fix, these cases become development and cannot remain heldout"
+}

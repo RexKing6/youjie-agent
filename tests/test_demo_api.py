@@ -1,5 +1,6 @@
 import json
 import threading
+import pytest
 from urllib.request import Request, urlopen
 
 from delivery_guard.demo_api import CASE, DemoApiApplication, DemoApiService
@@ -29,6 +30,28 @@ def replay_graph_factory() -> DeliveryGuardGraph:
             CASE.parents[1] / "model_replays/mendeley_drill.json"
         ),
     )
+
+
+@pytest.mark.parametrize("flag", ["erpnext_approval_invalidated", "openmes_approval_invalidated"])
+@pytest.mark.parametrize("method", ["approve", "run_erpnext_integration", "run_openmes_integration", "run_integration"])
+def test_stale_external_approval_blocks_all_dispatch_before_runtime(monkeypatch, flag, method):
+    application = DemoApiApplication(graph_factory=replay_graph_factory)
+    application.sessions["stale"] = {
+        "result": {"status": "completed"},
+        "graph": None,
+        "erpnext_links": [{"erpnext_work_order": "MFG-TEST"}],
+        flag: True,
+    }
+
+    def forbidden_runtime(*args, **kwargs):
+        pytest.fail("stale approval crossed dispatch gate")
+
+    monkeypatch.setattr(application, "_erpnext_runtime", forbidden_runtime)
+    monkeypatch.setattr(application, "_openmes_runtime", forbidden_runtime)
+    monkeypatch.setattr("delivery_guard.demo_api.run_partial_failure_demo", forbidden_runtime)
+    with pytest.raises(ValueError, match="旧审批已失效"):
+        getattr(application, method)({"session_id": "stale"})
+    assert application.sessions["stale"][flag] is True
 
 
 def request_json(base_url: str, method: str, path: str, payload=None):

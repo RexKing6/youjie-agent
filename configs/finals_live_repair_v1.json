@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "scope": "Development regression after actual online failures, not independent validation; shared original 100-call budget",
+  "wiki_summary_case": "two_reply",
+  "cases": [
+    {"id":"main_two_replies","case_id":"two_reply","policies":["fixed","adaptive"],"repeat":1,"text":"订单O-208的A1延期24小时，A2以前用过，调查能否替代","initial_status":"awaiting_evidence","replies":[{"text":"王工说技术上应该没问题","documents":[],"status":"awaiting_evidence"},{"text":"附当前订单客户批准邮件，请核验范围和批次","documents":["AP-CURRENT"],"status":"awaiting_approval"}],"eligible_a2":400,"expected_delay":24,"expected_quantity":600},
+    {"id":"conflict_then_supersession","case_id":"conflict","policies":["adaptive"],"repeat":1,"text":"A1延期36小时，先核对当前批准的冲突","initial_status":"awaiting_evidence","replies":[{"text":"提供当前客户正式核对结论，明确取代旧记录","documents":["AP-RESOLVE"],"status":"awaiting_approval"}],"eligible_a2":400,"expected_delay":36,"expected_quantity":600}
+  ]
+}
