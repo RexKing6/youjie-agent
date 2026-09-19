@@ -5,7 +5,7 @@ from pathlib import Path
 from zipfile import ZipFile, ZIP_DEFLATED
 from lxml import etree as E
 
-source,video,poster,dest=map(Path,sys.argv[1:])
+source,video,poster,dest=map(Path,sys.argv[1:5])
 if dest.exists():raise SystemExit('Preserve existing output')
 P='http://schemas.openxmlformats.org/presentationml/2006/main'
 A='http://schemas.openxmlformats.org/drawingml/2006/main'
@@ -24,9 +24,14 @@ pic=E.fromstring(f'''<p:pic xmlns:p="{P}" xmlns:a="{A}" xmlns:r="{R}">
 xfrm=pic.find(f'.//{{{A}}}xfrm');xfrm.find(f'{{{A}}}off').set('x','762000');xfrm.find(f'{{{A}}}off').set('y','685800')
 xfrm.find(f'{{{A}}}ext').set('cx','10668000');xfrm.find(f'{{{A}}}ext').set('cy','6000750')
 pic.find(f'.//{{{A}}}hlinkClick').attrib.pop(f'{{{R}}}id',None)
+pic.find(f'.//{{{P}}}ext').set('uri','{DAA4B4D4-6D71-4841-9C94-3DE7FCFB9230}')
 tree.append(pic)
 timing=E.fromstring(f'''<p:timing xmlns:p="{P}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot"><p:childTnLst><p:video><p:cMediaNode vol="80000"><p:cTn id="2" fill="hold" display="0"><p:stCondLst><p:cond delay="indefinite"/></p:stCondLst></p:cTn><p:tgtEl><p:spTgt spid="{shape_id}"/></p:tgtEl></p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>''')
 timing.find(f'.//{{{P}}}cond').set('delay','0')
+if len(sys.argv)>5:
+    with ZipFile(sys.argv[5]) as z:
+        timing=E.fromstring(z.read(slide)).find(f'{{{P}}}timing')
+        for target in timing.findall(f'.//{{{P}}}spTgt'):target.set('spid',str(shape_id))
 root.append(timing);parts[slide]=E.tostring(root,xml_declaration=True,encoding='UTF-8',standalone=True)
 rels=E.fromstring(parts[rel])
 for id,typ,target in [('rIdDemoVideo',R+'/video','../media/finals_demo.mp4'),('rIdDemoMedia','http://schemas.microsoft.com/office/2007/relationships/media','../media/finals_demo.mp4'),('rIdDemoPoster',R+'/image','../media/finals_demo_poster.png')]:E.SubElement(rels,f'{{{PK}}}Relationship',Id=id,Type=typ,Target=target)
