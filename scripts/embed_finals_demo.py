@@ -23,6 +23,7 @@ pic=E.fromstring(f'''<p:pic xmlns:p="{P}" xmlns:a="{A}" xmlns:r="{R}">
 # Keep the official logo band visible; fit 16:9 media inside the slide bounds.
 xfrm=pic.find(f'.//{{{A}}}xfrm');xfrm.find(f'{{{A}}}off').set('x','762000');xfrm.find(f'{{{A}}}off').set('y','685800')
 xfrm.find(f'{{{A}}}ext').set('cx','10668000');xfrm.find(f'{{{A}}}ext').set('cy','6000750')
+pic.find(f'.//{{{A}}}hlinkClick').attrib.pop(f'{{{R}}}id',None)
 tree.append(pic)
 timing=E.fromstring(f'''<p:timing xmlns:p="{P}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot"><p:childTnLst><p:video><p:cMediaNode vol="80000"><p:cTn id="2" fill="hold" display="0"><p:stCondLst><p:cond delay="indefinite"/></p:stCondLst></p:cTn><p:tgtEl><p:spTgt spid="{shape_id}"/></p:tgtEl></p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>''')
 root.append(timing);parts[slide]=E.tostring(root,xml_declaration=True,encoding='UTF-8',standalone=True)
