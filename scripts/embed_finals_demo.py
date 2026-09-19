@@ -26,6 +26,7 @@ xfrm.find(f'{{{A}}}ext').set('cx','10668000');xfrm.find(f'{{{A}}}ext').set('cy',
 pic.find(f'.//{{{A}}}hlinkClick').attrib.pop(f'{{{R}}}id',None)
 tree.append(pic)
 timing=E.fromstring(f'''<p:timing xmlns:p="{P}"><p:tnLst><p:par><p:cTn id="1" dur="indefinite" restart="never" nodeType="tmRoot"><p:childTnLst><p:video><p:cMediaNode vol="80000"><p:cTn id="2" fill="hold" display="0"><p:stCondLst><p:cond delay="indefinite"/></p:stCondLst></p:cTn><p:tgtEl><p:spTgt spid="{shape_id}"/></p:tgtEl></p:cMediaNode></p:video></p:childTnLst></p:cTn></p:par></p:tnLst></p:timing>''')
+timing.find(f'.//{{{P}}}cond').set('delay','0')
 root.append(timing);parts[slide]=E.tostring(root,xml_declaration=True,encoding='UTF-8',standalone=True)
 rels=E.fromstring(parts[rel])
 for id,typ,target in [('rIdDemoVideo',R+'/video','../media/finals_demo.mp4'),('rIdDemoMedia','http://schemas.microsoft.com/office/2007/relationships/media','../media/finals_demo.mp4'),('rIdDemoPoster',R+'/image','../media/finals_demo_poster.png')]:E.SubElement(rels,f'{{{PK}}}Relationship',Id=id,Type=typ,Target=target)
