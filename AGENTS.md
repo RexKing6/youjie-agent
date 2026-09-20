@@ -2,6 +2,8 @@
 
 ## Objective
 
+2026-09-20 authorized finals presentation-only mode: reuse the finals React interface with sanitized snapshots from a completed demo. `frontend/site/showcase/` contains its standalone entry, build config and snapshot fixture; `showcase_static/` contains generated deployable static assets. `streamlit_finals.py` embeds these assets without API/model/ERP/MES calls. Always display 演示回放, block all mutation handlers, preserve the real local mode and never describe recorded results as live. No secrets, runtime databases, personal approval names or raw private runtime paths in exported fixtures. Publication/push still require action-time confirmation.
+
 Build a competition-ready, reproducible AI+Industrial Manufacturing demo for supply-chain disruption response. The system must turn an incident into evidence-backed impact analysis, solver-verified recovery plans, explicit human approval, and auditable change orders.
 
 ## First Principles

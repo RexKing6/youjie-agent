@@ -26,7 +26,7 @@ import {
 const API = 'http://127.0.0.1:8766';
 let sessionCapability = '';
 type Doc = { id: string; title: string; role: string; body: string };
-type Run = HarnessRun & {
+export type Run = HarnessRun & {
   capacity_event?: {status:string;start_hour?:number;end_hour?:number};
   decision_budget?: number;
   failure?: unknown;
@@ -142,7 +142,7 @@ const PROFILES: Record<string, string> = {
   balanced: '预算内折中',
   stability_first: '不追加成本',
 };
-type Bootstrap = {
+export type Bootstrap = {
   skills?: NonNullable<HarnessRun['harness']>['skills'];
   cases: Array<{ id: string; label: string }>;
   sources: Doc[];
@@ -282,15 +282,16 @@ function AnalysisMessage({text}: {text: string}) {
   </div>;
 }
 
-export function WikiWorkbench() {
-  const [stage,setStage]=useState<StudioStage>('intake');
+export function WikiWorkbench({preview}:{preview?:{boot:Bootstrap;run:Run|null;stage:StudioStage}}={}) {
+  const [stage,setStage]=useState<StudioStage>(preview?.stage ?? 'intake');
   function navigate(next:StudioStage){setStage(next);window.scrollTo({top:0,behavior:'instant'});}
-  const [boot, setBoot] = useState<Bootstrap | null>(null);
+  const [boot, setBoot] = useState<Bootstrap | null>(preview?.boot ?? null);
   const [error, setError] = useState('');
+  const [previewNotice,setPreviewNotice]=useState('');
   const [busy, setBusy] = useState('');
   const [progress,setProgress]=useState<HarnessRun['trace']>([]);
   useEffect(()=>{
-    if(!busy)return;
+    if(preview||!busy)return;
     const since=Date.now()/1000;
     let active=true;
     const timer=window.setInterval(async()=>{
@@ -322,7 +323,7 @@ export function WikiWorkbench() {
   const mode = 'live';
   const [attachment, setAttachment] = useState('');
   const [actor, setActor] = useState('演练计划员');
-  const [run, setRun] = useState<Run | null>(null);
+  const [run, setRun] = useState<Run | null>(preview?.run ?? null);
   const [comparison, setComparison] = useState<{
     runs: Run[];
     disclosure: string;
@@ -330,6 +331,7 @@ export function WikiWorkbench() {
   const [wiki, setWiki] = useState<Run['wiki'] | null>(null);
 
   useEffect(() => {
+    if(preview)return;
     request('/bootstrap')
       .then((value) => {
         setBoot(value);
@@ -345,6 +347,7 @@ export function WikiWorkbench() {
     target?.focus({preventScroll: true});
   }, [run,stage]);
   async function act(label: string, work: () => Promise<void>) {
+    if(preview){setPreviewNotice('请用顶部情节按钮查看已记录的结果。');return;}
     setProgress([]);
     setBusy(label);
     setError('');
@@ -382,6 +385,7 @@ export function WikiWorkbench() {
   return (
     <FinalsStudio stage={stage} onStage={navigate} run={run} busy={busy}>
     <main className="wiki-shell studio-body">
+      {previewNotice&&<p role="status">{previewNotice}</p>}
       <div hidden={stage!=='intake'} className="studio-intake">
       <section className="wiki-story" aria-label="案例背景">
         <span className="studio-kicker">工厂内部订单 / X</span><h2>600件成品，原计划12小时交货</h2>
