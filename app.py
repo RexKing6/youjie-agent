@@ -11,6 +11,13 @@ import altair as alt
 import pandas as pd
 import streamlit as st
 
+# Keep the deployed app.py entry and URL; the previous implementation below is
+# retained for history, but the public entry serves only the finals showcase.
+if __name__ == "__main__":
+    import runpy
+    runpy.run_path(str(Path(__file__).resolve().parent / "streamlit_finals.py"), run_name="__main__")
+    st.stop()
+
 from delivery_guard.chaos_agent import ChaosDrillAgent
 from delivery_guard.data import load_scenario
 from delivery_guard.evidence import load_evidence_bundle
